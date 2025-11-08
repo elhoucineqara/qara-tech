@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>El Houcine Qara - Full Stack Developer | Web & Mobile Developer Portfolio</title>
+    <meta name="description" content="El Houcine Qara - Full Stack Developer specializing in Laravel, React, Node.js, and modern web technologies. Professional Bachelor's in Computer Systems Engineering from EST Sidi Bennour, Morocco. Expert in microservices, VoIP systems, and LMS development.">
+    <meta name="keywords" content="El Houcine Qara, Full Stack Developer, Web Developer, Morocco Developer, Laravel Developer, React Developer, Node.js, JavaScript, TypeScript, PHP, Python, Mobile Developer, Software Engineer, Bouznika, EST Sidi Bennour, ENSET Mohammedia, Portfolio, Web Development, Microservices, VoIP, Call Center, LMS, E-Learning">
+    <meta name="author" content="El Houcine Qara">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elhoucineqara.com/">
+    <meta property="og:title" content="El Houcine Qara - Full Stack Developer Portfolio">
+    <meta property="og:description" content="Professional Full Stack Developer from Morocco specializing in Laravel, React, Node.js, and modern web technologies. View my portfolio and projects.">
+    <meta property="og:image" content="https://elhoucineqara.com/assets/photo.jpg">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="El Houcine Qara Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://elhoucineqara.com/">
+    <meta name="twitter:title" content="El Houcine Qara - Full Stack Developer Portfolio">
+    <meta name="twitter:description" content="Professional Full Stack Developer from Morocco specializing in Laravel, React, Node.js, and modern web technologies.">
+    <meta name="twitter:image" content="https://elhoucineqara.com/assets/photo.jpg">
+    <meta name="twitter:creator" content="@elhoucineqara">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://elhoucineqara.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "El Houcine Qara",
+      "jobTitle": "Full Stack Developer",
+      "description": "Professional Full Stack Developer specializing in Laravel, React, Node.js, and modern web technologies",
+      "url": "https://elhoucineqara.com",
+      "image": "https://elhoucineqara.com/assets/photo.jpg",
+      "email": "elhoucineqara114@gmail.com",
+      "telephone": "+212637446431",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bouznika",
+        "addressCountry": "Morocco"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/el-houcine-qara-927b07302/"
+      ],
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "ENSET Mohammedia",
+          "location": "Mohammedia, Morocco"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "EST Sidi Bennour",
+          "location": "Sidi Bennour, Morocco"
+        }
+      ],
+      "knowsAbout": [
+        "Laravel",
+        "React",
+        "Node.js",
+        "JavaScript",
+        "TypeScript",
+        "PHP",
+        "Python",
+        "MySQL",
+        "MongoDB",
+        "Docker",
+        "Microservices",
+        "WebRTC",
+        "Full Stack Development",
+        "Web Development",
+        "Mobile Development"
+      ]
+    }
+    </script>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EH Qara">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">EL HOUCINE QARA</div>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#skills" class="nav-link"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#projects" class="nav-link"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="#education" class="nav-link"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="profile-image">
+                <img src="assets/photo.jpg" alt="El Houcine Qara">
+            </div>
+            <h1>El Houcine Qara</h1>
+            <h2>Full Stack Developer & Software Engineer</h2>
+            <div class="hero-contact-row">
+                <div class="hero-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>elhoucineqara114@gmail.com</span>
+                </div>
+                <div class="hero-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+212 637 446 431</span>
+                </div>
+                <a href="https://www.linkedin.com/in/el-houcine-qara-927b07302/" target="_blank" class="hero-contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+            <div class="hero-actions">
+                <a href="assets/CV-QARA EL HOUCINE.pdf" download class="hero-download-btn">
+                    <i class="fas fa-download"></i>
+                    DOWNLOAD RESUME
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Passionate Full Stack Developer with a Professional Bachelor's degree in 
+                        Computer Systems Engineering and Web Technologies from the Higher School 
+                        of Technology of Sidi Bennour. With solid training in computer science, 
+                        my goal is to highlight my skills and enthusiasm in service of the 
+                        development industry.
+                    </p>
+                    <p>
+                        My journey spans from electronics and hardware to modern web technologies, 
+                        giving me a unique perspective on technology solutions. I'm always eager 
+                        to learn new technologies and take on challenging projects that push the 
+                        boundaries of what's possible.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <img src="assets/photo.jpg" alt="El Houcine Qara">
+                </div>
+            </div>
+            <div class="about-stats">
+                <div class="stat-item">
+                    <h3>Experience</h3>
+                    <p>2+ Years</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Projects</h3>
+                    <p>10+ Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Location</h3>
+                    <p>Bouznika, Morocco</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Languages</h3>
+                    <p>Arabic, French, English</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3 class="skill-name"><i class="fas fa-laptop-code"></i> Frontend Development</h3>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag"><i class="fab fa-react"></i> React</span>
+                        <span class="skill-tag"><i class="fas fa-fire"></i> Svelte</span>
+                        <span class="skill-tag"><i class="fab fa-angular"></i> Angular</span>
+                        <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                        <span class="skill-tag"><i class="fas fa-code"></i> TypeScript</span>
+                        <span class="skill-tag"><i class="fab fa-html5"></i> HTML/CSS</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h3 class="skill-name"><i class="fas fa-server"></i> Backend Development</h3>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag"><i class="fab fa-laravel"></i> Laravel</span>
+                        <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js</span>
+                        <span class="skill-tag"><i class="fab fa-php"></i> PHP</span>
+                        <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                        <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h3 class="skill-name"><i class="fas fa-database"></i> Databases</h3>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
+                        <span class="skill-tag"><i class="fas fa-leaf"></i> MongoDB</span>
+                        <span class="skill-tag"><i class="fas fa-table"></i> Oracle</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h3 class="skill-name"><i class="fas fa-mobile-alt"></i> Mobile Development</h3>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag"><i class="fab fa-android"></i> Android Studio</span>
+                        <span class="skill-tag"><i class="fas fa-mobile"></i> Ionic + React</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h3 class="skill-name"><i class="fas fa-sitemap"></i> Architecture & Patterns</h3>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag"><i class="fas fa-cubes"></i> Microservices Architecture</span>
+                        <span class="skill-tag"><i class="fas fa-puzzle-piece"></i> Microfrontends</span>
+                        <span class="skill-tag"><i class="fas fa-layer-group"></i> Qiankun</span>
+                        <span class="skill-tag"><i class="fab fa-docker"></i> Docker</span>
+                        <span class="skill-tag"><i class="fas fa-project-diagram"></i> RESTful API</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h3 class="skill-name"><i class="fas fa-code-branch"></i> Programming Languages</h3>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag"><i class="fab fa-js-square"></i> JavaScript</span>
+                        <span class="skill-tag"><i class="fas fa-file-code"></i> TypeScript</span>
+                        <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                        <span class="skill-tag"><i class="fab fa-php"></i> PHP</span>
+                        <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                        <span class="skill-tag"><i class="fas fa-copyright"></i> C/C++</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h3 class="skill-name"><i class="fas fa-tools"></i> Tools & Technologies</h3>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag"><i class="fab fa-git-alt"></i> Git/GitLab</span>
+                        <span class="skill-tag"><i class="fas fa-tasks"></i> JIRA</span>
+                        <span class="skill-tag"><i class="fab fa-figma"></i> Figma</span>
+                        <span class="skill-tag"><i class="fas fa-pen-nib"></i> Adobe XD</span>
+                        <span class="skill-tag"><i class="fas fa-code"></i> VS Code</span>
+                        <span class="skill-tag"><i class="fas fa-project-diagram"></i> Scrum</span>
+                        <span class="skill-tag"><i class="fas fa-sitemap"></i> UML</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        <span>Feb 2024 – Present</span>
+                        <span class="location">Remote</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Full Stack Developer - Call Center HARX</h3>
+                        <h4>I-ETERIA</h4>
+                        <p>
+                            Leading the development of HARX, an advanced cloud-based call center solution. 
+                            Architecting and implementing a comprehensive VoIP platform with real-time 
+                            communication features, intelligent call routing, CRM integration, and advanced 
+                            analytics dashboard. Developing microservices architecture for scalability and 
+                            performance optimization.
+                        </p>
+                        <ul>
+                            <li>Designed and developed real-time call management system with WebRTC integration</li>
+                            <li>Implemented AI-powered call analytics and sentiment analysis using OpenAI</li>
+                            <li>Built RESTful APIs for CRM integration with Zoho and Google services</li>
+                            <li>Developed responsive admin dashboard with React for monitoring and reporting</li>
+                            <li>Integrated VoIP telephony system with automatic call distribution (ACD)</li>
+                            <li>Created real-time notifications system using WebSockets</li>
+                            <li>Optimized database queries reducing response time by 60%</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Svelte</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">WebRTC</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">WebSockets</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">Google API</span>
+                            <span class="tech-tag">Zoho CRM</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        <span>Feb 2024 – Oct 2024</span>
+                        <span class="location">Remote</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Web Developer - LMS Development</h3>
+                        <h4>I-ETERIA</h4>
+                        <p>
+                            Developed a comprehensive Learning Management System (LMS) for HARX organization, 
+                            designed to deliver specialized trading training programs across multiple companies. 
+                            The platform enables traders to access educational content, complete courses, track 
+                            progress, and obtain certifications in financial trading and market analysis.
+                        </p>
+                        <ul>
+                            <li>Architected and developed multi-company LMS platform for trader training programs</li>
+                            <li>Implemented course management system with video lessons, assessments, and certifications</li>
+                            <li>Built user progress tracking and analytics dashboard for training administrators</li>
+                            <li>Created role-based access control for different companies and user types</li>
+                            <li>Developed interactive trading simulations and practical exercises modules</li>
+                            <li>Integrated real-time notifications for course updates and assignment deadlines</li>
+                            <li>Implemented reporting system for tracking learner performance across companies</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Svelte</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">RESTful API</span>
+                            <span class="tech-tag">WebSockets</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        <span>March 2023 – April 2023</span>
+                        <span class="location">Remote</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Full Stack Developer</h3>
+                        <h4>HR Automation Project</h4>
+                        <p>
+                            Developed a comprehensive HR management system to automate human resources processes 
+                            including employee onboarding, leave management, payroll processing, and performance 
+                            evaluation. Implemented secure authentication, role-based access control, and automated 
+                            workflows to streamline HR operations.
+                        </p>
+                        <ul>
+                            <li>Designed and developed employee management dashboard with real-time data visualization</li>
+                            <li>Implemented automated leave request and approval workflow system</li>
+                            <li>Built payroll calculation module with tax and deduction management</li>
+                            <li>Created document management system for employee records</li>
+                            <li>Integrated email notifications for automated HR communications</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">RESTful API</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        <span>Feb 2020 – Mar 2020</span>
+                        <span class="location">Casablanca, Morocco</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Electronics Repair Technician</h3>
+                        <h4>C2EZ</h4>
+                        <p>
+                            Specialized in electronics card conception and repair, Arduino programming, 
+                            and machine software troubleshooting. Gained valuable hardware-software 
+                            integration experience.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Arduino</span>
+                            <span class="tech-tag">Electronics</span>
+                            <span class="tech-tag">Hardware Repair</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Notable Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>HARX - Call Center TAAS</h3>
+                        <span class="project-type">Web Full Stack</span>
+                    </div>
+                    <p>
+                        Enterprise cloud call center platform with intelligent routing, real-time analytics and AI insights. 
+                        Microservices architecture handling thousands of concurrent calls using WebRTC technology.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">WebRTC</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">WebSockets</span>
+                        <span class="tech-tag">OpenAI</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Microservices</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>E-Commerce Platform</h3>
+                        <span class="project-type">Web Full Stack</span>
+                    </div>
+                    <p>
+                        Developed a comprehensive e-commerce application from scratch, serving as a 
+                        live demo for various services. Built with modern technologies and responsive design.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Node.js</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Task Management System</h3>
+                        <span class="project-type">Web Development</span>
+                    </div>
+                    <p>
+                        Created a complete task management platform using modern web technologies. 
+                        Implemented user authentication, task tracking, and responsive design.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Svelte</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>FormIp - LMS Mobile Application</h3>
+                        <span class="project-type">Mobile</span>
+                    </div>
+                    <p>
+                        Comprehensive Learning Management System (LMS) mobile application for FormIp organization. 
+                        Cross-platform app providing seamless access to training programs, courses, and educational content 
+                        with offline support, progress tracking, and interactive lesson viewer for iOS and Android.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">RESTful API</span>
+                        <span class="tech-tag">AsyncStorage</span>
+                        <span class="tech-tag">React Navigation</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Push Notifications</span>
+                        <span class="tech-tag">Android Studio</span>
+                        <span class="tech-tag">Xcode</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education">
+        <div class="container">
+            <h2>Education & Certifications</h2>
+            <div class="education-timeline">
+                <div class="education-item">
+                    <div class="education-year">2024-2025</div>
+                    <div class="education-content">
+                        <h3>Master's in Digital Transformation of Educational Processes (2nd Year)</h3>
+                        <h4>In Progress - ENSET Mohammedia, Morocco</h4>
+                        <p>
+                            Advanced specialized training in digital transformation of education, 
+                            covering modern educational technologies, digitalization of learning processes, 
+                            and digital pedagogical innovation.
+                        </p>
+                        <div class="education-highlights">
+                            <span class="highlight">Educational Technologies</span>
+                            <span class="highlight">Pedagogical Innovation</span>
+                            <span class="highlight">Digitalization</span>
+                            <span class="highlight">E-Learning</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2023-2024</div>
+                    <div class="education-content">
+                        <h3>Professional Bachelor's Degree in Computer Systems Engineering and Web Technologies</h3>
+                        <h4>EST Sidi Bennour Chouaib Doukkali, El Jadida, Morocco</h4>
+                        <p>
+                            Comprehensive software engineering program covering advanced programming concepts, 
+                            software architecture, project management, and modern development methodologies.
+                        </p>
+                        <div class="education-highlights">
+                            <span class="highlight">Software Architecture</span>
+                            <span class="highlight">Web Technologies</span>
+                            <span class="highlight">Project Management</span>
+                            <span class="highlight">Modern Development</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2022-2023</div>
+                    <div class="education-content">
+                        <h3>Specialized Technician Diploma in Digital Development, Web Full Stack</h3>
+                        <h4>ISTA TAOURIRT, Morocco</h4>
+                        <p>
+                            Intensive program focused on full-stack web development, covering both 
+                            frontend and backend technologies with hands-on project experience.
+                        </p>
+                        <div class="education-highlights">
+                            <span class="highlight">Full Stack Development</span>
+                            <span class="highlight">Frontend Technologies</span>
+                            <span class="highlight">Backend Development</span>
+                            <span class="highlight">Database Management</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2019-2020</div>
+                    <div class="education-content">
+                        <h3>Fundamental Bachelor's in Physical Sciences</h3>
+                        <h4>Faculty of Sciences Aïn Chock Hassan II, Casablanca</h4>
+                        <p>
+                            Strong foundation in mathematics, physics, and scientific methodology 
+                            that supports analytical problem-solving in software development.
+                        </p>
+                        <div class="education-highlights">
+                            <span class="highlight">Mathematics</span>
+                            <span class="highlight">Physics</span>
+                            <span class="highlight">Electronics</span>
+                            <span class="highlight">Scientific Method</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2015-2016</div>
+                    <div class="education-content">
+                        <h3>Baccalaureate in Physical Sciences</h3>
+                        <h4>Ibn Khaldoun High School, Bouznika, Morocco</h4>
+                        <p>
+                            High school diploma with specialization in Physical Sciences, providing 
+                            a solid foundation in mathematics, physics, chemistry, and scientific reasoning.
+                        </p>
+                        <div class="education-highlights">
+                            <span class="highlight">Physical Sciences</span>
+                            <span class="highlight">Mathematics</span>
+                            <span class="highlight">Chemistry</span>
+                            <span class="highlight">Physics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p class="contact-description">
+                I'm always excited to discuss new opportunities, collaborate on innovative 
+                projects, or connect with fellow developers. Let's build something amazing together!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>El Houcine Qara</h3>
+                    <p>Full Stack Developer & Software Engineer</p>
+                </div>
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="mailto:elhoucineqara114@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/el-houcine-qara-927b07302/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="tel:+212637446431"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 El Houcine Qara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

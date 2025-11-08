@@ -1,0 +1,124 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "services": "Services",
+
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "El Houcine QARA",
+    "title": "Full Stack Developer",
+    "subtitle": "Creating modern web and mobile applications",
+    "contact": "Contact me",
+    "at": "at"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Full Stack Developer & Software Engineer",
+    "company": "I-ETERIA",
+    "email": "elhoucineqara114@gmail.com",
+    "phone": "+212 637 446 431",
+    "whatsapp": "+212637446431",
+    "linkedin": "https://www.linkedin.com/in/el-houcine-qara-927b07302/",
+    "location": "Bouznika, Morocco",
+    "downloadCV": "Download CV",
+    "viewCV": "View CV",
+    "description": "Passionate Full Stack Developer with a Professional Bachelor's degree in Computer Systems Engineering and Web Technologies. With solid training in computer science and 2+ years of experience, my goal is to highlight my skills and enthusiasm in service of the development industry.",
+    "learnMore": "Learn more"
+  },
+  "skills": {
+    "title": "My Skills",
+    "description": "Expertise in web and mobile development",
+    "viewSkills": "View skills"
+  },
+  "services": {
+    "title": "My Services",
+    "subtitle": "Discover my professional services in development and IT consulting",
+    "description": "I offer comprehensive web and mobile development services to help you achieve your digital goals.",
+    "viewServices": "View Services"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "subtitle": "Get in touch with me for any questions or collaboration opportunities",
+    "description": "I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Feel free to reach out through the contact form below.",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "sendMessage": "Send Message"
+    },
+    "modal": {
+      "title": "Contact Form",
+      "name": "Full Name",
+      "subject": "Subject"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 El Houcine QARA. All rights reserved.",
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "pages": {
+    "about": {
+      "title": "About Me",
+      "description": "Learn more about my journey and expertise in web development"
+    },
+    "skills": {
+      "title": "My Skills",
+      "description": "Discover my technical skills and expertise in different development areas",
+      "frontend": { "title": "Frontend" },
+      "backend": { "title": "Backend" },
+      "languages": { "title": "Languages" },
+      "databases": { "title": "Databases" },
+      "tools": { "title": "Tools" },
+      "apis": { "title": "APIs" },
+      "cloud": { "title": "Cloud" },
+      "mobile": { "title": "Mobile" },
+      "testing": { "title": "Testing" }
+    },
+    "services": {
+      "title": "My Services",
+      "description": "Discover my professional services in development and IT consulting",
+      "webDev": {
+        "title": "Web Development",
+        "description": "Creation of custom, responsive, and modern websites and web applications. Expertise in modern frameworks (React, Vue, Svelte), full-stack development, and API integration. Focus on performance, accessibility, and user experience.",
+        "cta": "Learn More"
+      },
+      "mobileDev": {
+        "title": "Mobile Development",
+        "description": "Development of native and cross-platform mobile applications for iOS and Android. Using technologies like React Native and Flutter. Creating intuitive user interfaces, integrating advanced features, and optimizing performance.",
+        "cta": "Learn More"
+      },
+      "cloud": {
+        "title": "Cloud Solutions",
+        "description": "Complete expertise in cloud solutions and DevOps practices. Deployment on AWS, Azure or GCP, CI/CD pipeline setup, Docker containerization, Kubernetes orchestration, and automation of development and deployment processes.",
+        "cta": "Learn More"
+      },
+      "devops": {
+        "title": "DevOps & Infrastructure",
+        "description": "Expertise in setting up and managing development and deployment pipelines. Implementation of CI/CD practices, container orchestration, infrastructure as code, and automated testing solutions.",
+        "cta": "Learn More"
+      },
+      "ai": {
+        "title": "AI & Machine Learning",
+        "description": "Development of AI-powered solutions and machine learning models. Implementation of predictive analytics, natural language processing, computer vision, and automated decision-making systems.",
+        "cta": "Learn More"
+      },
+      "consulting": {
+        "title": "Consulting & Strategy",
+        "description": "Complete strategic support for your digital projects. Needs analysis, technological roadmap definition, process optimization, software architecture consulting, and support in your digital transformation.",
+        "cta": "Learn More"
+      }
+    },
+    "contact": {
+      "title": "Contact Me",
+      "description": "Get in touch with me for any questions or collaboration opportunities"
+    }
+  }
+} 

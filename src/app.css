@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* Custom styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-lg p-6;
+  }
+  
+  .section-title {
+    @apply text-3xl font-bold text-gray-900 mb-8;
+  }
+  
+  .section-subtitle {
+    @apply text-xl text-gray-600 mb-4;
+  }
+}
+
+body {
+  @apply bg-gray-100;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Progress bar styles */
+.progress-bar {
+  @apply w-full bg-gray-200 rounded-full h-2.5;
+}
+
+.progress-bar-fill {
+  @apply h-2.5 rounded-full transition-all duration-500;
+}
+
+/* Card styles */
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Button styles */
+.btn-primary:hover {
+  @apply bg-blue-700;
+}
+
+.btn-secondary:hover {
+  @apply bg-gray-700;
+}
+
+/* Form styles */
+.form-input {
+  @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+/* Section styles */
+.section {
+  @apply py-16;
+}
+
+/* Navigation styles */
+.nav-link {
+  @apply text-gray-600 px-3 py-2 rounded-md text-sm font-medium;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  @apply text-gray-900;
+}
+
+.nav-link-active {
+  @apply text-blue-600;
+}
+
+.nav-link-active:hover {
+  @apply text-blue-700;
+}
+
+/* Icon styles */
+.icon {
+  @apply text-2xl text-blue-500;
+}
+
+/* Badge styles */
+.badge {
+  @apply px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-primary {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.badge-secondary {
+  @apply bg-gray-100 text-gray-800;
+}
+
+/* Image styles */
+.img-cover {
+  @apply w-full h-full object-cover;
+}
+
+/* Container styles */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Grid styles */
+.grid-cols-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Spacing styles */
+.space-y-8 > * + * {
+  @apply mt-8;
+}
+
+.space-x-4 > * + * {
+  @apply ml-4;
+}
+
+/* Shadow styles */
+.shadow-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-hover:hover {
+  @apply shadow-xl;
+}
+
+/* Border styles */
+.border-hover {
+  transition: border-color 0.3s ease;
+}
+
+.border-hover:hover {
+  @apply border-blue-500;
+}
+
+/* Text styles */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500;
+}
+
+/* Background styles */
+.bg-gradient {
+  @apply bg-gradient-to-r from-blue-500 to-purple-500;
+}
+
+/* Hover effect styles */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Animation styles */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+} 

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://elhoucineqara.com/sitemap.xml
+
+# Disallow crawling of specific files
+Disallow: /assets/CV-QARA EL HOUCINE.pdf
+

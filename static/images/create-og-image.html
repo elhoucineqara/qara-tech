@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer Image pour Réseaux Sociaux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: #00ff00;
+            text-align: center;
+        }
+        
+        .info {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .info p {
+            color: #00ff00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        #canvas {
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+            margin-bottom: 20px;
+            background: #000;
+        }
+        
+        .controls {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ff00;
+            font-weight: bold;
+        }
+        
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        input[type="file"] {
+            padding: 8px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #00cc00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .instructions {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .instructions h3 {
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        .preview-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        #preview {
+            max-width: 200px;
+            max-height: 200px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Créer Image pour Réseaux Sociaux</h1>
+    
+    <div class="info">
+        <p>📏 Format idéal : 1200 x 630 pixels</p>
+        <p>Parfait pour Facebook, LinkedIn, Twitter, WhatsApp ✅</p>
+    </div>
+    
+    <canvas id="canvas" width="1200" height="630"></canvas>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label for="photoInput">📸 Votre Photo :</label>
+            <input type="file" id="photoInput" accept="image/*">
+            <div class="preview-container">
+                <img id="preview" class="hidden" alt="Aperçu">
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label for="name">👤 Nom :</label>
+            <input type="text" id="name" value="EL HOUCINE QARA">
+        </div>
+        
+        <div class="control-group">
+            <label for="title">💼 Titre :</label>
+            <input type="text" id="title" value="Full Stack Developer">
+        </div>
+        
+        <div class="control-group">
+            <label for="skills">🚀 Compétences :</label>
+            <input type="text" id="skills" value="Laravel • React • Svelte • Node.js">
+        </div>
+        
+        <div class="button-group">
+            <button onclick="generateImage()">🎨 Générer</button>
+            <button onclick="downloadImage()">💾 Télécharger</button>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>📝 Instructions</h3>
+        <ol>
+            <li><strong>Choisissez votre photo</strong> (profile.jpg ou autre)</li>
+            <li><strong>Modifiez</strong> les textes si besoin</li>
+            <li><strong>Cliquez</strong> sur "Générer"</li>
+            <li><strong>Téléchargez</strong> l'image (sera nommée <code>qaratech.jpg</code>)</li>
+            <li><strong>Placez-la</strong> dans <code>E:\usa\portfolio-houcine\static\images\qaratech.jpg</code></li>
+            <li><strong>Push</strong> sur GitHub : <code>git add . && git commit -m "Add qaratech.jpg for SEO" && git push</code></li>
+            <li><strong>Attendez 3 minutes</strong> pour le déploiement Vercel</li>
+        </ol>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const photoInput = document.getElementById('photoInput');
+        const preview = document.getElementById('preview');
+        let uploadedImage = null;
+        
+        // Charger l'image
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        uploadedImage = img;
+                        preview.src = event.target.result;
+                        preview.classList.remove('hidden');
+                        generateImage();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        function generateImage() {
+            const name = document.getElementById('name').value;
+            const title = document.getElementById('title').value;
+            const skills = document.getElementById('skills').value;
+            
+            // Background gradient noir/vert
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#0a0a0a');
+            gradient.addColorStop(0.5, '#1a1a1a');
+            gradient.addColorStop(1, '#0a0a0a');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Grille de fond subtile
+            ctx.strokeStyle = 'rgba(0, 255, 0, 0.05)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < canvas.width; i += 30) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+            }
+            for (let i = 0; i < canvas.height; i += 30) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.stroke();
+            }
+            
+            // Barre latérale verte
+            const barGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            barGradient.addColorStop(0, '#00ff00');
+            barGradient.addColorStop(1, '#00aa00');
+            ctx.fillStyle = barGradient;
+            ctx.fillRect(0, 0, 15, canvas.height);
+            
+            // Photo de profil (si uploadée)
+            if (uploadedImage) {
+                const photoSize = 250;
+                const photoX = 100;
+                const photoY = (canvas.height - photoSize) / 2;
+                
+                // Cercle de fond
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(photoX + photoSize/2, photoY + photoSize/2, photoSize/2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                
+                // Dessiner l'image
+                const scale = Math.max(photoSize / uploadedImage.width, photoSize / uploadedImage.height);
+                const scaledWidth = uploadedImage.width * scale;
+                const scaledHeight = uploadedImage.height * scale;
+                const x = photoX + (photoSize - scaledWidth) / 2;
+                const y = photoY + (photoSize - scaledHeight) / 2;
+                ctx.drawImage(uploadedImage, x, y, scaledWidth, scaledHeight);
+                ctx.restore();
+                
+                // Bordure verte autour de la photo
+                ctx.strokeStyle = '#00ff00';
+                ctx.lineWidth = 5;
+                ctx.beginPath();
+                ctx.arc(photoX + photoSize/2, photoY + photoSize/2, photoSize/2, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            
+            // Textes
+            const textX = uploadedImage ? 420 : 150;
+            ctx.textAlign = uploadedImage ? 'left' : 'center';
+            
+            // Nom
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 70px Arial, sans-serif';
+            ctx.fillText(name, textX, 200);
+            
+            // Titre
+            ctx.fillStyle = '#00ff00';
+            ctx.font = 'bold 45px Arial, sans-serif';
+            ctx.fillText(title, textX, 280);
+            
+            // Compétences
+            ctx.fillStyle = '#cccccc';
+            ctx.font = '32px Arial, sans-serif';
+            ctx.fillText(skills, textX, 360);
+            
+            // Footer
+            ctx.fillStyle = '#00ff00';
+            ctx.font = 'bold 28px Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('PORTFOLIO 2024', canvas.width / 2, 560);
+            
+            // Coins décoratifs
+            ctx.strokeStyle = '#00ff00';
+            ctx.lineWidth = 4;
+            
+            // Coin supérieur gauche
+            ctx.beginPath();
+            ctx.moveTo(30, 80);
+            ctx.lineTo(30, 30);
+            ctx.lineTo(80, 30);
+            ctx.stroke();
+            
+            // Coin inférieur droit
+            ctx.beginPath();
+            ctx.moveTo(canvas.width - 30, canvas.height - 80);
+            ctx.lineTo(canvas.width - 30, canvas.height - 30);
+            ctx.lineTo(canvas.width - 80, canvas.height - 30);
+            ctx.stroke();
+        }
+        
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'qaratech.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            link.click();
+        }
+        
+        // Auto-update
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('input', () => {
+                if (uploadedImage) generateImage();
+            });
+        });
+        
+        // Générer une image par défaut
+        generateImage();
+    </script>
+</body>
+</html>
+
