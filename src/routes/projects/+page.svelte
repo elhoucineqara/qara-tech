@@ -28,7 +28,6 @@
       technologies: ['Laravel', 'React', 'Svelte', 'Node.js', 'WebRTC', 'MySQL', 'MongoDB', 'Redis', 'Docker', 'OpenAI'],
       category: 'Enterprise',
       image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800',
-      demoUrl: 'https://harx-demo.com',
       features: [
         'Real-time WebRTC video/audio calls',
         'AI-powered call analytics and sentiment analysis',
