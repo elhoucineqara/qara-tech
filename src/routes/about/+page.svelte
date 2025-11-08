@@ -229,7 +229,7 @@
             <div class="absolute w-[280px] sm:w-[320px] h-[280px] sm:h-[320px] bg-gradient-to-r from-cyan-500/30 to-purple-500/30 rounded-full animate-pulse"></div>
             <img 
               alt="El Houcine QARA" 
-              src="/images/profile.jpg" 
+              src="/images/qaratech.jpg" 
               class="w-64 sm:w-72 h-64 sm:h-72 object-cover rounded-full relative z-10 shadow-xl hover:scale-105 transition-transform duration-300"
             >
           </div>
