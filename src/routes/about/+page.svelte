@@ -3,7 +3,6 @@
   import { t } from '$lib/i18n/i18n';
   
   let isVisible = false;
-  let showModal = false;
   let displayedText = "";
   let isTyping = true;
   const fullText = $t('about.company');
@@ -28,10 +27,6 @@
         isTyping = false;
       }
     }, 100);
-  };
-
-  const toggleModal = () => {
-    showModal = !showModal;
   };
 
   const createParticles = () => {
@@ -275,24 +270,6 @@
               <span>{$t('about.location')}</span>
             </p>
           </div>
-
-          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <a 
-              href="/cv.pdf" 
-              download
-              class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center sm:justify-start text-sm sm:text-base"
-            >
-              <i class="fas fa-download mr-3"></i>
-              {$t('about.downloadCV')}
-            </a>
-            <button 
-              on:click={toggleModal}
-              class="bg-gray-800 text-gray-200 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center sm:justify-start border border-gray-700 hover:bg-gray-700 text-sm sm:text-base"
-            >
-              <i class="fas fa-eye mr-3"></i>
-              {$t('about.viewCV')}
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -300,32 +277,6 @@
 
   <!-- Removing the footer section -->
 </div>
-
-{#if showModal}
-  <div 
-    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
-    on:click|self={toggleModal}
-  >
-    <div class="relative w-full max-w-4xl bg-white rounded-xl shadow-2xl min-h-[80vh] my-4">
-      <div class="flex justify-end">
-        <button 
-          on:click={toggleModal}
-          class="m-2 sm:m-4 text-slate-500 hover:text-slate-700 text-xl z-10"
-        >
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="p-2 sm:p-4 h-full min-h-[80vh]">
-        <iframe
-          src="/cv.pdf"
-          title="CV"
-          class="w-full h-full rounded-lg"
-          style="min-height: 80vh;"
-        ></iframe>
-      </div>
-    </div>
-  </div>
-{/if}
 
 <style>
   .font-playfair {
