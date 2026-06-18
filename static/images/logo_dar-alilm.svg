@@ -1,0 +1,82 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Open Book -->
+  <!-- Left Page (Blue) -->
+  <path d="M40 60 L40 140 Q40 150 50 150 L90 150 Q100 150 100 140 L100 60 Q100 50 90 50 L50 50 Q40 50 40 60 Z" fill="#1E3A8A" stroke="#1E40AF" stroke-width="2"/>
+  
+  <!-- Right Page (Golden Yellow) -->
+  <path d="M100 60 L100 140 Q100 150 110 150 L150 150 Q160 150 160 140 L160 60 Q160 50 150 50 L110 50 Q100 50 100 60 Z" fill="#FCD34D" stroke="#FBBF24" stroke-width="2"/>
+  
+  <!-- Book Binding/Center -->
+  <line x1="100" y1="50" x2="100" y2="150" stroke="#1E40AF" stroke-width="3"/>
+  
+  <!-- Technology Symbols on Left Page (Blue) -->
+  <!-- Code Brackets -->
+  <text x="55" y="75" font-family="monospace" font-size="14" font-weight="bold" fill="#60A5FA" opacity="0.8">&lt;/&gt;</text>
+  
+  <!-- Circuit/Node Symbol -->
+  <circle cx="65" cy="95" r="4" fill="#60A5FA"/>
+  <line x1="65" y1="95" x2="75" y2="95" stroke="#60A5FA" stroke-width="1.5"/>
+  <line x1="65" y1="95" x2="65" y2="105" stroke="#60A5FA" stroke-width="1.5"/>
+  <circle cx="75" cy="95" r="3" fill="#60A5FA"/>
+  <circle cx="65" cy="105" r="3" fill="#60A5FA"/>
+  
+  <!-- Database Symbol -->
+  <ellipse cx="70" cy="120" rx="8" ry="3" fill="none" stroke="#60A5FA" stroke-width="1.5"/>
+  <ellipse cx="70" cy="125" rx="8" ry="3" fill="none" stroke="#60A5FA" stroke-width="1.5"/>
+  <line x1="62" y1="120" x2="62" y2="125" stroke="#60A5FA" stroke-width="1.5"/>
+  <line x1="78" y1="120" x2="78" y2="125" stroke="#60A5FA" stroke-width="1.5"/>
+  
+  <!-- AI Symbols on Right Page (Yellow) -->
+  <!-- Neural Network/Brain -->
+  <circle cx="120" cy="75" r="6" fill="#FBBF24" opacity="0.8"/>
+  <circle cx="130" cy="80" r="4" fill="#FBBF24" opacity="0.8"/>
+  <circle cx="125" cy="88" r="5" fill="#FBBF24" opacity="0.8"/>
+  <line x1="120" y1="75" x2="130" y2="80" stroke="#FBBF24" stroke-width="1.5" opacity="0.6"/>
+  <line x1="130" y1="80" x2="125" y2="88" stroke="#FBBF24" stroke-width="1.5" opacity="0.6"/>
+  <line x1="120" y1="75" x2="125" y2="88" stroke="#FBBF24" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- AI Chip/Processor -->
+  <rect x="115" y="100" width="20" height="20" rx="2" fill="none" stroke="#FBBF24" stroke-width="1.5"/>
+  <circle cx="118" cy="103" r="1" fill="#FBBF24"/>
+  <circle cx="132" cy="103" r="1" fill="#FBBF24"/>
+  <circle cx="118" cy="117" r="1" fill="#FBBF24"/>
+  <circle cx="132" cy="117" r="1" fill="#FBBF24"/>
+  <line x1="125" y1="105" x2="125" y2="115" stroke="#FBBF24" stroke-width="1"/>
+  <line x1="120" y1="110" x2="130" y2="110" stroke="#FBBF24" stroke-width="1"/>
+  
+  <!-- Robot/AI Face -->
+  <rect x="118" y="125" width="14" height="12" rx="1" fill="none" stroke="#FBBF24" stroke-width="1.5"/>
+  <circle cx="122" cy="129" r="1.5" fill="#FBBF24"/>
+  <circle cx="128" cy="129" r="1.5" fill="#FBBF24"/>
+  <path d="M122 133 Q125 135 128 133" stroke="#FBBF24" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Rising Arrow/Progress from Book -->
+  <path d="M70 130 Q85 110 100 95 Q115 80 130 70" 
+        stroke="#1E3A8A" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round"
+        marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrowhead -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#1E3A8A"/>
+    </marker>
+  </defs>
+  
+  <!-- Text: DAR AL-ILM -->
+  <!-- Shadow -->
+  <text x="100" y="170" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#0F172A" text-anchor="middle" opacity="0.3">
+    DAR AL-ILM
+  </text>
+  <!-- Main Text -->
+  <text x="100" y="170" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#1E3A8A" text-anchor="middle">
+    DAR AL-ILM
+  </text>
+  
+  <!-- Slogan: The Door to Knowledge -->
+  <text x="100" y="185" font-family="Arial, sans-serif" font-size="11" fill="#FCD34D" text-anchor="middle" font-style="italic" font-weight="600">
+    The Door to Knowledge
+  </text>
+</svg>

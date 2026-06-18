@@ -1,368 +1,382 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { fly, fade } from 'svelte/transition';
   import { t } from '$lib/i18n/i18n';
-  import Header from '$lib/components/Header.svelte';
   import SEO from '$lib/components/SEO.svelte';
-  
-  let isVisible = false;
-  
-  onMount(() => {
-    isVisible = true;
-    initMatrixRain();
-    createFloatingCode();
-  });
+  import ParticleSphere from '$lib/components/ParticleSphere.svelte';
+  import AnimatedBackground from '$lib/components/AnimatedBackground.svelte';
+  import TerminalTyping from '$lib/components/TerminalTyping.svelte';
+  import { tilt3d, reveal } from '$lib/actions/motion';
 
-  const initMatrixRain = () => {
-    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
-    if (!canvas) return;
+  let mounted = false;
+  onMount(() => (mounted = true));
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-=<>/{}[]|\\";
-    const matrixArray = matrix.split("");
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
-
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.floor(Math.random() * (canvas.height / fontSize));
+  $: featuredProjects = [
+    {
+      key: 'harx',
+      title: $t('projects.items.harx.title'),
+      subtitle: $t('projects.items.harx.subtitle'),
+      description: $t('projects.items.harx.description'),
+      url: 'https://harx25pageslinks.netlify.app/',
+      tech: ['Laravel', 'React', 'WebRTC', 'AI'],
+      gradient: 'from-indigo-500 via-purple-500 to-pink-500',
+      image: '/images/HARX.png',
+      logo: '/images/harx-mascotte.webp'
+    },
+    {
+      key: 'lms',
+      title: $t('projects.items.lms.title'),
+      subtitle: $t('projects.items.lms.subtitle'),
+      description: $t('projects.items.lms.description'),
+      url: 'https://learn.qaranetwork.com/',
+      tech: ['SvelteKit', 'Laravel', 'MySQL', 'i18n'],
+      gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+      image: '/images/dar-al-ilm.png',
+      logo: '/images/logo_dar-alilm.svg'
     }
+  ];
 
-    const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#00ff00';
-      ctx.font = fontSize + 'px monospace';
+  $: stats = [
+    { value: '15+', label: $t('home.stats.projects') },
+    { value: '2+', label: $t('home.stats.yearsExp') },
+    { value: '10+', label: $t('home.stats.technologies') },
+    { value: '100%', label: $t('home.stats.dedication') }
+  ];
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    };
-
-    setInterval(draw, 33);
-  };
-
-  const createFloatingCode = () => {
-    const container = document.querySelector('.code-snippets');
-    if (!container) return;
-
-    const codeSnippets = [
-      'const dev = new Developer();',
-      'function build() { return app; }',
-      'npm run deploy --production',
-      'git commit -m "feat: new feature"',
-      'SELECT * FROM users WHERE active=1',
-      'docker-compose up -d',
-      'Laravel::make()->awesome()',
-      'React.useEffect(() => {})',
-      'async/await Promise.resolve()',
-      'console.log("Hello World");',
-      'php artisan serve',
-      'composer install',
-      'npm install --save',
-      'const api = await fetch(url);',
-      'sudo systemctl restart nginx'
-    ];
-
-    for (let i = 0; i < 15; i++) {
-      const snippet = document.createElement('div');
-      snippet.className = 'floating-code';
-      snippet.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-      snippet.style.left = `${Math.random() * 100}%`;
-      snippet.style.top = `${Math.random() * 100}%`;
-      snippet.style.animationDelay = `${Math.random() * 5}s`;
-      snippet.style.animationDuration = `${15 + Math.random() * 10}s`;
-      container.appendChild(snippet);
-    }
-  };
+  const techStack = [
+    { name: 'Laravel', icon: 'fa-brands fa-laravel', color: 'text-red-500' },
+    { name: 'React', icon: 'fa-brands fa-react', color: 'text-cyan-500' },
+    { name: 'Svelte', icon: 'fa-solid fa-bolt', color: 'text-orange-500' },
+    { name: 'Node.js', icon: 'fa-brands fa-node-js', color: 'text-green-600' },
+    { name: 'TypeScript', icon: 'fa-solid fa-code', color: 'text-blue-600' },
+    { name: 'MySQL', icon: 'fa-solid fa-database', color: 'text-indigo-600' },
+    { name: 'Docker', icon: 'fa-brands fa-docker', color: 'text-sky-500' },
+    { name: 'Git', icon: 'fa-brands fa-git-alt', color: 'text-rose-500' }
+  ];
 </script>
 
-<SEO 
-  title="El Houcine QARA - Full Stack Developer | Laravel, React, Node.js Expert"
-  description="Full Stack Developer with 2+ years experience building enterprise applications. Expert in Laravel, React, Svelte, Node.js. Based in Morocco. Portfolio showcasing 15+ successful projects."
-  keywords="Full Stack Developer Morocco, Laravel Developer, React Developer, Web Application Development, Enterprise Software, HARX, LMS Development, Morocco Software Engineer"
-  url="https://qaratech.vercel.app/"
+<SEO
+  title="El Houcine QARA — Full Stack Developer | Laravel, React, SvelteKit"
+  description="Full Stack Developer based in Morocco. Building modern web platforms — HARX contact center, Dar Al-Ilm LMS, enterprise apps. Laravel, React, Svelte, Node.js."
+  keywords="Full Stack Developer Morocco, Laravel, React, SvelteKit, HARX, Dar Al-Ilm, Contact Center, LMS"
 />
 
 <svelte:head>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    rel="stylesheet"
+  />
 </svelte:head>
 
-<div class="relative">
-  <!-- Hero Section -->
-  <div class="relative flex content-center items-center justify-center h-screen overflow-hidden">
-    <!-- Background avec dégradé sombre et grille -->
-    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900">
-      <canvas id="matrix-rain" class="absolute inset-0 w-full h-full opacity-20"></canvas>
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-      <div class="code-snippets absolute inset-0"></div>
-      <span class="absolute inset-0 w-full h-full bg-black opacity-50"></span>
+<!-- ==================== HERO ==================== -->
+<section class="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
+  <AnimatedBackground variant="aurora" showStars={true} />
+
+  <div class="container relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: copy -->
+      <div class="text-center lg:text-left">
+        {#if mounted}
+          <div in:fly={{ y: 20, duration: 600 }} class="inline-flex items-center gap-2 badge-glass mb-6">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span>{$t('home.badge')}</span>
+          </div>
+
+          <h1
+            in:fly={{ y: 30, duration: 700, delay: 100 }}
+            class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
+          >
+            {$t('home.greeting')} <span class="text-gradient">{$t('home.name')}</span><br />
+            {$t('home.titlePart1')} <span class="text-gradient-blue">{$t('home.titlePart2')}</span>
+          </h1>
+
+          <p
+            in:fly={{ y: 30, duration: 700, delay: 200 }}
+            class="mt-6 text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+          >
+            {$t('home.subtitle')}
+            <span class="font-semibold text-slate-800 dark:text-slate-100">{$t('home.subtitleHighlight1')}</span>
+            {$t('home.subtitleAnd')}
+            <span class="font-semibold text-slate-800 dark:text-slate-100">{$t('home.subtitleHighlight2')}</span>
+            {$t('home.subtitleEnd')}
+          </p>
+
+          <div
+            in:fly={{ y: 30, duration: 700, delay: 300 }}
+            class="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start"
+          >
+            <a href="/projects" class="btn-primary-gradient shine">
+              <i class="fa-solid fa-folder-open"></i>
+              {$t('home.viewMyWork')}
+            </a>
+            <a href="/contact" class="btn-secondary-light">
+              <i class="fa-solid fa-paper-plane"></i>
+              {$t('common.getInTouch')}
+            </a>
+          </div>
+
+          <!-- Stats inline -->
+          <div in:fade={{ duration: 700, delay: 400 }} class="mt-12 grid grid-cols-4 gap-4 max-w-lg mx-auto lg:mx-0">
+            {#each stats as s, i}
+              <div class="text-center lg:text-left reveal-scale" use:reveal={{ delay: 400 + i * 80 }}>
+                <div class="text-2xl sm:text-3xl font-bold text-gradient-animated">{s.value}</div>
+                <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">{s.label}</div>
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </div>
+
+      <!-- Right: floating glass card stack -->
+      {#if mounted}
+        <div in:fly={{ x: 40, duration: 800, delay: 200 }} class="relative h-[520px] hidden lg:block">
+          <!-- Decorative ring -->
+          <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full
+                   border border-purple-200/60 ring-glow-purple"
+          ></div>
+          <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full
+                   border border-pink-200/60"
+          ></div>
+
+          <!-- Floating card 1: live terminal -->
+          <div
+            class="absolute top-6 left-2 w-72 animate-float"
+            style="animation-delay: 0s"
+            use:tilt3d={{ max: 10, scale: 1.03 }}
+          >
+            <TerminalTyping />
+          </div>
+
+          <!-- Floating card 2: project (clickable) -->
+          <a
+            href="https://harx25pageslinks.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit HARX live site"
+            class="group absolute top-32 right-0 w-64 glass-card p-5 animate-float
+                   hover:shadow-2xl hover:shadow-purple-500/20
+                   transition-all duration-300 cursor-pointer"
+            style="animation-delay: 1.5s"
+            use:tilt3d={{ max: 10, scale: 1.04 }}
+          >
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-11 h-11 rounded-xl bg-white dark:bg-slate-900 shadow border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden">
+                <img src="/images/harx-mascotte.webp" alt="HARX" class="w-9 h-9 object-contain" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-slate-800 dark:text-slate-100 text-sm flex items-center gap-1.5">
+                  HARX
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400 group-hover:text-purple-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"></i>
+                </div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">Contact Center</div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="badge-tech">Laravel</span>
+              <span class="badge-tech">React</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">● Live</span>
+            </div>
+          </a>
+
+          <!-- Floating card 3: stat -->
+          <div
+            class="absolute bottom-20 left-12 w-56 glass-card p-5 animate-float"
+            style="animation-delay: 3s"
+            use:tilt3d={{ max: 10, scale: 1.03 }}
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center"
+              >
+                <i class="fa-solid fa-rocket text-white text-lg"></i>
+              </div>
+              <div>
+                <div class="text-2xl font-extrabold text-slate-800 dark:text-slate-100">95%</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">Performance</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating card 4: animated particle sphere with logo -->
+          <div
+            class="absolute bottom-4 right-6 w-56 h-56 sm:w-64 sm:h-64 animate-float"
+            style="animation-delay: 2s"
+          >
+            <ParticleSphere
+              particleCount={180}
+              radius={90}
+              rotationSpeed={0.005}
+              centerImage="/images/qaratech-icon.png"
+            />
+          </div>
+        </div>
+      {/if}
     </div>
-    
-    <!-- Terminal-style border effect -->
-    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent opacity-50"></div>
-    <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent opacity-50"></div>
-    
-    <div class="container relative mx-auto px-4 z-10">
-      <div class="items-center flex flex-wrap justify-center">
-        <div class="w-full lg:w-6/12 px-4 text-center">
-          <!-- Terminal header effect -->
-          <div class="mb-4 md:mb-6 flex justify-center px-2">
-            <div class="inline-block bg-black/50 backdrop-blur-sm border border-green-500/30 rounded-lg px-2 md:px-4 py-1.5 md:py-2">
-              <span class="text-green-400 font-mono text-xs md:text-sm">
-                <span class="inline-block w-2 h-2 md:w-3 md:h-3 bg-red-500 rounded-full mr-1 md:mr-2"></span>
-                <span class="inline-block w-2 h-2 md:w-3 md:h-3 bg-yellow-500 rounded-full mr-1 md:mr-2"></span>
-                <span class="inline-block w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full mr-1 md:mr-2"></span>
-                <span class="text-red-400">root</span><span class="text-white">@</span><span class="text-cyan-400">qara</span><span class="text-white">:</span><span class="text-blue-400">~/elhoucine</span><span class="text-green-400">#</span>
-              </span>
+  </div>
+</section>
+
+<!-- ==================== FEATURED PROJECTS ==================== -->
+<section class="relative py-20 sm:py-28">
+  <div class="container relative z-10">
+    <div class="text-center mb-14 reveal" use:reveal>
+      <span class="badge-glass mb-4">
+        <i class="fa-solid fa-star text-yellow-500"></i>
+        {$t('home.featured.badge')}
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        {$t('home.featured.title')} <span class="text-gradient">{$t('home.featured.titleHighlight')}</span>
+      </h2>
+      <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        {$t('home.featured.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      {#each featuredProjects as project, i}
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative block glass-card overflow-hidden reveal-scale lift hover:shadow-2xl transition-all duration-500"
+          use:reveal={{ delay: i * 120 }}
+          use:tilt3d={{ max: 6, scale: 1.01 }}
+        >
+          <!-- Screenshot header -->
+          <div class="relative h-56 bg-gradient-to-br {project.gradient} overflow-hidden">
+            <img
+              src={project.image}
+              alt="{project.title} screenshot"
+              class="w-full h-full object-cover object-top opacity-95 group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            <div class="absolute top-4 right-4 badge-glass">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              {$t('common.live')}
             </div>
           </div>
-          
-          <div class="text-white font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl my-2 glitch-text px-2">
-            {$t('hero.name')}
-          </div>
-          
-          <div class="text-green-400 font-mono text-lg sm:text-xl md:text-2xl lg:text-3xl my-3 md:my-4 font-light typing-effect px-2">
-            <span class="text-green-500">$</span> {$t('hero.title')}
-          </div>
-          
-          <div class="text-gray-300 font-poppins text-base sm:text-lg md:text-xl lg:text-2xl my-3 md:my-4 font-light px-4">
-            {$t('hero.subtitle')}
-          </div>
-          
-          <!-- Code-style icons -->
-          <div class="flex justify-center gap-2 md:gap-4 my-4 md:my-6 text-green-400 px-2">
-            <div class="font-mono text-xs md:text-sm bg-black/30 px-2 md:px-3 py-1 rounded border border-green-500/30">
-              <i class="fas fa-code"></i> <span class="hidden sm:inline">Code</span>
+
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-white dark:bg-slate-900 shadow-md border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+                  <img
+                    src={project.logo}
+                    alt="{project.title} logo"
+                    class="w-10 h-10 object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
+                  <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{project.subtitle}</p>
+                </div>
+              </div>
+              <i
+                class="fa-solid fa-arrow-up-right-from-square text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all"
+              ></i>
             </div>
-            <div class="font-mono text-xs md:text-sm bg-black/30 px-2 md:px-3 py-1 rounded border border-green-500/30">
-              <i class="fas fa-terminal"></i> <span class="hidden sm:inline">Terminal</span>
-            </div>
-            <div class="font-mono text-xs md:text-sm bg-black/30 px-2 md:px-3 py-1 rounded border border-green-500/30">
-              <i class="fas fa-server"></i> <span class="hidden sm:inline">Deploy</span>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">{project.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {#each project.tech as t}
+                <span class="badge-tech">{t}</span>
+              {/each}
             </div>
           </div>
-          
-          <a href="/contact" class="bg-green-500/20 text-green-400 border-2 border-green-500 active:bg-green-500/30 text-xs md:text-sm font-mono font-semibold uppercase px-4 md:px-8 py-3 md:py-4 rounded shadow hover:shadow-lg hover:shadow-green-500/50 outline-none focus:outline-none transition-all duration-300 inline-block hover:scale-105" type="button">
-            <i class="fas fa-terminal mr-2"></i>{$t('hero.contact')}
+        </a>
+      {/each}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="/projects" class="btn-glass shine">
+        <i class="fa-solid fa-layer-group"></i>
+        {$t('common.viewAllProjects')}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TECH STACK ==================== -->
+<section class="relative py-20 sm:py-24">
+  <div class="container relative z-10">
+    <div class="text-center mb-12 reveal" use:reveal>
+      <span class="badge-glass mb-4">
+        <i class="fa-solid fa-microchip text-indigo-500"></i>
+        {$t('home.stack.badge')}
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        {$t('home.stack.title')} <span class="text-gradient-blue">{$t('home.stack.titleHighlight')}</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+      {#each techStack as tech, i}
+        <div
+          class="glass-card p-5 flex flex-col items-center justify-center gap-2 reveal-scale lift transition-all duration-300 aspect-square hover:-translate-y-1 hover:shadow-xl"
+          use:reveal={{ delay: i * 35 }}
+        >
+          <i class="{tech.icon} {tech.color} text-3xl"></i>
+          <span class="text-xs font-medium text-slate-700 dark:text-slate-200">{tech.name}</span>
+        </div>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="relative py-20 sm:py-28">
+  <div class="container relative z-10">
+    <div
+      class="relative overflow-hidden glass-strong rounded-3xl p-10 sm:p-16 text-center reveal-scale"
+      use:reveal
+      use:tilt3d={{ max: 3, scale: 1.005 }}
+    >
+      <!-- Decorative gradient blob -->
+      <div
+        class="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-purple-400/50 to-pink-400/50 rounded-full blur-3xl"
+      ></div>
+      <div
+        class="absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-br from-blue-400/50 to-cyan-400/50 rounded-full blur-3xl"
+      ></div>
+
+      <div class="relative">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          {$t('home.cta.title')} <span class="text-gradient">{$t('home.cta.titleHighlight')}</span>
+        </h2>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          {$t('home.cta.subtitle')}
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4 justify-center">
+          <a href="/contact" class="btn-primary-gradient shine">
+            <i class="fa-solid fa-paper-plane"></i>
+            {$t('common.startProject')}
+          </a>
+          <a
+            href="https://wa.me/212637446431"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary-light"
+          >
+            <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+            {$t('common.quickChat')}
           </a>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <style>
-  .min-h-screen-75 {
-    min-height: 75vh;
-  }
-  
-  .font-playfair {
-    font-family: 'Playfair Display', serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    letter-spacing: 1px;
-  }
-  
-  .font-poppins {
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.5px;
-  }
-
-  [dir="rtl"] .ml-auto {
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-  [dir="rtl"] .mr-auto {
-    margin-right: 0;
-    margin-left: auto;
-  }
-
-  .logo {
-    max-width: 200px;
-    height: auto;
-    display: block;
-  }
-
-  header {
-    height: 8vh;
-  }
-
-  /* Matrix Canvas */
-  #matrix-rain {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  /* Floating Code Snippets */
-  .code-snippets {
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  :global(.floating-code) {
-    position: absolute;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    color: rgba(0, 255, 0, 0.4);
-    white-space: nowrap;
-    animation: float-code 20s infinite linear;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-  }
-
-  @keyframes float-code {
-    0% {
-      transform: translateY(0) translateX(0) rotate(0deg);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.6;
-    }
-    90% {
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateY(-100vh) translateX(50px) rotate(5deg);
-      opacity: 0;
-    }
-  }
-
-  /* Glitch Text Effect */
-  .glitch-text {
-    position: relative;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 
-      0 0 10px rgba(0, 255, 0, 0.5),
-      0 0 20px rgba(0, 255, 0, 0.3),
-      0 0 30px rgba(0, 255, 0, 0.2);
-    animation: glitch 3s infinite;
-  }
-
-  @keyframes glitch {
-    0%, 90%, 100% {
-      text-shadow: 
-        0 0 10px rgba(0, 255, 0, 0.5),
-        0 0 20px rgba(0, 255, 0, 0.3),
-        0 0 30px rgba(0, 255, 0, 0.2);
-    }
-    92% {
-      text-shadow: 
-        -2px 0 rgba(255, 0, 0, 0.7),
-        2px 0 rgba(0, 255, 0, 0.7);
-    }
-    94% {
-      text-shadow: 
-        2px 0 rgba(255, 0, 0, 0.7),
-        -2px 0 rgba(0, 255, 0, 0.7);
-    }
-  }
-
-  /* Typing Effect */
-  .typing-effect {
-    position: relative;
-    display: inline-block;
-  }
-
-  .typing-effect::after {
-    content: '|';
-    display: inline-block;
-    animation: blink 1s infinite;
-    margin-left: 5px;
-  }
-
-  @keyframes blink {
-    0%, 50% {
-      opacity: 1;
-    }
-    51%, 100% {
-      opacity: 0;
-    }
-  }
-
-  /* Button Styles */
-  a[href="/contact"] {
-    position: relative;
-    overflow: hidden;
-  }
-
-  a[href="/contact"]::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
-    transition: left 0.5s;
-  }
-
-  a[href="/contact"]:hover::before {
-    left: 100%;
-  }
-
-  /* Terminal Dots Animation */
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.5;
-      transform: scale(0.9);
-    }
-  }
-
-  .inline-block.w-3.h-3 {
-    animation: pulse 2s infinite;
-  }
-
-  .inline-block.w-3.h-3:nth-child(1) {
-    animation-delay: 0s;
-  }
-
-  .inline-block.w-3.h-3:nth-child(2) {
-    animation-delay: 0.3s;
-  }
-
-  .inline-block.w-3.h-3:nth-child(3) {
-    animation-delay: 0.6s;
-  }
-
-  /* Scanline Effect */
-  @keyframes scanline {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(100%);
-    }
-  }
-
-  .relative.flex.content-center::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.5), transparent);
-    animation: scanline 8s linear infinite;
-    pointer-events: none;
-    z-index: 100;
+  :global(body) {
+    font-family: 'Inter', 'Space Grotesk', system-ui, sans-serif;
   }
 </style>

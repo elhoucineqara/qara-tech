@@ -1,191 +1,202 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { clickOutside } from '$lib/actions/clickOutside';
+  import { onMount, onDestroy } from 'svelte';
+  import ThemeToggle from './ThemeToggle.svelte';
+  import LanguageToggle from './LanguageToggle.svelte';
+  import { t } from '$lib/i18n/i18n';
 
   let isScrolled = false;
   let isMenuOpen = false;
-  
+
   function handleScroll() {
-    isScrolled = window.scrollY > 50;
+    isScrolled = window.scrollY > 30;
   }
-  
+
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
-  
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', handleScroll);
+
+  function closeMenu() {
+    isMenuOpen = false;
   }
 
-  // Determine if the current page requires a transparent background
-  $: isTransparentPage = $page.url.pathname === '/';
-  
-  // Determine text color based on page and scroll - toujours blanc/vert
-  $: textColor = isScrolled ? 'text-green-400' : 'text-white';
-  $: hoverColor = 'hover:text-green-300';
-  $: headerBg = isScrolled || !isTransparentPage 
-    ? 'bg-gradient-to-r from-gray-900 via-black to-gray-900 backdrop-blur-md shadow-lg border-b border-green-500/30' 
-    : 'bg-black/30 backdrop-blur-sm';
+  onMount(() => {
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+  });
+
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  });
+
+  $: navItems = [
+    { href: '/', label: $t('nav.home') },
+    { href: '/about', label: $t('nav.about') },
+    { href: '/skills', label: $t('nav.skills') },
+    { href: '/experience', label: $t('nav.experience') },
+    { href: '/projects', label: $t('nav.projects') },
+    { href: '/services', label: $t('nav.services') },
+    { href: '/contact', label: $t('nav.contact') }
+  ];
+
+  $: currentPath = $page.url.pathname;
 </script>
 
-<header class="fixed w-full z-50 transition-all duration-500 ease-in-out {headerBg}">
-  <nav class="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
-    <div class="flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-      <a href="/" class="hover:scale-110 transition-all duration-300 group">
-          <div class="flex items-center gap-2 sm:gap-3">
-            <!-- Logo Icon with Hexagon -->
-            <div class="relative">
-              <!-- Animated rings -->
-              <div class="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 border-2 border-green-500/30 rounded-lg rotate-45 group-hover:rotate-90 transition-all duration-500"></div>
-              <div class="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 border-2 border-cyan-500/20 rounded-lg -rotate-45 group-hover:rotate-0 transition-all duration-700"></div>
-              
-              <!-- Main logo -->
-              <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 via-green-400 to-cyan-500 rounded-lg flex items-center justify-center font-black relative z-10 shadow-lg shadow-green-500/50 group-hover:shadow-green-500/80 transition-all duration-300">
-                <span class="text-base sm:text-xl text-black">Q</span>
-              </div>
-              
-              <!-- Glow effect -->
-              <div class="absolute inset-0 bg-green-500 blur-xl opacity-40 group-hover:opacity-70 transition-all duration-300 rounded-lg animate-pulse"></div>
-            </div>
-            
-            <!-- Logo Text with gradient -->
-            <div class="text-base sm:text-xl md:text-2xl font-black tracking-tight">
-              <span class="bg-gradient-to-r from-green-400 to-green-300 bg-clip-text text-transparent">QARA</span><span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">TECH</span>
-              <!-- Underline effect -->
-              <div class="h-0.5 bg-gradient-to-r from-green-500 to-cyan-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </div>
+<header
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-500
+         {isScrolled
+    ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl border-b border-white/60 dark:border-slate-800/60 shadow-[0_4px_24px_-8px_rgba(99,102,241,0.15)] dark:shadow-[0_4px_24px_-8px_rgba(0,0,0,0.6)]'
+    : 'bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-b border-white/30 dark:border-slate-800/30'}"
+>
+  <nav class="container">
+    <div class="flex justify-between items-center py-3 sm:py-4">
+      <!-- Logo -->
+      <a href="/" class="group flex items-center gap-3" on:click={closeMenu}>
+        <div class="relative">
+          <div
+            class="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden
+                   ring-2 ring-white/60 dark:ring-purple-500/30
+                   shadow-lg shadow-purple-500/30
+                   group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
+          >
+            <img
+              src="/images/qaratech-icon.png"
+              alt="QARATECH logo"
+              class="w-full h-full object-contain"
+            />
           </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-indigo-400 to-pink-400 rounded-full blur-xl opacity-40
+                   group-hover:opacity-70 transition-opacity duration-300 -z-10"
+          ></div>
+        </div>
+        <div class="hidden xs:block sm:block">
+          <div class="text-lg sm:text-xl font-extrabold tracking-tight leading-none">
+            <span class="text-gradient">QARA</span><span class="text-slate-800 dark:text-slate-100">TECH</span>
+          </div>
+          <div class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">
+            {$t('header.tagline')}
+          </div>
+        </div>
       </a>
-      </div>
-      
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center space-x-3 lg:space-x-6 text-sm lg:text-base font-mono">
-        <a href="/" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/' ? 'font-semibold text-green-300' : ''}">
-          Home
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/about" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/about' ? 'font-semibold text-green-300' : ''}">
-          About
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/skills" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/skills' ? 'font-semibold text-green-300' : ''}">
-          Skills
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/experience" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/experience' ? 'font-semibold text-green-300' : ''}">
-          Experience
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/projects" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/projects' ? 'font-semibold text-green-300' : ''}">
-          Projects
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/education" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/education' ? 'font-semibold text-green-300' : ''}">
-          Education
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/services" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/services' ? 'font-semibold text-green-300' : ''}">
-          Services
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/contact" class="{textColor} {hoverColor} transition-all duration-300 relative group {$page.url.pathname === '/contact' ? 'font-semibold text-green-300' : ''}">
-          Contact
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden lg:flex items-center gap-1">
+        {#each navItems as item}
+          <a
+            href={item.href}
+            class="relative px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-300
+                   {currentPath === item.href
+              ? 'text-purple-700 dark:text-purple-300 bg-purple-50/80 dark:bg-purple-500/15'
+              : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60'}"
+          >
+            {item.label}
+            {#if currentPath === item.href}
+              <span
+                class="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500"
+              ></span>
+            {/if}
+          </a>
+        {/each}
       </div>
 
-      <!-- Mobile: Hamburger -->
-      <div class="md:hidden flex items-center">
-        <button class="{textColor} hover:scale-110 transition-transform duration-300" on:click={toggleMenu} aria-label="Menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          {#if isMenuOpen}
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          {:else}
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          {/if}
-        </svg>
-      </button>
-    </div>
-    </div>
+      <!-- CTA + mobile button -->
+      <div class="flex items-center gap-2">
+        <LanguageToggle />
+        <ThemeToggle />
 
-    <!-- Mobile Menu Overlay -->
-    {#if isMenuOpen}
-      <div class="md:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-40 animate-fadeIn" on:click={toggleMenu}></div>
-      <div class="md:hidden fixed top-16 left-0 right-0 mx-4 z-50 animate-slideDown bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-lg shadow-2xl border border-green-500/30">
-        <!-- Close Button -->
-        <div class="flex justify-between items-center p-4 border-b border-green-500/30">
-          <span class="text-green-400 font-mono text-sm font-semibold">
-            Navigation Menu
-          </span>
-          <button on:click={toggleMenu} class="text-green-400 hover:text-red-400 hover:rotate-90 transition-all duration-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        
-        <div class="space-y-2 p-4">
-          <a href="/" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            Home
-          </a>
-          <a href="/about" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/about' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            About
-          </a>
-          <a href="/skills" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/skills' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            Skills
-          </a>
-          <a href="/experience" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/experience' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            Experience
-          </a>
-          <a href="/projects" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/projects' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            Projects
-          </a>
-          <a href="/education" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/education' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            Education
-          </a>
-          <a href="/services" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/services' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            Services
-          </a>
-          <a href="/contact" on:click={toggleMenu} class="block font-mono text-green-400 hover:text-green-300 transition-all duration-300 py-2 px-3 rounded hover:bg-green-500/20 border border-transparent hover:border-green-500/30 {$page.url.pathname === '/contact' ? 'font-semibold bg-green-500/20 border-green-500/30' : ''}">
-            Contact
-          </a>
-        </div>
+        <a
+          href="/contact"
+          class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white
+                 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                 shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30
+                 hover:-translate-y-0.5 transition-all duration-300"
+        >
+          <i class="fa-solid fa-paper-plane text-xs"></i>
+          {$t('common.hireMe')}
+        </a>
+
+        <button
+          class="lg:hidden w-10 h-10 rounded-xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-white/70 dark:border-slate-700/70
+                 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:bg-white/80 dark:hover:bg-slate-800/80 transition"
+          on:click={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {#if isMenuOpen}
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            {:else}
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            {/if}
+          </svg>
+        </button>
       </div>
-    {/if}
+    </div>
   </nav>
 </header>
 
+<!-- Mobile menu overlay -->
+{#if isMenuOpen}
+  <div
+    class="lg:hidden fixed inset-0 bg-slate-900/30 dark:bg-black/50 backdrop-blur-sm z-40 animate-fadeIn"
+    on:click={closeMenu}
+    role="button"
+    tabindex="-1"
+    on:keydown={(e) => e.key === 'Escape' && closeMenu()}
+  ></div>
+
+  <div
+    class="lg:hidden fixed top-20 left-4 right-4 z-50 glass-strong rounded-2xl p-2 animate-slideDown"
+  >
+    {#each navItems as item}
+      <a
+        href={item.href}
+        on:click={closeMenu}
+        class="block px-4 py-3 rounded-xl text-sm font-medium transition
+               {currentPath === item.href
+          ? 'bg-gradient-to-r from-indigo-50 to-pink-50 dark:from-indigo-500/20 dark:to-pink-500/20 text-purple-700 dark:text-purple-300'
+          : 'text-slate-700 dark:text-slate-200 hover:bg-white/70 dark:hover:bg-slate-800/60'}"
+      >
+        {item.label}
+      </a>
+    {/each}
+    <a
+      href="/contact"
+      on:click={closeMenu}
+      class="block mt-2 px-4 py-3 rounded-xl text-center text-sm font-semibold text-white
+             bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-md"
+    >
+      <i class="fa-solid fa-paper-plane text-xs mr-2"></i>
+      {$t('common.hireMe')}
+    </a>
+  </div>
+{/if}
+
 <style>
-  .font-playfair {
-    font-family: 'Playfair Display', serif;
-  }
-
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-
   @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
   }
+  .animate-fadeIn { animation: fadeIn 0.25s ease-out forwards; }
+  .animate-slideDown { animation: slideDown 0.3s ease-out forwards; }
 
-  .animate-fadeIn {
-    animation: fadeIn 0.3s ease-out forwards;
+  @media (min-width: 380px) {
+    :global(.xs\:block) { display: block; }
   }
-
-  .animate-slideDown {
-    animation: slideDown 0.3s ease-out forwards;
-  }
-</style> 
+</style>

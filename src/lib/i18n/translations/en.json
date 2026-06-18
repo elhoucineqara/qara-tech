@@ -1,18 +1,70 @@
 {
+  "common": {
+    "available": "Available for new projects",
+    "live": "Live",
+    "morocco": "Morocco",
+    "remote": "Remote",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "showLess": "Show less",
+    "learnMore": "Learn more",
+    "readMore": "Read More",
+    "getInTouch": "Get in Touch",
+    "viewProjects": "View Projects",
+    "viewAllProjects": "See all projects",
+    "startProject": "Start a Project",
+    "quickChat": "Quick Chat",
+    "hireMe": "Hire Me",
+    "private": "Private Project"
+  },
   "nav": {
     "home": "Home",
     "about": "About",
     "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
     "services": "Services",
-
-    "contact": "Contact"
+    "education": "Education",
+    "contact": "Contact",
+    "blog": "Blog"
   },
-  "hero": {
-    "name": "El Houcine QARA",
-    "title": "Full Stack Developer",
-    "subtitle": "Creating modern web and mobile applications",
-    "contact": "Contact me",
-    "at": "at"
+  "header": {
+    "tagline": "Full Stack Developer"
+  },
+  "home": {
+    "badge": "Available for new projects",
+    "greeting": "Hi, I'm",
+    "name": "El Houcine",
+    "titlePart1": "Full Stack",
+    "titlePart2": "Developer",
+    "subtitle": "I build modern, scalable web platforms — from",
+    "subtitleHighlight1": "contact centers",
+    "subtitleAnd": "and",
+    "subtitleHighlight2": "learning platforms",
+    "subtitleEnd": "to enterprise software. Based in Morocco.",
+    "viewMyWork": "View My Work",
+    "stats": {
+      "projects": "Projects",
+      "yearsExp": "Years Exp.",
+      "technologies": "Technologies",
+      "dedication": "Dedication"
+    },
+    "featured": {
+      "badge": "Featured Work",
+      "title": "Live",
+      "titleHighlight": "Projects",
+      "subtitle": "Real production platforms I've built and shipped. Click any card to explore the live site."
+    },
+    "stack": {
+      "badge": "My Stack",
+      "title": "Built with",
+      "titleHighlight": "modern tools"
+    },
+    "cta": {
+      "title": "Let's build something",
+      "titleHighlight": "amazing",
+      "subtitle": "Have a project in mind? I'd love to hear about it. Let's discuss how we can turn your ideas into a production-ready platform."
+    }
   },
   "about": {
     "title": "About Me",
@@ -25,23 +77,325 @@
     "location": "Bouznika, Morocco",
     "downloadCV": "Download CV",
     "viewCV": "View CV",
-    "description": "Passionate Full Stack Developer with a Professional Bachelor's degree in Computer Systems Engineering and Web Technologies. With solid training in computer science and 2+ years of experience, my goal is to highlight my skills and enthusiasm in service of the development industry.",
-    "learnMore": "Learn more"
+    "description": "Passionate Full Stack Developer, currently pursuing a Master's in Digital Transformation, after a Professional Bachelor's degree in Computer Systems Engineering. With 2+ years of real-world experience, my goal is to highlight my skills and enthusiasm in service of the development industry.",
+    "learnMore": "Learn more",
+    "page": {
+      "badge": "About Me",
+      "titlePart1": "Full Stack",
+      "titlePart2": "Developer",
+      "introPart1": "Currently at",
+      "introPart2": "— building enterprise platforms with passion. Pursuing a Master's in Digital Transformation with 2+ years of hands-on experience, I turn ideas into production-grade software.",
+      "openToWork": "Open to work",
+      "languages": "EN · FR · AR",
+      "remote": "Remote",
+      "highlights": {
+        "cleanCode": "Clean Code",
+        "cleanCodeValue": "15+ projects shipped",
+        "performance": "Performance",
+        "performanceValue": "60% faster queries",
+        "teamWork": "Team Work",
+        "teamWorkValue": "Cross-functional teams",
+        "learning": "Always learning",
+        "learningValue": "Master's in progress"
+      },
+      "contactBadge": "Contact Info",
+      "contactTitle": "Let's",
+      "contactTitleHighlight": "connect",
+      "labels": {
+        "email": "Email",
+        "phone": "Phone",
+        "whatsapp": "WhatsApp",
+        "whatsappValue": "Chat with me",
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "location": "Location"
+      }
+    }
   },
-  "skills": {
-    "title": "My Skills",
-    "description": "Expertise in web and mobile development",
-    "viewSkills": "View skills"
+  "projects": {
+    "badge": "Portfolio",
+    "titlePart1": "Real projects,",
+    "titleHighlight": "real impact",
+    "subtitle": "A curated selection of production platforms I've designed, built and shipped.",
+    "live": "Live in Production",
+    "all": "All Projects",
+    "filter": {
+      "all": "All"
+    },
+    "actions": {
+      "demo": "Demo",
+      "code": "Code",
+      "visitLive": "Visit Live Site",
+      "private": "Private Project"
+    },
+    "cta": {
+      "title": "Got a project in mind?",
+      "subtitle": "Let's discuss how I can help you build something great.",
+      "button": "Start a Conversation"
+    },
+    "categories": {
+      "Enterprise": "Enterprise",
+      "Education": "Education",
+      "Personal": "Personal",
+      "E-Commerce": "E-Commerce",
+      "Communication": "Communication"
+    },
+    "items": {
+      "harx": {
+        "title": "HARX",
+        "subtitle": "Contact Center Platform",
+        "description": "Advanced cloud-based contact center solution with real-time VoIP, CRM integration and AI analytics.",
+        "impact": "Improved call center efficiency by 45% and customer satisfaction by 60%"
+      },
+      "lms": {
+        "title": "Dar Al-Ilm",
+        "subtitle": "Online Learning Platform",
+        "description": "Multi-company LMS for specialized training programs with courses, forum and progress tracking.",
+        "impact": "Trained 500+ students with 95% completion rate"
+      },
+      "hr": {
+        "title": "HR Automation System",
+        "description": "Complete HR management solution with automated workflows, leave management and payroll.",
+        "impact": "Reduced HR processing time by 70% and eliminated manual errors"
+      },
+      "portfolio": {
+        "title": "AI-Powered Portfolio",
+        "description": "Modern portfolio website with integrated AI chatbot assistant.",
+        "impact": "Increased recruiter engagement by 80% with interactive AI assistant"
+      },
+      "ecommerce": {
+        "title": "E-Commerce Platform",
+        "description": "Full-featured e-commerce solution with payment integration.",
+        "impact": "Processed $500K+ in transactions with 99.9% uptime"
+      },
+      "chat": {
+        "title": "Real-Time Chat App",
+        "description": "Scalable chat application with WebSocket communication and video calls.",
+        "impact": "Supports 10,000+ concurrent users with <100ms latency"
+      }
+    }
   },
   "services": {
-    "title": "My Services",
-    "subtitle": "Discover my professional services in development and IT consulting",
-    "description": "I offer comprehensive web and mobile development services to help you achieve your digital goals.",
-    "viewServices": "View Services"
+    "badge": "Services",
+    "titlePart1": "End-to-end",
+    "titleHighlight": "development",
+    "subtitle": "From idea to production. I help startups and companies ship modern web platforms with the right architecture, the right stack and the right pace.",
+    "process": {
+      "badge": "How we work",
+      "title": "A simple",
+      "titleHighlight": "4-step process",
+      "steps": {
+        "discovery": "Discovery",
+        "discoveryDesc": "We talk about your needs, goals and constraints.",
+        "planning": "Planning",
+        "planningDesc": "I design the architecture and break work into milestones.",
+        "building": "Building",
+        "buildingDesc": "I code, test and ship — with regular demos.",
+        "support": "Support",
+        "supportDesc": "Maintenance, monitoring and iterations after launch."
+      }
+    },
+    "cta": {
+      "title": "Ready to",
+      "titleHighlight": "start",
+      "subtitle": "Tell me about your project — I'll get back within 24h with a free estimate.",
+      "button": "Request a Quote"
+    },
+    "items": {
+      "web": {
+        "title": "Web Development",
+        "description": "Creation of custom, responsive, and modern websites and web applications. Expertise in modern frameworks (React, Vue, Svelte), full-stack development, and API integration.",
+        "feat1": "React / SvelteKit",
+        "feat2": "Responsive UI",
+        "feat3": "SEO optimized"
+      },
+      "mobile": {
+        "title": "Mobile Development",
+        "description": "Native and cross-platform mobile applications for iOS and Android using React Native and Flutter.",
+        "feat1": "React Native",
+        "feat2": "Flutter",
+        "feat3": "iOS & Android"
+      },
+      "cloud": {
+        "title": "Cloud Solutions",
+        "description": "Cloud deployment on AWS, Azure or GCP, CI/CD pipelines, Docker, Kubernetes and automation.",
+        "feat1": "AWS / Azure / GCP",
+        "feat2": "Auto-scaling",
+        "feat3": "Cost optimization"
+      },
+      "devops": {
+        "title": "DevOps & Infrastructure",
+        "description": "Setting up CI/CD, container orchestration, infrastructure as code and automated testing.",
+        "feat1": "CI/CD pipelines",
+        "feat2": "Docker / K8s",
+        "feat3": "Infrastructure as Code"
+      },
+      "ai": {
+        "title": "AI & Machine Learning",
+        "description": "AI-powered solutions, ML models, predictive analytics, NLP and computer vision.",
+        "feat1": "OpenAI integration",
+        "feat2": "ML models",
+        "feat3": "NLP & vision"
+      },
+      "consulting": {
+        "title": "Consulting & Strategy",
+        "description": "Strategic support for digital projects, tech roadmap, process optimization and architecture consulting.",
+        "feat1": "Architecture review",
+        "feat2": "Tech roadmap",
+        "feat3": "Process audit"
+      }
+    }
+  },
+  "skills": {
+    "badge": "Tech Stack",
+    "titlePart1": "My",
+    "titleHighlight": "Skills",
+    "subtitle": "Discover my technical skills and expertise in different development areas",
+    "categories": {
+      "all": "All Skills",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "languages": "Languages",
+      "databases": "Databases",
+      "devops": "DevOps & Cloud",
+      "tools": "Tools",
+      "architecture": "Architecture",
+      "mobile": "Mobile",
+      "testing": "Testing"
+    },
+    "groupTitles": {
+      "frontend": "Frontend Frameworks",
+      "backend": "Backend Frameworks",
+      "languages": "Programming Languages",
+      "databases": "Databases",
+      "devops": "API, DevOps & Cloud",
+      "tools": "Development Tools",
+      "architecture": "Architecture & Patterns",
+      "mobile": "Mobile Development",
+      "testing": "Testing & QA"
+    },
+    "stats": {
+      "technologies": "Technologies",
+      "categories": "Categories",
+      "yearsExp": "Years Exp.",
+      "passion": "Passion"
+    }
+  },
+  "experience": {
+    "badge": "Career",
+    "titlePart1": "Professional",
+    "titleHighlight": "Experience",
+    "subtitle": "2+ years of experience building innovative solutions for enterprise clients.",
+    "cta": {
+      "title": "Looking for an experienced developer?",
+      "subtitle": "I'm currently open to new opportunities — full-time, contract or freelance."
+    },
+    "items": {
+      "harx": {
+        "title": "Full Stack Developer — HARX Contact Center",
+        "company": "I-ETERIA",
+        "period": "Feb 2024 — Present",
+        "location": "Remote",
+        "description": "Leading development of HARX, an advanced cloud-based contact center solution. Architecting a comprehensive VoIP platform with real-time communication, intelligent call routing, CRM integration and analytics dashboards.",
+        "a1": "Designed real-time call management system with WebRTC integration",
+        "a2": "Implemented AI-powered call analytics & sentiment analysis using OpenAI",
+        "a3": "Built RESTful APIs for CRM integration (Zoho, Google)",
+        "a4": "Developed responsive admin dashboard with React",
+        "a5": "Integrated VoIP telephony with automatic call distribution (ACD)",
+        "a6": "Created real-time notifications system using WebSockets",
+        "a7": "Optimized database queries reducing response time by 60%"
+      },
+      "lms": {
+        "title": "Web Developer — Dar Al-Ilm LMS",
+        "company": "I-ETERIA",
+        "period": "Feb 2024 — Oct 2024",
+        "location": "Remote",
+        "description": "Developed a comprehensive multi-company Learning Management System for HARX organization, delivering specialized trading training programs with course management, progress tracking and certifications.",
+        "a1": "Architected multi-company LMS platform for trader training programs",
+        "a2": "Implemented course management with video lessons, assessments and certifications",
+        "a3": "Built user progress tracking and analytics dashboard",
+        "a4": "Created role-based access control for different companies and user types",
+        "a5": "Developed interactive trading simulations and practical exercises",
+        "a6": "Implemented reporting system for tracking learner performance"
+      },
+      "hr": {
+        "title": "Full Stack Developer — HR Automation",
+        "company": "HR Automation Project",
+        "period": "March 2023 — April 2023",
+        "location": "Remote",
+        "description": "Developed an HR management system automating employee onboarding, leave management, payroll processing and performance evaluation.",
+        "a1": "Designed employee management dashboard with real-time data visualization",
+        "a2": "Implemented automated leave request and approval workflow",
+        "a3": "Built payroll calculation module with tax and deduction management",
+        "a4": "Created document management system for employee records",
+        "a5": "Integrated email notifications for automated HR communications"
+      },
+      "electronics": {
+        "title": "Electronics Repair Technician",
+        "company": "C2EZ",
+        "period": "Feb 2020 — Mar 2020",
+        "location": "Casablanca, Morocco",
+        "description": "Specialized in electronics card conception and repair, Arduino programming and machine software troubleshooting.",
+        "a1": "Electronics card design and repair",
+        "a2": "Arduino programming and prototyping",
+        "a3": "Machine software troubleshooting"
+      }
+    }
+  },
+  "education": {
+    "badge": "Education",
+    "titlePart1": "Academic",
+    "titleHighlight": "Excellence",
+    "subtitle": "From physical sciences to digital transformation — a journey of continuous learning.",
+    "period": "Period",
+    "certsBadge": "Certifications & Skills",
+    "certsTitle": "Continuously",
+    "certsTitleHighlight": "leveling up",
+    "certsSubtitle": "Expanding expertise through professional certifications and hands-on experience.",
+    "continuous": {
+      "title": "Continuous Learning",
+      "subtitle": "Committed to lifelong learning and staying current with the latest technologies and industry trends. Actively pursuing new certifications and professional development programs."
+    },
+    "items": {
+      "master": {
+        "degree": "Master's in Digital Transformation of Educational Processes",
+        "school": "ENSET Mohammedia, Morocco · 2nd Year",
+        "description": "Advanced training in digital transformation of education, covering modern educational technologies, digitalization of learning and pedagogical innovation."
+      },
+      "bachelor": {
+        "degree": "Professional Bachelor's in Computer Systems Engineering & Web Technologies",
+        "school": "EST Sidi Bennour Chouaib Doukkali, El Jadida",
+        "description": "Comprehensive software engineering program covering advanced programming, software architecture, project management and modern development methodologies."
+      },
+      "tech": {
+        "degree": "Specialized Technician Diploma — Digital Development, Web Full Stack",
+        "school": "ISTA TAOURIRT, Morocco",
+        "description": "Intensive program focused on full-stack web development, covering frontend & backend technologies with hands-on project experience."
+      },
+      "physics": {
+        "degree": "Fundamental Bachelor's in Physical Sciences",
+        "school": "Faculty of Sciences Aïn Chock Hassan II, Casablanca",
+        "description": "Strong foundation in mathematics, physics and scientific methodology that supports analytical problem-solving in software development."
+      },
+      "bac": {
+        "degree": "Baccalaureate in Physical Sciences",
+        "school": "Ibn Khaldoun High School, Bouznika, Morocco",
+        "description": "High school diploma with specialization in Physical Sciences."
+      }
+    },
+    "certs": {
+      "laravel": { "title": "Laravel Expert", "sub": "Framework Mastery", "desc": "Advanced backend dev, RESTful APIs and microservices" },
+      "react": { "title": "React Developer", "sub": "Frontend Excellence", "desc": "React, Redux, Hooks and modern frontend patterns" },
+      "node": { "title": "Node.js Expert", "sub": "Server-Side Pro", "desc": "Scalable backend with Node, Express and real-time comms" },
+      "db": { "title": "Database Design", "sub": "Data Architect", "desc": "MySQL, MongoDB, PostgreSQL, Redis — optimized design" },
+      "cloud": { "title": "Cloud Computing", "sub": "AWS & Azure", "desc": "Cloud deployment, scalability and DevOps practices" },
+      "agile": { "title": "Agile & Scrum", "sub": "Project Management", "desc": "Agile methodologies, Scrum, JIRA and team collaboration" }
+    }
   },
   "contact": {
-    "title": "Contact Me",
-    "subtitle": "Get in touch with me for any questions or collaboration opportunities",
+    "badge": "Contact",
+    "titlePart1": "Let's",
+    "titleHighlight": "talk",
     "description": "I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Feel free to reach out through the contact form below.",
     "form": {
       "firstName": "First Name",
@@ -49,76 +403,52 @@
       "email": "Email",
       "phone": "Phone",
       "message": "Message",
-      "sendMessage": "Send Message"
+      "messagePlaceholder": "Tell me about your project...",
+      "sendMessage": "Send Message",
+      "sending": "Sending...",
+      "required": "Please fill in all required fields",
+      "invalidEmail": "Please enter a valid email address",
+      "successTitle": "Message sent successfully! I'll get back to you soon.",
+      "opening": "Opening your email client..."
     },
-    "modal": {
-      "title": "Contact Form",
-      "name": "Full Name",
-      "subject": "Subject"
+    "sidebar": {
+      "direct": "Reach me directly",
+      "directLabels": {
+        "email": "Email",
+        "emailValue": "Send Email",
+        "whatsapp": "WhatsApp",
+        "whatsappValue": "Chat Now",
+        "phone": "Phone",
+        "phoneValue": "Call Me"
+      },
+      "quickInfo": "Quick info",
+      "responseTime": "Response within 24 hours",
+      "availability": "Available for remote work",
+      "spoken": "English · French · Arabic",
+      "location": "Bouznika, Morocco",
+      "availableTitle": "Available for new projects",
+      "availableSubtitle": "Open to full-time, contract and freelance opportunities."
     }
+  },
+  "blog": {
+    "badge": "Blog",
+    "titlePart1": "Insights &",
+    "titleHighlight": "Tutorials",
+    "subtitle": "Thoughts on web development, programming and technology.",
+    "filterAll": "All Posts",
+    "minRead": "min",
+    "readMore": "Read More",
+    "noPosts": "No posts found",
+    "noPostsHint": "Try selecting a different tag or check back later."
   },
   "footer": {
-    "copyright": "© 2024 El Houcine QARA. All rights reserved.",
-    "social": {
-      "github": "GitHub",
-      "linkedin": "LinkedIn"
-    }
-  },
-  "pages": {
-    "about": {
-      "title": "About Me",
-      "description": "Learn more about my journey and expertise in web development"
-    },
-    "skills": {
-      "title": "My Skills",
-      "description": "Discover my technical skills and expertise in different development areas",
-      "frontend": { "title": "Frontend" },
-      "backend": { "title": "Backend" },
-      "languages": { "title": "Languages" },
-      "databases": { "title": "Databases" },
-      "tools": { "title": "Tools" },
-      "apis": { "title": "APIs" },
-      "cloud": { "title": "Cloud" },
-      "mobile": { "title": "Mobile" },
-      "testing": { "title": "Testing" }
-    },
-    "services": {
-      "title": "My Services",
-      "description": "Discover my professional services in development and IT consulting",
-      "webDev": {
-        "title": "Web Development",
-        "description": "Creation of custom, responsive, and modern websites and web applications. Expertise in modern frameworks (React, Vue, Svelte), full-stack development, and API integration. Focus on performance, accessibility, and user experience.",
-        "cta": "Learn More"
-      },
-      "mobileDev": {
-        "title": "Mobile Development",
-        "description": "Development of native and cross-platform mobile applications for iOS and Android. Using technologies like React Native and Flutter. Creating intuitive user interfaces, integrating advanced features, and optimizing performance.",
-        "cta": "Learn More"
-      },
-      "cloud": {
-        "title": "Cloud Solutions",
-        "description": "Complete expertise in cloud solutions and DevOps practices. Deployment on AWS, Azure or GCP, CI/CD pipeline setup, Docker containerization, Kubernetes orchestration, and automation of development and deployment processes.",
-        "cta": "Learn More"
-      },
-      "devops": {
-        "title": "DevOps & Infrastructure",
-        "description": "Expertise in setting up and managing development and deployment pipelines. Implementation of CI/CD practices, container orchestration, infrastructure as code, and automated testing solutions.",
-        "cta": "Learn More"
-      },
-      "ai": {
-        "title": "AI & Machine Learning",
-        "description": "Development of AI-powered solutions and machine learning models. Implementation of predictive analytics, natural language processing, computer vision, and automated decision-making systems.",
-        "cta": "Learn More"
-      },
-      "consulting": {
-        "title": "Consulting & Strategy",
-        "description": "Complete strategic support for your digital projects. Needs analysis, technological roadmap definition, process optimization, software architecture consulting, and support in your digital transformation.",
-        "cta": "Learn More"
-      }
-    },
-    "contact": {
-      "title": "Contact Me",
-      "description": "Get in touch with me for any questions or collaboration opportunities"
-    }
+    "tagline": "Building modern web platforms — contact centers, LMS and enterprise software with Laravel, React and SvelteKit.",
+    "available": "Available for new projects",
+    "navigate": "Navigate",
+    "liveProjects": "Live Projects",
+    "getInTouch": "Get in Touch",
+    "rights": "All rights reserved.",
+    "craftedWith": "Crafted with",
+    "craftedWithEnd": "using SvelteKit & TailwindCSS"
   }
-} 
+}

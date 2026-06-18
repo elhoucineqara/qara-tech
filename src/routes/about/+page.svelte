@@ -1,597 +1,349 @@
- <script lang="ts">
+<script lang="ts">
   import { onMount } from 'svelte';
+  import { fade, fly } from 'svelte/transition';
   import { t } from '$lib/i18n/i18n';
-  
-  let isVisible = false;
-  let displayedText = "";
-  let isTyping = true;
-  const fullText = $t('about.company');
-  let currentIndex = 0;
-  
-  onMount(() => {
-    isVisible = true;
-    typeText();
-    createParticles();
-    createScanline();
-    initMatrixRain();
-    createCodeLines();
-  });
+  import AnimatedBackground from '$lib/components/AnimatedBackground.svelte';
+  import { tilt3d, reveal } from '$lib/actions/motion';
 
-  const typeText = () => {
-    const typingInterval = setInterval(() => {
+  let mounted = false;
+  let displayedText = '';
+  let isTyping = true;
+  const fullText = 'I-ETERIA';
+  let currentIndex = 0;
+
+  onMount(() => {
+    mounted = true;
+    const id = setInterval(() => {
       if (currentIndex < fullText.length) {
         displayedText += fullText[currentIndex];
         currentIndex++;
       } else {
-        clearInterval(typingInterval);
+        clearInterval(id);
         isTyping = false;
       }
     }, 100);
-  };
+  });
 
-  const createParticles = () => {
-    const container = document.querySelector('.absolute.inset-0');
-    if (!container) return;
-
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.top = `${Math.random() * 100}%`;
-      particle.style.animationDelay = `${Math.random() * 5}s`;
-      container.appendChild(particle);
+  $: contacts = [
+    {
+      icon: 'fa-solid fa-envelope',
+      label: $t('about.page.labels.email'),
+      value: 'elhoucineqara114@gmail.com',
+      href: 'mailto:elhoucineqara114@gmail.com',
+      color: 'from-rose-400 to-pink-500'
+    },
+    {
+      icon: 'fa-solid fa-phone',
+      label: $t('about.page.labels.phone'),
+      value: '+212 637 446 431',
+      href: 'tel:+212637446431',
+      color: 'from-indigo-400 to-purple-500'
+    },
+    {
+      icon: 'fa-brands fa-whatsapp',
+      label: $t('about.page.labels.whatsapp'),
+      value: $t('about.page.labels.whatsappValue'),
+      href: 'https://wa.me/212637446431',
+      color: 'from-emerald-400 to-green-500'
+    },
+    {
+      icon: 'fa-brands fa-linkedin-in',
+      label: $t('about.page.labels.linkedin'),
+      value: 'el-houcine-qara',
+      href: 'https://www.linkedin.com/in/el-houcine-qara-927b07302/',
+      color: 'from-blue-400 to-sky-500'
+    },
+    {
+      icon: 'fa-brands fa-github',
+      label: $t('about.page.labels.github'),
+      value: '@elhoucineqara',
+      href: 'https://github.com/elhoucineqara',
+      color: 'from-slate-600 to-slate-800'
+    },
+    {
+      icon: 'fa-solid fa-location-dot',
+      label: $t('about.page.labels.location'),
+      value: 'Bouznika, ' + $t('common.morocco'),
+      href: '#',
+      color: 'from-amber-400 to-orange-500'
     }
-  };
+  ];
 
-  const createScanline = () => {
-    const container = document.querySelector('.absolute.inset-0');
-    if (!container) return;
-
-    const scanline = document.createElement('div');
-    scanline.className = 'scanline';
-    container.appendChild(scanline);
-  };
-
-  const initMatrixRain = () => {
-    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
-    const matrixArray = matrix.split("");
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
-
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.floor(Math.random() * (canvas.height / fontSize));
-    }
-
-    const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0F0';
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    };
-
-    setInterval(draw, 33);
-  };
-
-  const createCodeLines = () => {
-    const container = document.querySelector('.code-lines');
-    if (!container) return;
-
-    const code = [
-      'function init() {',
-      '  const data = new Array();',
-      '  return process(data);',
-      '}',
-      'class System {',
-      '  constructor() {',
-      '    this.status = "active";',
-      '  }',
-      '}',
-      'const matrix = new Matrix();',
-      'matrix.initialize();',
-      'while(true) {',
-      '  update();',
-      '  render();',
-      '}'
-    ];
-
-    code.forEach((line, index) => {
-      const div = document.createElement('div');
-      div.className = 'code-line';
-      div.textContent = line;
-      div.style.animationDelay = `${index * 0.5}s`;
-      container.appendChild(div);
-    });
-  };
+  $: highlights = [
+    { icon: 'fa-solid fa-code', label: $t('about.page.highlights.cleanCode'), value: $t('about.page.highlights.cleanCodeValue') },
+    { icon: 'fa-solid fa-rocket', label: $t('about.page.highlights.performance'), value: $t('about.page.highlights.performanceValue') },
+    { icon: 'fa-solid fa-users', label: $t('about.page.highlights.teamWork'), value: $t('about.page.highlights.teamWorkValue') },
+    { icon: 'fa-solid fa-graduation-cap', label: $t('about.page.highlights.learning'), value: $t('about.page.highlights.learningValue') }
+  ];
 </script>
 
-<div class="min-h-screen flex flex-col">
-  <div class="flex-grow relative pt-16 md:pt-32 pb-16 md:pb-32 flex content-center items-center justify-center">
-    <div class="absolute inset-0">
-      <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-      <!-- Matrix rain effect -->
-      <canvas id="matrix-rain" class="absolute inset-0 opacity-10"></canvas>
-      <!-- Code lines effect -->
-      <div class="code-lines absolute inset-0 opacity-5"></div>
-      <!-- Add a subtle grid pattern -->
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.05)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-      <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-        <!-- Main curved shape -->
-        <path 
-          d="M 100 0 C 100 0, 100 30, 90 50 C 80 70, 60 80, 40 85 C 20 90, 10 95, 0 100" 
-          fill="rgba(0, 255, 255, 0.05)"
-          class="transition-all duration-300"
-        />
-        <!-- Decorative circles -->
-        <circle cx="20%" cy="20%" r="30" fill="rgba(0, 255, 255, 0.1)" class="animate-float">
-          <animate attributeName="r" values="30;32;30" dur="8s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="80%" cy="60%" r="20" fill="rgba(255, 0, 255, 0.1)" class="animate-float-delayed">
-          <animate attributeName="r" values="20;22;20" dur="6s" repeatCount="indefinite" />
-        </circle>
-        <!-- New animated shapes -->
-        <circle cx="40%" cy="80%" r="15" fill="rgba(0, 255, 255, 0.15)" class="animate-pulse">
-          <animate attributeName="r" values="15;17;15" dur="10s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="60%" cy="30%" r="25" fill="rgba(255, 0, 255, 0.15)" class="animate-pulse-delayed">
-          <animate attributeName="r" values="25;27;25" dur="7s" repeatCount="indefinite" />
-        </circle>
-        <!-- Additional geometric shapes -->
-        <rect x="10" y="10" width="20" height="20" fill="rgba(0, 255, 255, 0.1)" class="animate-rotate">
-          <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="10s" repeatCount="indefinite"/>
-        </rect>
-        <polygon points="70,20 75,25 70,30 65,25" fill="rgba(255, 0, 255, 0.1)" class="animate-float">
-          <animateTransform attributeName="transform" type="rotate" from="0 70 25" to="360 70 25" dur="8s" repeatCount="indefinite"/>
-        </polygon>
-        <!-- Decorative shapes -->
-        <path 
-          d="M 40 30 Q 50 10, 60 30 T 80 30" 
-          stroke="rgba(0, 255, 255, 0.2)" 
-          fill="none" 
-          stroke-width="2"
-          class="animate-draw"
-        />
-        <path 
-          d="M 70 70 Q 80 50, 90 70 T 110 70" 
-          stroke="rgba(255, 0, 255, 0.2)" 
-          fill="none" 
-          stroke-width="2"
-          class="animate-draw-delayed"
-        />
-        <!-- New decorative paths -->
-        <path 
-          d="M 20 50 Q 30 30, 40 50 T 60 50" 
-          stroke="rgba(0, 255, 255, 0.15)" 
-          fill="none" 
-          stroke-width="1.5"
-          class="animate-draw-slow"
-        />
-        <path 
-          d="M 80 20 Q 90 0, 100 20 T 120 20" 
-          stroke="rgba(255, 0, 255, 0.15)" 
-          fill="none" 
-          stroke-width="1.5"
-          class="animate-draw-slower"
-        />
-        <!-- New wave effect -->
-        <path 
-          d="M 0 80 Q 25 70, 50 80 T 100 80" 
-          stroke="rgba(0, 255, 255, 0.1)" 
-          fill="none" 
-          stroke-width="2"
-          class="animate-wave"
-        />
-        <path 
-          d="M 0 85 Q 25 75, 50 85 T 100 85" 
-          stroke="rgba(255, 0, 255, 0.1)" 
-          fill="none" 
-          stroke-width="2"
-          class="animate-wave-delayed"
-        />
-      </svg>
-    </div>
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="items-center flex flex-wrap">
-        <!-- Title section that always appears first -->
-        <div class="w-full mb-8 sm:mb-12 lg:hidden px-2">
-          <h1 class="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 font-mono leading-tight">
-            <span class="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">{$t('about.title')}</span>
-          </h1>
-          <h2 class="text-lg sm:text-xl mb-2 text-gray-200 font-medium leading-relaxed">{$t('about.subtitle')} <span class:typewriter={isTyping} class="text-cyan-400 font-semibold">{displayedText}</span></h2>
-        </div>
+<svelte:head>
+  <title>About — El Houcine QARA</title>
+  <meta
+    name="description"
+    content="Full Stack Developer based in Morocco. Passionate about building modern web platforms with Laravel, React and SvelteKit."
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    rel="stylesheet"
+  />
+</svelte:head>
 
-        <!-- Profile image section -->
-        <div class="w-full lg:w-4/12 px-4 mr-auto ml-auto mb-12 lg:mb-0 order-1 lg:order-2">
-          <div class="relative flex justify-center items-center">
-            <div class="absolute w-[280px] sm:w-[320px] h-[280px] sm:h-[320px] bg-gradient-to-r from-cyan-500/30 to-purple-500/30 rounded-full animate-pulse"></div>
-            <img 
-              alt="El Houcine QARA" 
-              src="/images/qaratech.jpg" 
-              class="w-64 sm:w-72 h-64 sm:h-72 object-cover rounded-full relative z-10 shadow-xl hover:scale-105 transition-transform duration-300"
+<!-- Hero -->
+<section class="relative pt-32 pb-16 sm:pt-40 sm:pb-20 overflow-hidden">
+  <AnimatedBackground variant="cube" showStars={true} />
+
+  <div class="container relative z-10">
+    <div class="grid lg:grid-cols-5 gap-12 items-center">
+      <!-- Avatar -->
+      <div class="lg:col-span-2 flex justify-center">
+        {#if mounted}
+          <div in:fly={{ y: 30, duration: 700 }} class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+            <!-- Rotating conic gradient ring -->
+            <div class="avatar-conic absolute inset-0 rounded-full"></div>
+
+            <!-- Counter-rotating dashed ring -->
+            <svg
+              class="absolute inset-0 w-full h-full rotate-ccw-slow"
+              viewBox="0 0 100 100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
-          </div>
-        </div>
+              <circle
+                cx="50"
+                cy="50"
+                r="48"
+                stroke="url(#dashStroke)"
+                stroke-width="0.6"
+                stroke-dasharray="2 3"
+                stroke-linecap="round"
+              />
+              <defs>
+                <linearGradient id="dashStroke" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#a855f7" />
+                  <stop offset="50%" stop-color="#ec4899" />
+                  <stop offset="100%" stop-color="#06b6d4" />
+                </linearGradient>
+              </defs>
+            </svg>
 
-        <!-- Main content section -->
-        <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto order-2 lg:order-1">
-          <!-- Title only visible on desktop -->
-          <div class="hidden lg:block mb-6">
-            <h1 class="text-4xl lg:text-5xl font-bold mb-4 font-mono leading-tight">
-              <span class="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">{$t('about.title')}</span>
-            </h1>
-            <h2 class="text-xl sm:text-2xl mb-4 text-gray-200 font-medium leading-relaxed">{$t('about.subtitle')} <span class:typewriter={isTyping} class="text-cyan-400 font-semibold">{displayedText}</span></h2>
+            <!-- Orbiting tech icons -->
+            <div class="orbit-container absolute inset-0 rotate-cw-slow">
+              {#each [
+                { icon: 'fa-brands fa-react',   color: 'text-cyan-400',    pos: 'top-0 left-1/2 -translate-x-1/2' },
+                { icon: 'fa-brands fa-laravel', color: 'text-rose-500',    pos: 'right-0 top-1/2 -translate-y-1/2' },
+                { icon: 'fa-solid fa-bolt',     color: 'text-amber-400',   pos: 'bottom-0 left-1/2 -translate-x-1/2' },
+                { icon: 'fa-brands fa-node-js', color: 'text-emerald-500', pos: 'left-0 top-1/2 -translate-y-1/2' }
+              ] as orb}
+                <div class="absolute {orb.pos}">
+                  <!-- Counter-rotate so icons stay upright while parent spins -->
+                  <div class="rotate-ccw-slow">
+                    <div class="w-10 h-10 rounded-xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md
+                                shadow-lg shadow-purple-500/20 border border-white/70 dark:border-slate-700
+                                flex items-center justify-center">
+                      <i class="{orb.icon} {orb.color} text-lg"></i>
+                    </div>
+                  </div>
+                </div>
+              {/each}
+            </div>
+
+            <!-- Photo card (kept floating) -->
+            <div class="relative w-64 h-64 sm:w-72 sm:h-72 glass-card p-2 rounded-full animate-float">
+              <img
+                src="/images/qaratech.jpg"
+                alt="El Houcine QARA"
+                class="w-full h-full object-cover rounded-full"
+              />
+
+              <!-- Sparkle dots -->
+              <span class="sparkle absolute -top-1 left-6 w-2 h-2 rounded-full bg-pink-400"></span>
+              <span class="sparkle absolute top-12 -right-1 w-1.5 h-1.5 rounded-full bg-cyan-400" style="animation-delay: -1.2s"></span>
+              <span class="sparkle absolute bottom-6 -left-2 w-2 h-2 rounded-full bg-purple-400" style="animation-delay: -2.4s"></span>
+              <span class="sparkle absolute -bottom-1 right-10 w-1.5 h-1.5 rounded-full bg-amber-300" style="animation-delay: -0.6s"></span>
+            </div>
+
+            <!-- Status badge floating -->
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 badge-glass animate-float z-10" style="animation-delay: -1.5s">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="font-semibold">{$t('about.page.openToWork')}</span>
+            </div>
           </div>
-          
-          <div class="space-y-4 mb-8 sm:mb-10">
-            <p class="flex items-center text-gray-300 hover:transform hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base">
-              <i class="fas fa-envelope mr-4 text-cyan-400 text-lg sm:text-xl"></i>
-              <a href="mailto:elhoucineqara114@gmail.com" class="hover:text-cyan-400 transition-colors duration-300 break-all">{$t('about.email')}</a>
-            </p>
-            <p class="flex items-center text-gray-300 hover:transform hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base">
-              <i class="fas fa-phone mr-4 text-purple-400 text-lg sm:text-xl"></i>
-              <a href="tel:+212637446431" class="hover:text-purple-400 transition-colors duration-300 break-all">{$t('about.phone')}</a>
-            </p>
-            <p class="flex items-center text-gray-300 hover:transform hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base">
-              <i class="fab fa-whatsapp mr-4 text-cyan-400 text-lg sm:text-xl"></i>
-              <a href="https://wa.me/212637446431" class="hover:text-cyan-400 transition-colors duration-300 break-all">WhatsApp</a>
-            </p>
-            <p class="flex items-center text-gray-300 hover:transform hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base">
-              <i class="fab fa-linkedin mr-4 text-purple-400 text-lg sm:text-xl"></i>
-              <a href="https://www.linkedin.com/in/el-houcine-qara-927b07302/" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition-colors duration-300 break-all">LinkedIn</a>
-            </p>
-            <p class="flex items-center text-gray-300 hover:transform hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base">
-              <i class="fab fa-github mr-4 text-cyan-400 text-lg sm:text-xl"></i>
-              <a href="https://github.com/elhoucineqara" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors duration-300 break-all">GitHub</a>
-            </p>
-            <p class="flex items-center text-gray-300 hover:transform hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base">
-              <i class="fab fa-twitter mr-4 text-purple-400 text-lg sm:text-xl"></i>
-              <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition-colors duration-300 break-all">Twitter</a>
-            </p>
-            <p class="flex items-center text-gray-300 hover:transform hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base">
-              <i class="fas fa-map-marker-alt mr-4 text-cyan-400 text-lg sm:text-xl"></i>
-              <span>{$t('about.location')}</span>
-            </p>
+        {/if}
+      </div>
+
+      <!-- Content -->
+      <div class="lg:col-span-3 text-center lg:text-left">
+        {#if mounted}
+          <div in:fly={{ y: 20, duration: 500 }} class="badge-glass mb-5">
+            <i class="fa-solid fa-user text-purple-500"></i>
+            {$t('about.page.badge')}
           </div>
-        </div>
+
+          <h1
+            in:fly={{ y: 30, duration: 700, delay: 100 }}
+            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
+          >
+            {$t('about.page.titlePart1')} <span class="text-gradient">{$t('about.page.titlePart2')}</span>
+          </h1>
+
+          <p
+            in:fly={{ y: 30, duration: 700, delay: 200 }}
+            class="mt-4 text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0"
+          >
+            {$t('about.page.introPart1')}
+            <span class="text-purple-600 dark:text-purple-400 font-semibold inline-flex items-center"
+              ><span class:typewriter={isTyping}>{displayedText}</span></span
+            > {$t('about.page.introPart2')}
+          </p>
+
+          <div
+            in:fade={{ duration: 700, delay: 400 }}
+            class="mt-6 flex flex-wrap gap-2 justify-center lg:justify-start"
+          >
+            <span class="badge-glass"><i class="fa-solid fa-flag text-rose-500"></i> {$t('common.morocco')}</span>
+            <span class="badge-glass"><i class="fa-solid fa-language text-blue-500"></i> {$t('about.page.languages')}</span>
+            <span class="badge-glass"><i class="fa-solid fa-briefcase text-amber-500"></i> {$t('about.page.remote')}</span>
+          </div>
+
+          <div
+            in:fade={{ duration: 700, delay: 500 }}
+            class="mt-8 flex flex-wrap gap-3 justify-center lg:justify-start"
+          >
+            <a href="/contact" class="btn-primary-gradient shine">
+              <i class="fa-solid fa-paper-plane"></i>
+              {$t('common.getInTouch')}
+            </a>
+            <a href="/projects" class="btn-secondary-light">
+              <i class="fa-solid fa-folder-open"></i>
+              {$t('common.viewProjects')}
+            </a>
+          </div>
+        {/if}
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Removing the footer section -->
-</div>
+<!-- Highlights -->
+<section class="relative py-12">
+  <div class="container">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {#each highlights as h, i}
+        <div
+          class="glass-card p-5 text-center reveal-scale lift cursor-default"
+          use:reveal={{ delay: i * 100 }}
+          use:tilt3d={{ max: 8, scale: 1.04 }}
+        >
+          <i class="{h.icon} text-3xl text-gradient mb-2"></i>
+          <div class="text-sm font-bold text-slate-900 dark:text-white mt-2">{h.label}</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">{h.value}</div>
+        </div>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<!-- Contact Methods -->
+<section class="relative py-16">
+  <div class="container">
+    <div class="text-center mb-10">
+      <span class="badge-glass mb-4">
+        <i class="fa-solid fa-address-card text-indigo-500"></i>
+        {$t('about.page.contactBadge')}
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+        {$t('about.page.contactTitle')} <span class="text-gradient">{$t('about.page.contactTitleHighlight')}</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {#each contacts as c, i}
+        <a
+          href={c.href}
+          target={c.href.startsWith('http') ? '_blank' : null}
+          rel="noopener noreferrer"
+          class="group glass-card p-5 flex items-center gap-4 reveal lift transition-all"
+          use:reveal={{ delay: i * 80 }}
+          use:tilt3d={{ max: 6, scale: 1.02 }}
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-gradient-to-br {c.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform"
+          >
+            <i class="{c.icon} text-lg"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">{c.label}</div>
+            <div class="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">{c.value}</div>
+          </div>
+          <i
+            class="fa-solid fa-arrow-right text-slate-400 dark:text-slate-500 group-hover:text-purple-500 group-hover:translate-x-1 transition-all"
+          ></i>
+        </a>
+      {/each}
+    </div>
+  </div>
+</section>
 
 <style>
-  .font-playfair {
-    font-family: 'Playfair Display', serif;
-  }
-  
-  .font-poppins {
-    font-family: 'Poppins', sans-serif;
-  }
-
-  [dir="rtl"] .ml-auto {
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-  [dir="rtl"] .mr-auto {
-    margin-right: 0;
-    margin-left: auto;
-  }
-
   .typewriter {
-    border-right: 2px solid #00ffff;
+    border-right: 2px solid #a855f7;
     animation: blink 0.75s step-end infinite;
+    padding-right: 2px;
   }
-
   @keyframes blink {
-    from, to { border-color: transparent }
-    50% { border-color: #00ffff; }
+    from, to { border-color: transparent; }
+    50% { border-color: #a855f7; }
   }
 
-  .clip-path-triangle {
-    display: none;
+  /* Rotating conic gradient ring behind the photo */
+  .avatar-conic {
+    background: conic-gradient(
+      from 0deg,
+      rgba(99, 102, 241, 0.0)  0%,
+      rgba(99, 102, 241, 0.5)  10%,
+      rgba(168, 85, 247, 0.7)  30%,
+      rgba(236, 72, 153, 0.7)  50%,
+      rgba(6, 182, 212, 0.6)   70%,
+      rgba(99, 102, 241, 0.0) 100%
+    );
+    -webkit-mask: radial-gradient(circle, transparent 58%, black 60%, black 70%, transparent 72%);
+            mask: radial-gradient(circle, transparent 58%, black 60%, black 70%, transparent 72%);
+    animation: spin-cw 10s linear infinite;
+    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.45));
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
-
-  @keyframes draw {
-    from { stroke-dashoffset: 1000; }
-    to { stroke-dashoffset: 0; }
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-float-delayed {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: 2s;
-  }
-
-  .animate-draw {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 4s ease-out forwards;
-  }
-
-  .animate-draw-delayed {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 4s ease-out forwards;
-    animation-delay: 1s;
-  }
-
-  .animate-pulse-delayed {
-    animation: pulse 4s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.2); opacity: 0.6; }
-  }
-
-  .animate-draw-slow {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 6s ease-out forwards;
-  }
-
-  .animate-draw-slower {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 8s ease-out forwards;
-  }
-
-  @keyframes rotate {
+  @keyframes spin-cw {
     from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    to   { transform: rotate(360deg); }
   }
 
-  .animate-rotate {
-    animation: rotate 10s linear infinite;
+  .rotate-cw-slow  { animation: spin-cw 22s linear infinite; }
+  .rotate-ccw-slow { animation: spin-ccw 22s linear infinite; }
+
+  @keyframes spin-ccw {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
   }
 
-  @keyframes wave {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(20px); }
+  /* Sparkle dots that pop in/out */
+  .sparkle {
+    box-shadow: 0 0 8px currentColor;
+    animation: sparkle 2.4s ease-in-out infinite;
+  }
+  @keyframes sparkle {
+    0%, 100% { transform: scale(0.4); opacity: 0.3; }
+    50%      { transform: scale(1.1); opacity: 1; }
   }
 
-  .animate-wave {
-    animation: wave 8s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    .avatar-conic,
+    .rotate-cw-slow,
+    .rotate-ccw-slow,
+    .sparkle { animation: none !important; }
   }
-
-  .animate-wave-delayed {
-    animation: wave 8s ease-in-out infinite;
-    animation-delay: 2s;
-  }
-
-  /* Add particle effect */
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 255, 0, 0.3);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    animation: particle-float 6s ease-in-out infinite;
-  }
-
-  @keyframes particle-float {
-    0%, 100% { 
-      transform: translateY(0) translateX(0); 
-      opacity: 0.5;
-      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    }
-    50% { 
-      transform: translateY(-20px) translateX(10px); 
-      opacity: 0.8;
-      box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
-    }
-  }
-
-  /* Update text colors for tech theme */
-  h1 {
-    color: #00ffff;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-  }
-
-  h2 {
-    color: #fff;
-  }
-
-  /* Add glitch effect */
-  @keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
-  }
-
-  .glitch-effect {
-    animation: glitch 1s linear infinite;
-  }
-
-  /* Update button styles */
-  a, button {
-    position: relative;
-    overflow: hidden;
-  }
-
-  a::before, button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0, 255, 255, 0.2),
-      transparent
-    );
-    transition: 0.5s;
-  }
-
-  a:hover::before, button:hover::before {
-    left: 100%;
-  }
-
-  /* Add scanline effect */
-  .scanline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(0, 255, 0, 0.05) 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    animation: scanline 8s linear infinite;
-  }
-
-  @keyframes scanline {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100%); }
-  }
-
-  /* Matrix rain canvas */
-  #matrix-rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  /* Code lines effect */
-  .code-lines {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    font-family: 'Courier New', monospace;
-    color: #0F0;
-    text-shadow: 0 0 5px #0F0;
-    overflow: hidden;
-  }
-
-  .code-line {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    animation: code-fade 2s ease-out forwards;
-    white-space: nowrap;
-  }
-
-  @keyframes code-fade {
-    0% {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-20px);
-    }
-    100% {
-      opacity: 0.3;
-      transform: translateX(-50%) translateY(0);
-    }
-  }
-
-  /* Add CRT screen effect */
-  .crt-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.15) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-    pointer-events: none;
-    animation: flicker 0.15s infinite;
-  }
-
-  @keyframes flicker {
-    0% { opacity: 0.97; }
-    5% { opacity: 0.95; }
-    10% { opacity: 0.9; }
-    15% { opacity: 0.95; }
-    20% { opacity: 0.98; }
-    25% { opacity: 0.95; }
-    30% { opacity: 0.9; }
-    35% { opacity: 0.95; }
-    40% { opacity: 0.98; }
-    45% { opacity: 0.95; }
-    50% { opacity: 0.9; }
-    55% { opacity: 0.95; }
-    60% { opacity: 0.98; }
-    65% { opacity: 0.95; }
-    70% { opacity: 0.9; }
-    75% { opacity: 0.95; }
-    80% { opacity: 0.98; }
-    85% { opacity: 0.95; }
-    90% { opacity: 0.9; }
-    95% { opacity: 0.95; }
-    100% { opacity: 0.98; }
-  }
-
-  /* Add distortion effect */
-  .distortion {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 255, 255, 0.1) 0px,
-      rgba(0, 255, 255, 0.1) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-    pointer-events: none;
-    animation: distort 0.5s infinite;
-  }
-
-  @keyframes distort {
-    0% { transform: skewX(0deg); }
-    25% { transform: skewX(1deg); }
-    75% { transform: skewX(-1deg); }
-    100% { transform: skewX(0deg); }
-  }
-</style> 
+</style>

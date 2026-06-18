@@ -1,0 +1,454 @@
+{
+  "common": {
+    "available": "Disponible pour de nouveaux projets",
+    "live": "En ligne",
+    "morocco": "Maroc",
+    "remote": "Télétravail",
+    "completed": "Terminé",
+    "inProgress": "En cours",
+    "showLess": "Voir moins",
+    "learnMore": "En savoir plus",
+    "readMore": "Lire la suite",
+    "getInTouch": "Me contacter",
+    "viewProjects": "Voir les projets",
+    "viewAllProjects": "Voir tous les projets",
+    "startProject": "Démarrer un projet",
+    "quickChat": "Chat rapide",
+    "hireMe": "M'engager",
+    "private": "Projet privé"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "services": "Services",
+    "education": "Formation",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+  "header": {
+    "tagline": "Développeur Full Stack"
+  },
+  "home": {
+    "badge": "Disponible pour de nouveaux projets",
+    "greeting": "Bonjour, je suis",
+    "name": "El Houcine",
+    "titlePart1": "Développeur",
+    "titlePart2": "Full Stack",
+    "subtitle": "Je conçois des plateformes web modernes et évolutives — des",
+    "subtitleHighlight1": "centres d'appels",
+    "subtitleAnd": "aux",
+    "subtitleHighlight2": "plateformes d'apprentissage",
+    "subtitleEnd": "et logiciels d'entreprise. Basé au Maroc.",
+    "viewMyWork": "Voir mes réalisations",
+    "stats": {
+      "projects": "Projets",
+      "yearsExp": "Ans d'exp.",
+      "technologies": "Technologies",
+      "dedication": "Dévouement"
+    },
+    "featured": {
+      "badge": "Projets phares",
+      "title": "Projets",
+      "titleHighlight": "en ligne",
+      "subtitle": "De vraies plateformes en production que j'ai conçues et déployées. Cliquez sur une carte pour découvrir le site."
+    },
+    "stack": {
+      "badge": "Ma stack",
+      "title": "Conçu avec des",
+      "titleHighlight": "outils modernes"
+    },
+    "cta": {
+      "title": "Créons quelque chose d'",
+      "titleHighlight": "exceptionnel",
+      "subtitle": "Vous avez un projet en tête ? J'aimerais en discuter. Voyons ensemble comment transformer vos idées en plateforme prête pour la production."
+    }
+  },
+  "about": {
+    "title": "À propos de moi",
+    "subtitle": "Développeur Full Stack & Ingénieur Logiciel",
+    "company": "I-ETERIA",
+    "email": "elhoucineqara114@gmail.com",
+    "phone": "+212 637 446 431",
+    "whatsapp": "+212637446431",
+    "linkedin": "https://www.linkedin.com/in/el-houcine-qara-927b07302/",
+    "location": "Bouznika, Maroc",
+    "downloadCV": "Télécharger le CV",
+    "viewCV": "Voir le CV",
+    "description": "Développeur Full Stack passionné, actuellement en Master de Transformation Numérique, après une Licence Professionnelle en Génie des Systèmes Informatiques. Fort de plus de 2 ans d'expérience, mon objectif est de mettre en valeur mes compétences et mon enthousiasme au service de l'industrie du développement.",
+    "learnMore": "En savoir plus",
+    "page": {
+      "badge": "À propos",
+      "titlePart1": "Développeur",
+      "titlePart2": "Full Stack",
+      "introPart1": "Actuellement chez",
+      "introPart2": "— je construis des plateformes d'entreprise avec passion. En Master de Transformation Numérique et fort de 2+ ans d'expérience, je transforme les idées en logiciels prêts pour la production.",
+      "openToWork": "Ouvert aux offres",
+      "languages": "FR · EN · AR",
+      "remote": "Télétravail",
+      "highlights": {
+        "cleanCode": "Code propre",
+        "cleanCodeValue": "15+ projets livrés",
+        "performance": "Performance",
+        "performanceValue": "Requêtes 60% plus rapides",
+        "teamWork": "Travail d'équipe",
+        "teamWorkValue": "Équipes transverses",
+        "learning": "Apprendre toujours",
+        "learningValue": "Master en cours"
+      },
+      "contactBadge": "Coordonnées",
+      "contactTitle": "Restons",
+      "contactTitleHighlight": "en contact",
+      "labels": {
+        "email": "Email",
+        "phone": "Téléphone",
+        "whatsapp": "WhatsApp",
+        "whatsappValue": "Discutons",
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "location": "Localisation"
+      }
+    }
+  },
+  "projects": {
+    "badge": "Portfolio",
+    "titlePart1": "Vrais projets,",
+    "titleHighlight": "vrai impact",
+    "subtitle": "Une sélection de plateformes en production que j'ai conçues, développées et déployées.",
+    "live": "En production",
+    "all": "Tous les projets",
+    "filter": {
+      "all": "Tous"
+    },
+    "actions": {
+      "demo": "Démo",
+      "code": "Code",
+      "visitLive": "Visiter le site",
+      "private": "Projet privé"
+    },
+    "cta": {
+      "title": "Un projet en tête ?",
+      "subtitle": "Discutons de la façon dont je peux vous aider à créer quelque chose de grand.",
+      "button": "Démarrer la conversation"
+    },
+    "categories": {
+      "Enterprise": "Entreprise",
+      "Education": "Éducation",
+      "Personal": "Personnel",
+      "E-Commerce": "E-Commerce",
+      "Communication": "Communication"
+    },
+    "items": {
+      "harx": {
+        "title": "HARX",
+        "subtitle": "Plateforme de centre de contact",
+        "description": "Solution avancée de centre de contact dans le cloud, avec VoIP temps réel, intégration CRM et analytique IA.",
+        "impact": "Efficacité du centre d'appels +45% et satisfaction client +60%"
+      },
+      "lms": {
+        "title": "Dar Al-Ilm",
+        "subtitle": "Plateforme d'apprentissage en ligne",
+        "description": "LMS multi-entreprises pour des programmes de formation spécialisés avec cours, forum et suivi de progression.",
+        "impact": "500+ apprenants formés avec 95% de taux de complétion"
+      },
+      "hr": {
+        "title": "Système RH automatisé",
+        "description": "Solution complète de gestion RH avec workflows automatisés, gestion des congés et paie.",
+        "impact": "Temps de traitement RH réduit de 70% et erreurs manuelles éliminées"
+      },
+      "portfolio": {
+        "title": "Portfolio assisté par IA",
+        "description": "Portfolio moderne avec assistant chatbot IA intégré.",
+        "impact": "Engagement des recruteurs +80% grâce à l'assistant IA interactif"
+      },
+      "ecommerce": {
+        "title": "Plateforme e-commerce",
+        "description": "Solution e-commerce complète avec intégration des paiements.",
+        "impact": "Plus de 500 000 $ de transactions traitées avec 99,9% de disponibilité"
+      },
+      "chat": {
+        "title": "Application de chat temps réel",
+        "description": "Application de messagerie scalable avec WebSockets et appels vidéo.",
+        "impact": "Supporte 10 000+ utilisateurs simultanés avec <100ms de latence"
+      }
+    }
+  },
+  "services": {
+    "badge": "Services",
+    "titlePart1": "Développement",
+    "titleHighlight": "de bout en bout",
+    "subtitle": "De l'idée à la production. J'aide startups et entreprises à livrer des plateformes web modernes avec la bonne architecture, la bonne stack et le bon rythme.",
+    "process": {
+      "badge": "Comment je travaille",
+      "title": "Un processus en",
+      "titleHighlight": "4 étapes",
+      "steps": {
+        "discovery": "Découverte",
+        "discoveryDesc": "On discute de vos besoins, objectifs et contraintes.",
+        "planning": "Planification",
+        "planningDesc": "Je conçois l'architecture et découpe le travail en jalons.",
+        "building": "Développement",
+        "buildingDesc": "Je code, teste et livre — avec des démos régulières.",
+        "support": "Support",
+        "supportDesc": "Maintenance, supervision et itérations après le lancement."
+      }
+    },
+    "cta": {
+      "title": "Prêt à",
+      "titleHighlight": "démarrer",
+      "subtitle": "Parlez-moi de votre projet — je reviens vers vous sous 24h avec un devis gratuit.",
+      "button": "Demander un devis"
+    },
+    "items": {
+      "web": {
+        "title": "Développement Web",
+        "description": "Création de sites et applications web sur mesure, modernes et responsives. Expertise sur les frameworks modernes (React, Vue, Svelte), full-stack et intégration d'API.",
+        "feat1": "React / SvelteKit",
+        "feat2": "UI responsive",
+        "feat3": "Optimisé SEO"
+      },
+      "mobile": {
+        "title": "Développement Mobile",
+        "description": "Applications mobiles natives et multiplateformes pour iOS et Android avec React Native et Flutter.",
+        "feat1": "React Native",
+        "feat2": "Flutter",
+        "feat3": "iOS & Android"
+      },
+      "cloud": {
+        "title": "Solutions Cloud",
+        "description": "Déploiement cloud sur AWS, Azure ou GCP, pipelines CI/CD, Docker, Kubernetes et automatisation.",
+        "feat1": "AWS / Azure / GCP",
+        "feat2": "Auto-scaling",
+        "feat3": "Optimisation des coûts"
+      },
+      "devops": {
+        "title": "DevOps & Infrastructure",
+        "description": "Mise en place de CI/CD, orchestration de conteneurs, infrastructure as code et tests automatisés.",
+        "feat1": "Pipelines CI/CD",
+        "feat2": "Docker / K8s",
+        "feat3": "Infrastructure as Code"
+      },
+      "ai": {
+        "title": "IA & Machine Learning",
+        "description": "Solutions IA, modèles ML, analytique prédictive, NLP et vision par ordinateur.",
+        "feat1": "Intégration OpenAI",
+        "feat2": "Modèles ML",
+        "feat3": "NLP & vision"
+      },
+      "consulting": {
+        "title": "Conseil & Stratégie",
+        "description": "Accompagnement stratégique pour vos projets digitaux, feuille de route tech, optimisation de processus et conseil architectural.",
+        "feat1": "Revue d'architecture",
+        "feat2": "Feuille de route tech",
+        "feat3": "Audit de processus"
+      }
+    }
+  },
+  "skills": {
+    "badge": "Stack technique",
+    "titlePart1": "Mes",
+    "titleHighlight": "Compétences",
+    "subtitle": "Découvrez mes compétences techniques et mon expertise dans différents domaines du développement.",
+    "categories": {
+      "all": "Toutes",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "languages": "Langages",
+      "databases": "Bases de données",
+      "devops": "DevOps & Cloud",
+      "tools": "Outils",
+      "architecture": "Architecture",
+      "mobile": "Mobile",
+      "testing": "Tests"
+    },
+    "groupTitles": {
+      "frontend": "Frameworks Frontend",
+      "backend": "Frameworks Backend",
+      "languages": "Langages de programmation",
+      "databases": "Bases de données",
+      "devops": "API, DevOps & Cloud",
+      "tools": "Outils de développement",
+      "architecture": "Architecture & Patterns",
+      "mobile": "Développement mobile",
+      "testing": "Tests & QA"
+    },
+    "stats": {
+      "technologies": "Technologies",
+      "categories": "Catégories",
+      "yearsExp": "Ans d'exp.",
+      "passion": "Passion"
+    }
+  },
+  "experience": {
+    "badge": "Carrière",
+    "titlePart1": "Expérience",
+    "titleHighlight": "professionnelle",
+    "subtitle": "Plus de 2 ans d'expérience à construire des solutions innovantes pour des clients d'entreprise.",
+    "cta": {
+      "title": "À la recherche d'un développeur expérimenté ?",
+      "subtitle": "Je suis actuellement ouvert aux nouvelles opportunités — CDI, CDD ou freelance."
+    },
+    "items": {
+      "harx": {
+        "title": "Développeur Full Stack — HARX Contact Center",
+        "company": "I-ETERIA",
+        "period": "Fév 2024 — Aujourd'hui",
+        "location": "Télétravail",
+        "description": "Pilotage du développement de HARX, une solution avancée de centre de contact cloud. Architecture d'une plateforme VoIP complète avec communication temps réel, routage intelligent des appels, intégration CRM et tableaux de bord analytiques.",
+        "a1": "Conception du système de gestion d'appels temps réel avec intégration WebRTC",
+        "a2": "Mise en place d'analyses d'appels et d'analyse de sentiment via OpenAI",
+        "a3": "Développement d'API RESTful pour l'intégration CRM (Zoho, Google)",
+        "a4": "Création du tableau de bord admin responsive en React",
+        "a5": "Intégration de la téléphonie VoIP avec distribution automatique d'appels (ACD)",
+        "a6": "Système de notifications temps réel via WebSockets",
+        "a7": "Optimisation des requêtes BD réduisant le temps de réponse de 60%"
+      },
+      "lms": {
+        "title": "Développeur Web — LMS Dar Al-Ilm",
+        "company": "I-ETERIA",
+        "period": "Fév 2024 — Oct 2024",
+        "location": "Télétravail",
+        "description": "Développement d'un Learning Management System multi-entreprises complet pour HARX, dédié à des formations spécialisées avec gestion de cours, suivi de progression et certifications.",
+        "a1": "Architecture d'une plateforme LMS multi-entreprises pour la formation de traders",
+        "a2": "Gestion de cours avec leçons vidéo, évaluations et certifications",
+        "a3": "Tableau de bord de suivi de progression et d'analytique",
+        "a4": "Contrôle d'accès basé sur les rôles par entreprise et type d'utilisateur",
+        "a5": "Simulations de trading interactives et exercices pratiques",
+        "a6": "Système de reporting pour le suivi des performances des apprenants"
+      },
+      "hr": {
+        "title": "Développeur Full Stack — Automatisation RH",
+        "company": "Projet RH",
+        "period": "Mars 2023 — Avril 2023",
+        "location": "Télétravail",
+        "description": "Développement d'un système RH automatisant l'onboarding, la gestion des congés, le traitement de la paie et l'évaluation des performances.",
+        "a1": "Tableau de bord de gestion des employés avec visualisation temps réel",
+        "a2": "Workflow automatisé de demande et d'approbation des congés",
+        "a3": "Module de calcul de paie avec gestion des taxes et déductions",
+        "a4": "Système de gestion documentaire pour les dossiers employés",
+        "a5": "Intégration de notifications email pour les communications RH"
+      },
+      "electronics": {
+        "title": "Technicien de réparation électronique",
+        "company": "C2EZ",
+        "period": "Fév 2020 — Mar 2020",
+        "location": "Casablanca, Maroc",
+        "description": "Spécialisation dans la conception et réparation de cartes électroniques, programmation Arduino et dépannage logiciel de machines.",
+        "a1": "Conception et réparation de cartes électroniques",
+        "a2": "Programmation Arduino et prototypage",
+        "a3": "Dépannage logiciel de machines"
+      }
+    }
+  },
+  "education": {
+    "badge": "Formation",
+    "titlePart1": "Excellence",
+    "titleHighlight": "académique",
+    "subtitle": "Des sciences physiques à la transformation digitale — un parcours d'apprentissage continu.",
+    "period": "Période",
+    "certsBadge": "Certifications & Compétences",
+    "certsTitle": "En progression",
+    "certsTitleHighlight": "continue",
+    "certsSubtitle": "Expertise élargie grâce à des certifications professionnelles et une expérience pratique.",
+    "continuous": {
+      "title": "Apprentissage continu",
+      "subtitle": "Engagé dans une formation tout au long de la vie pour rester à jour sur les dernières technologies et tendances. Je poursuis activement de nouvelles certifications et programmes de développement professionnel."
+    },
+    "items": {
+      "master": {
+        "degree": "Master en Transformation Digitale des Processus Éducatifs",
+        "school": "ENSET Mohammedia, Maroc · 2ème année",
+        "description": "Formation avancée en transformation digitale de l'éducation, couvrant les technologies éducatives modernes, la digitalisation de l'apprentissage et l'innovation pédagogique."
+      },
+      "bachelor": {
+        "degree": "Licence Professionnelle en Génie des Systèmes Informatiques & Technologies Web",
+        "school": "EST Sidi Bennour Chouaïb Doukkali, El Jadida",
+        "description": "Programme complet en génie logiciel couvrant la programmation avancée, l'architecture logicielle, la gestion de projet et les méthodologies modernes."
+      },
+      "tech": {
+        "degree": "Diplôme de Technicien Spécialisé — Développement Digital, Web Full Stack",
+        "school": "ISTA TAOURIRT, Maroc",
+        "description": "Programme intensif axé sur le développement web full-stack, couvrant les technologies frontend et backend avec une expérience pratique sur projets."
+      },
+      "physics": {
+        "degree": "Licence Fondamentale en Sciences Physiques",
+        "school": "Faculté des Sciences Aïn Chock Hassan II, Casablanca",
+        "description": "Solide formation en mathématiques, physique et méthodologie scientifique, base d'une résolution de problèmes analytique en développement logiciel."
+      },
+      "bac": {
+        "degree": "Baccalauréat Sciences Physiques",
+        "school": "Lycée Ibn Khaldoun, Bouznika, Maroc",
+        "description": "Baccalauréat avec spécialité Sciences Physiques."
+      }
+    },
+    "certs": {
+      "laravel": { "title": "Expert Laravel", "sub": "Maîtrise du framework", "desc": "Backend avancé, API RESTful et microservices" },
+      "react": { "title": "Développeur React", "sub": "Excellence frontend", "desc": "React, Redux, Hooks et patterns frontend modernes" },
+      "node": { "title": "Expert Node.js", "sub": "Pro côté serveur", "desc": "Backend scalable avec Node, Express et temps réel" },
+      "db": { "title": "Conception BDD", "sub": "Architecte de données", "desc": "MySQL, MongoDB, PostgreSQL, Redis — conception optimisée" },
+      "cloud": { "title": "Cloud Computing", "sub": "AWS & Azure", "desc": "Déploiement cloud, scalabilité et pratiques DevOps" },
+      "agile": { "title": "Agile & Scrum", "sub": "Gestion de projet", "desc": "Méthodologies agiles, Scrum, JIRA et collaboration d'équipe" }
+    }
+  },
+  "contact": {
+    "badge": "Contact",
+    "titlePart1": "Discutons",
+    "titleHighlight": "ensemble",
+    "description": "Je suis toujours ouvert à discuter de nouveaux projets, d'idées créatives ou d'opportunités. N'hésitez pas à me contacter via le formulaire ci-dessous.",
+    "form": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "message": "Message",
+      "messagePlaceholder": "Parlez-moi de votre projet...",
+      "sendMessage": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "required": "Veuillez remplir tous les champs obligatoires",
+      "invalidEmail": "Veuillez entrer une adresse email valide",
+      "successTitle": "Message envoyé avec succès ! Je vous réponds rapidement.",
+      "opening": "Ouverture de votre client email..."
+    },
+    "sidebar": {
+      "direct": "Contactez-moi directement",
+      "directLabels": {
+        "email": "Email",
+        "emailValue": "Envoyer un email",
+        "whatsapp": "WhatsApp",
+        "whatsappValue": "Discuter",
+        "phone": "Téléphone",
+        "phoneValue": "M'appeler"
+      },
+      "quickInfo": "Infos pratiques",
+      "responseTime": "Réponse sous 24h",
+      "availability": "Disponible en télétravail",
+      "spoken": "Français · Anglais · Arabe",
+      "location": "Bouznika, Maroc",
+      "availableTitle": "Disponible pour de nouveaux projets",
+      "availableSubtitle": "Ouvert aux missions CDI, CDD et freelance."
+    }
+  },
+  "blog": {
+    "badge": "Blog",
+    "titlePart1": "Articles &",
+    "titleHighlight": "Tutoriels",
+    "subtitle": "Mes réflexions sur le développement web, la programmation et la tech.",
+    "filterAll": "Tous",
+    "minRead": "min",
+    "readMore": "Lire la suite",
+    "noPosts": "Aucun article trouvé",
+    "noPostsHint": "Essayez un autre tag ou revenez plus tard."
+  },
+  "footer": {
+    "tagline": "Création de plateformes web modernes — centres de contact, LMS et logiciels d'entreprise avec Laravel, React et SvelteKit.",
+    "available": "Disponible pour de nouveaux projets",
+    "navigate": "Navigation",
+    "liveProjects": "Projets en ligne",
+    "getInTouch": "Restons en contact",
+    "rights": "Tous droits réservés.",
+    "craftedWith": "Fait avec",
+    "craftedWithEnd": "avec SvelteKit & TailwindCSS"
+  }
+}

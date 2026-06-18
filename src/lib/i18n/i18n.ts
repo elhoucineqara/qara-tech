@@ -1,121 +1,81 @@
 import { writable, derived } from 'svelte/store';
+import { browser } from '$app/environment';
 import en from './translations/en.json';
+import fr from './translations/fr.json';
 
-interface Translations {
-  nav: {
-    home: string;
-    about: string;
-    skills: string;
-    services: string;
-    contact: string;
-  };
-  hero: {
-    name: string;
-    title: string;
-    subtitle: string;
-    contact: string;
-    at: string;
-  };
-  about: {
-    title: string;
-    subtitle: string;
-    company: string;
-    email: string;
-    phone: string;
-    whatsapp: string;
-    linkedin: string;
-    location: string;
-    downloadCV: string;
-    viewCV: string;
-    description: string;
-    learnMore: string;
-  };
-  skills: {
-    title: string;
-    description: string;
-    viewSkills: string;
-    pageTitle: string;
-    pageDescription: string;
-    frontend: { title: string };
-    backend: { title: string };
-    languages: { title: string };
-    databases: { title: string };
-    tools: { title: string };
-    apis: { title: string };
-    cloud: { title: string };
-    mobile: { title: string };
-    testing: { title: string };
-  };
-  services: {
-    title: string;
-    subtitle: string;
-    learn_more: string;
-    web_development: {
-      title: string;
-      description: string;
-    };
-    mobile_development: {
-      title: string;
-      description: string;
-    };
-    maintenance: {
-      title: string;
-      description: string;
-    };
-    security: {
-      title: string;
-      description: string;
-    };
-    training: {
-      title: string;
-      description: string;
-    };
-    cloud_devops: {
-      title: string;
-      description: string;
-    };
-    consulting: {
-      title: string;
-      description: string;
-    };
-  };
-  contact: {
-    title: string;
-    subtitle: string;
-    form: {
-      firstName: string;
-      lastName: string;
-      email: string;
-      phone: string;
-      message: string;
-      sendMessage: string;
-    };
-    modal: {
-      title: string;
-      name: string;
-      subject: string;
-    };
-  };
-  footer: {
-    copyright: string;
-    social: {
-      github: string;
-      linkedin: string;
-    };
+export type Lang = 'en' | 'fr';
+
+export const languages: Record<Lang, { label: string; short: string; flag: string }> = {
+  en: { label: 'English', short: 'EN', flag: 'https://flagcdn.com/w320/us.png' },
+  fr: { label: 'Français', short: 'FR', flag: 'https://flagcdn.com/w320/fr.png' }
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dictionaries: Record<Lang, any> = { en, fr };
+
+const STORAGE_KEY = 'qara_lang';
+
+function getInitialLang(): Lang {
+  if (!browser) return 'en';
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY) as Lang | null;
+    if (stored === 'en' || stored === 'fr') return stored;
+  } catch {
+    /* ignore */
+  }
+  return 'en';
+}
+
+function createLangStore() {
+  const { subscribe, set } = writable<Lang>('en');
+
+  return {
+    subscribe,
+    set: (lang: Lang) => {
+      set(lang);
+      if (browser) {
+        try {
+          localStorage.setItem(STORAGE_KEY, lang);
+          document.documentElement.setAttribute('lang', lang);
+        } catch {
+          /* ignore */
+        }
+      }
+    },
+    init: () => {
+      if (!browser) return;
+      const initial = getInitialLang();
+      set(initial);
+      try {
+        document.documentElement.setAttribute('lang', initial);
+      } catch {
+        /* ignore */
+      }
+    },
+    toggle: () => {
+      if (!browser) return;
+      const current = (localStorage.getItem(STORAGE_KEY) as Lang) || 'en';
+      const next: Lang = current === 'en' ? 'fr' : 'en';
+      set(next);
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+        document.documentElement.setAttribute('lang', next);
+      } catch {
+        /* ignore */
+      }
+    }
   };
 }
 
-export const languages = {
-  en: '🇬🇧 English'
-} as const;
+export const currentLang = createLangStore();
 
-export const translations: Record<keyof typeof languages, Translations> = {
-  en
-};
-
-export const currentLang = writable<keyof typeof languages>('en');
-
-export const t = derived(currentLang, ($currentLang) => (key: string) => {
+export const t = derived(currentLang, ($currentLang) => (key: string): string => {
   const keys = key.split('.');
-  return keys.reduce((obj: any, k) => obj?.[k], translations[$currentLang]) || key;
-}); 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const value = keys.reduce<any>((obj, k) => (obj != null ? obj[k] : undefined), dictionaries[$currentLang]);
+  if (typeof value === 'string') return value;
+  // Fallback to English if missing
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fallback = keys.reduce<any>((obj, k) => (obj != null ? obj[k] : undefined), dictionaries.en);
+  return typeof fallback === 'string' ? fallback : key;
+});

@@ -1,412 +1,451 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { fade, fly } from 'svelte/transition';
-  
-  let isVisible = false;
+  import { fly, fade } from 'svelte/transition';
+  import { t } from '$lib/i18n/i18n';
+  import AnimatedBackground from '$lib/components/AnimatedBackground.svelte';
+  import { tilt3d, reveal } from '$lib/actions/motion';
+
+  let mounted = false;
   let selectedCategory = 'all';
-  
+
   interface Project {
     id: number;
+    key: string;
     title: string;
+    subtitle?: string;
     description: string;
-    longDescription: string;
     technologies: string[];
     category: string;
-    image: string;
     demoUrl?: string;
     githubUrl?: string;
-    features: string[];
     impact: string;
+    featured?: boolean;
+    gradient: string;
+    icon: string;
+    image?: string;
+    logo?: string;
   }
-  
-  const projects: Project[] = [
+
+  $: projects = [
     {
       id: 1,
-      title: 'HARX - Call Center Platform',
-      description: 'Advanced cloud-based call center solution with real-time VoIP, CRM integration, and AI analytics',
-      longDescription: 'HARX is a comprehensive call center management platform that revolutionizes customer communication. Built with modern technologies, it provides real-time call routing, AI-powered sentiment analysis, and comprehensive analytics.',
+      key: 'harx',
+      title: $t('projects.items.harx.title'),
+      subtitle: $t('projects.items.harx.subtitle'),
+      description: $t('projects.items.harx.description'),
       technologies: ['Laravel', 'React', 'Svelte', 'Node.js', 'WebRTC', 'MySQL', 'MongoDB', 'Redis', 'Docker', 'OpenAI'],
       category: 'Enterprise',
-      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800',
-      features: [
-        'Real-time WebRTC video/audio calls',
-        'AI-powered call analytics and sentiment analysis',
-        'Automatic call distribution (ACD)',
-        'CRM integration (Zoho, Google)',
-        'Real-time dashboard with live metrics',
-        'WebSocket notifications',
-        '60% faster database query optimization'
-      ],
-      impact: 'Improved call center efficiency by 45% and customer satisfaction by 60%'
+      demoUrl: 'https://harx25pageslinks.netlify.app/',
+      featured: true,
+      gradient: 'from-indigo-500 via-purple-500 to-pink-500',
+      icon: 'fa-solid fa-headset',
+      image: '/images/HARX.png',
+      logo: '/images/harx-mascotte.webp',
+      impact: $t('projects.items.harx.impact')
     },
     {
       id: 2,
-      title: 'LMS - Learning Management System',
-      description: 'Multi-company LMS platform for specialized trading training programs',
-      longDescription: 'A comprehensive Learning Management System designed for HARX organization to deliver specialized trading training across multiple companies. Features include course management, progress tracking, and certification.',
-      technologies: ['Laravel', 'Svelte', 'Node.js', 'MySQL', 'MongoDB', 'RESTful API', 'WebSockets'],
+      key: 'lms',
+      title: $t('projects.items.lms.title'),
+      subtitle: $t('projects.items.lms.subtitle'),
+      description: $t('projects.items.lms.description'),
+      technologies: ['SvelteKit', 'Laravel', 'Node.js', 'MySQL', 'MongoDB', 'RESTful API', 'WebSockets'],
       category: 'Education',
-      image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800',
-      features: [
-        'Multi-company course management',
-        'Video lessons with interactive assessments',
-        'Real-time progress tracking',
-        'Role-based access control',
-        'Trading simulation modules',
-        'Advanced reporting system',
-        'Automated certification generation'
-      ],
-      impact: 'Trained 500+ traders across 15 companies with 95% completion rate'
+      demoUrl: 'https://learn.qaranetwork.com/',
+      featured: true,
+      gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+      icon: 'fa-solid fa-graduation-cap',
+      image: '/images/dar-al-ilm.png',
+      logo: '/images/logo_dar-alilm.svg',
+      impact: $t('projects.items.lms.impact')
     },
     {
       id: 3,
-      title: 'HR Automation System',
-      description: 'Complete HR management solution with automated workflows and payroll processing',
-      longDescription: 'Comprehensive HR management system automating employee onboarding, leave management, payroll processing, and performance evaluation with secure role-based access.',
+      key: 'hr',
+      title: $t('projects.items.hr.title'),
+      description: $t('projects.items.hr.description'),
       technologies: ['Laravel', 'React', 'MySQL', 'RESTful API', 'Bootstrap'],
       category: 'Enterprise',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
-      features: [
-        'Automated employee onboarding',
-        'Leave request workflow system',
-        'Payroll calculation with tax management',
-        'Document management system',
-        'Performance evaluation tracking',
-        'Email notification automation',
-        'Real-time HR analytics dashboard'
-      ],
-      impact: 'Reduced HR processing time by 70% and eliminated manual errors'
+      gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
+      icon: 'fa-solid fa-users-gear',
+      impact: $t('projects.items.hr.impact')
     },
     {
       id: 4,
-      title: 'AI-Powered Portfolio',
-      description: 'Modern portfolio website with integrated AI chatbot assistant',
-      longDescription: 'A cutting-edge portfolio website featuring an AI-powered chatbot that can answer questions about skills, experience, and projects. Built with SvelteKit and OpenAI integration.',
+      key: 'portfolio',
+      title: $t('projects.items.portfolio.title'),
+      description: $t('projects.items.portfolio.description'),
       technologies: ['SvelteKit', 'TypeScript', 'TailwindCSS', 'OpenAI API', 'Vite'],
       category: 'Personal',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
-      githubUrl: 'https://github.com/yourusername/portfolio',
-      features: [
-        'AI chatbot with context-aware responses',
-        'Modern animated UI with Matrix effects',
-        'Multilingual support (i18n)',
-        'Responsive design',
-        'Dark theme optimized',
-        'SEO optimized',
-        'Fast performance with Vite'
-      ],
-      impact: 'Increased recruiter engagement by 80% with interactive AI assistant'
+      gradient: 'from-fuchsia-500 via-pink-500 to-rose-500',
+      icon: 'fa-solid fa-robot',
+      githubUrl: 'https://github.com/elhoucineqara',
+      impact: $t('projects.items.portfolio.impact')
     },
     {
       id: 5,
-      title: 'E-Commerce Platform',
-      description: 'Full-featured e-commerce solution with payment integration',
-      longDescription: 'Complete e-commerce platform with product management, shopping cart, order processing, and multiple payment gateway integrations.',
+      key: 'ecommerce',
+      title: $t('projects.items.ecommerce.title'),
+      description: $t('projects.items.ecommerce.description'),
       technologies: ['Laravel', 'Vue.js', 'MySQL', 'Stripe', 'PayPal', 'Redis', 'Docker'],
       category: 'E-Commerce',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
-      features: [
-        'Product catalog management',
-        'Shopping cart with real-time updates',
-        'Multiple payment gateways',
-        'Order tracking system',
-        'Inventory management',
-        'Customer reviews and ratings',
-        'Admin analytics dashboard'
-      ],
-      impact: 'Processed $500K+ in transactions with 99.9% uptime'
+      gradient: 'from-orange-500 via-amber-500 to-yellow-500',
+      icon: 'fa-solid fa-cart-shopping',
+      impact: $t('projects.items.ecommerce.impact')
     },
     {
       id: 6,
-      title: 'Real-Time Chat Application',
-      description: 'Scalable chat application with WebSocket communication',
-      longDescription: 'Real-time messaging platform supporting group chats, file sharing, and video calls with end-to-end encryption.',
+      key: 'chat',
+      title: $t('projects.items.chat.title'),
+      description: $t('projects.items.chat.description'),
       technologies: ['Node.js', 'React', 'WebSockets', 'MongoDB', 'Redis', 'WebRTC'],
       category: 'Communication',
-      image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800',
-      features: [
-        'Real-time messaging with WebSockets',
-        'Group chat functionality',
-        'File and media sharing',
-        'Video/audio calls with WebRTC',
-        'End-to-end encryption',
-        'Message search and history',
-        'Typing indicators and read receipts'
-      ],
-      impact: 'Supports 10,000+ concurrent users with <100ms latency'
+      gradient: 'from-sky-500 via-blue-500 to-indigo-500',
+      icon: 'fa-solid fa-comments',
+      impact: $t('projects.items.chat.impact')
     }
-  ];
-  
-  onMount(() => {
-    isVisible = true;
-    createParticles();
-    createScanline();
-    initMatrixRain();
-  });
+  ] as Project[];
 
-  const createParticles = () => {
-    const container = document.querySelector('.absolute.inset-0');
-    if (!container) return;
+  onMount(() => (mounted = true));
 
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.top = `${Math.random() * 100}%`;
-      particle.style.animationDelay = `${Math.random() * 5}s`;
-      container.appendChild(particle);
-    }
-  };
+  let expandedTech = new Set<number>();
+  function toggleTech(id: number) {
+    if (expandedTech.has(id)) expandedTech.delete(id);
+    else expandedTech.add(id);
+    expandedTech = expandedTech;
+  }
 
-  const createScanline = () => {
-    const container = document.querySelector('.absolute.inset-0');
-    if (!container) return;
+  function categoryLabel(category: string): string {
+    if (category === 'all') return $t('projects.filter.all');
+    const translated = $t(`projects.categories.${category}`);
+    return translated && translated !== `projects.categories.${category}` ? translated : category;
+  }
 
-    const scanline = document.createElement('div');
-    scanline.className = 'scanline';
-    container.appendChild(scanline);
-  };
-
-  const initMatrixRain = () => {
-    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
-    const matrixArray = matrix.split("");
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
-
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.floor(Math.random() * (canvas.height / fontSize));
-    }
-
-    const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0F0';
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    };
-
-    setInterval(draw, 33);
-  };
-  
-  $: categories = ['all', ...new Set(projects.map(p => p.category))];
-  $: filteredProjects = selectedCategory === 'all' 
-    ? projects 
-    : projects.filter(p => p.category === selectedCategory);
+  $: categories = ['all', ...new Set(projects.map((p) => p.category))];
+  $: filteredProjects =
+    selectedCategory === 'all' ? projects : projects.filter((p) => p.category === selectedCategory);
 </script>
 
 <svelte:head>
-  <title>Projects - El Houcine QARA</title>
-  <meta name="description" content="Explore my portfolio of web development projects including enterprise applications, e-commerce platforms, and innovative solutions." />
+  <title>Projects · El Houcine QARA</title>
+  <meta
+    name="description"
+    content="Portfolio of web platforms — HARX contact center, Dar Al-Ilm LMS, HR automation, e-commerce and more."
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    rel="stylesheet"
+  />
 </svelte:head>
 
-<div class="min-h-screen w-full relative">
-  <div class="absolute inset-0">
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-    <canvas id="matrix-rain" class="absolute inset-0 opacity-10"></canvas>
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.05)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+<!-- Header section -->
+<section class="relative pt-32 pb-12 sm:pt-40 sm:pb-16 overflow-hidden">
+  <AnimatedBackground variant="aurora" />
+
+  <div class="container relative z-10 text-center">
+    {#if mounted}
+      <div in:fly={{ y: 20, duration: 500 }} class="badge-glass mb-5">
+        <i class="fa-solid fa-layer-group text-purple-500"></i>
+        {$t('projects.badge')}
+      </div>
+      <h1
+        in:fly={{ y: 30, duration: 600, delay: 100 }}
+        class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
+      >
+        {$t('projects.titlePart1')} <span class="text-gradient">{$t('projects.titleHighlight')}</span>
+      </h1>
+      <p
+        in:fade={{ duration: 600, delay: 200 }}
+        class="mt-5 text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
+      >
+        {$t('projects.subtitle')}
+      </p>
+    {/if}
   </div>
+</section>
 
-  <div class="relative z-10 px-4 sm:px-8 pt-32 pb-16">
-    <div class="container mx-auto">
-      <!-- Header -->
-      <div class="mb-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-cyan-400" in:fly={{ y: -50, duration: 600 }}>
-          Projects
-        </h1>
-        <p class="text-lg text-gray-200 max-w-3xl mx-auto" in:fly={{ y: -50, duration: 600, delay: 100 }}>
-          Showcasing innovative solutions and successful implementations
-        </p>
+<!-- Featured projects (live URLs) -->
+{#if mounted}
+  <section class="relative pb-12">
+    <div class="container">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="badge-glass">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          {$t('projects.live')}
+        </span>
+        <div class="h-px flex-1 bg-gradient-to-r from-purple-200 to-transparent"></div>
       </div>
 
-      <!-- Category Filter -->
-      <div class="flex flex-wrap justify-center gap-4 mb-12">
-        {#each categories as category}
-          <button
-            on:click={() => selectedCategory = category}
-            class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {selectedCategory === category 
-              ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white shadow-lg' 
-              : 'bg-slate-800/50 text-gray-300 hover:bg-slate-700/50 border border-cyan-500/20'}"
+      <div class="grid md:grid-cols-2 gap-8">
+        {#each projects.filter((p) => p.featured) as project, i}
+          <div
+            class="group glass-card overflow-hidden reveal-scale lift hover:shadow-2xl transition-all duration-500"
+            use:reveal={{ delay: i * 120 }}
+            use:tilt3d={{ max: 6, scale: 1.01 }}
           >
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </button>
-        {/each}
-      </div>
-
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {#each filteredProjects as project, index}
-          <div 
-            class="bg-slate-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-2 group"
-            in:fly={{ y: 50, duration: 600, delay: index * 100 }}
-          >
-            <!-- Project Image -->
-            <div class="relative h-48 overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
-              <div class="absolute bottom-4 left-4 px-3 py-1 bg-cyan-500/20 backdrop-blur-sm rounded-full text-cyan-300 text-sm border border-cyan-500/30">
-                {project.category}
+            <!-- Screenshot block -->
+            <div class="relative h-64 bg-gradient-to-br {project.gradient} overflow-hidden">
+              {#if project.image}
+                <img
+                  src={project.image}
+                  alt="{project.title} screenshot"
+                  class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              {:else}
+                <div class="absolute inset-0 bg-grid-light opacity-20"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <i class="{project.icon} text-white text-7xl drop-shadow-2xl"></i>
+                </div>
+              {/if}
+              <div class="absolute top-4 right-4 badge-glass">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                {$t('common.live')}
+              </div>
+              <div class="absolute top-4 left-4 badge-glass">
+                {categoryLabel(project.category)}
               </div>
             </div>
 
-            <!-- Project Content -->
             <div class="p-6">
-              <h3 class="text-2xl font-bold text-cyan-400 mb-3 group-hover:text-cyan-300 transition-colors">
-                {project.title}
-              </h3>
-              <p class="text-gray-300 mb-4 leading-relaxed">
-                {project.description}
-              </p>
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-3">
+                  {#if project.logo}
+                    <div class="w-14 h-14 rounded-xl bg-white dark:bg-slate-900 shadow-md border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+                      <img
+                        src={project.logo}
+                        alt="{project.title} logo"
+                        class="w-12 h-12 object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  {/if}
+                  <div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
+                    {#if project.subtitle}
+                      <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{project.subtitle}</p>
+                    {/if}
+                  </div>
+                </div>
+              </div>
 
-              <!-- Technologies -->
-              <div class="flex flex-wrap gap-2 mb-4">
-                {#each project.technologies.slice(0, 4) as tech}
-                  <span class="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs">
-                    {tech}
-                  </span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-5">{project.description}</p>
+
+              <div class="flex flex-wrap gap-2 mb-5">
+                {#each expandedTech.has(project.id) ? project.technologies : project.technologies.slice(0, 6) as tech}
+                  <span class="badge-tech">{tech}</span>
                 {/each}
-                {#if project.technologies.length > 4}
-                  <span class="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs">
-                    +{project.technologies.length - 4} more
-                  </span>
+                {#if project.technologies.length > 6}
+                  <button
+                    type="button"
+                    on:click|preventDefault|stopPropagation={() => toggleTech(project.id)}
+                    class="badge-tech hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition cursor-pointer"
+                    aria-label="Show all technologies"
+                  >
+                    {#if expandedTech.has(project.id)}
+                      <i class="fa-solid fa-minus text-[10px]"></i> {$t('common.showLess')}
+                    {:else}
+                      +{project.technologies.length - 6}
+                    {/if}
+                  </button>
                 {/if}
               </div>
 
-              <!-- Impact Badge -->
-              <div class="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-                <p class="text-green-300 text-sm flex items-start">
-                  <i class="fas fa-chart-line mt-1 mr-2"></i>
+              <div
+                class="mb-5 p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 dark:border-emerald-500/20"
+              >
+                <p class="text-sm text-emerald-700 dark:text-emerald-300 flex items-start gap-2">
+                  <i class="fa-solid fa-chart-line mt-0.5"></i>
                   <span>{project.impact}</span>
                 </p>
               </div>
 
-              <!-- Actions -->
               <div class="flex gap-3">
-                {#if project.demoUrl}
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1 text-center bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-2 px-4 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
-                  >
-                    <i class="fas fa-external-link-alt mr-2"></i>
-                    Demo
-                  </a>
-                {/if}
-                {#if project.githubUrl}
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1 text-center bg-slate-800 text-gray-200 py-2 px-4 rounded-lg hover:bg-slate-700 transition-all duration-300 border border-cyan-500/20"
-                  >
-                    <i class="fab fa-github mr-2"></i>
-                    Code
-                  </a>
-                {/if}
-                {#if !project.demoUrl && !project.githubUrl}
-                  <div class="flex-1 text-center bg-slate-800/50 text-gray-400 py-2 px-4 rounded-lg border border-cyan-500/10">
-                    <i class="fas fa-lock mr-2"></i>
-                    Private Project
-                  </div>
-                {/if}
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 btn-primary-gradient shine !py-2.5"
+                >
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  {$t('projects.actions.visitLive')}
+                </a>
               </div>
             </div>
           </div>
         {/each}
       </div>
+    </div>
+  </section>
+{/if}
 
-      <!-- CTA Section -->
-      <div class="mt-16 text-center">
-        <div class="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl p-8 border border-cyan-500/30">
-          <h2 class="text-3xl font-bold text-cyan-400 mb-4">Interested in Working Together?</h2>
-          <p class="text-gray-200 text-lg mb-6 max-w-2xl mx-auto">
-            Let's discuss how I can help bring your next project to life with innovative solutions and cutting-edge technologies.
+<!-- Filter -->
+<section class="relative py-8">
+  <div class="container">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="badge-glass">
+        <i class="fa-solid fa-filter text-indigo-500"></i>
+        {$t('projects.all')}
+      </span>
+      <div class="h-px flex-1 bg-gradient-to-r from-indigo-200 to-transparent"></div>
+    </div>
+
+    <div class="flex flex-wrap gap-2.5">
+      {#each categories as category}
+        <button
+          on:click={() => (selectedCategory = category)}
+          class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                 {selectedCategory === category
+            ? 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/30'
+            : 'bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-white/70 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-white/80 dark:hover:bg-slate-700/80'}"
+        >
+          {categoryLabel(category)}
+        </button>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<!-- All projects grid -->
+<section class="relative pb-24">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {#each filteredProjects as project, i (project.id)}
+        <div
+          class="group glass-card overflow-hidden reveal lift hover:shadow-xl transition-all duration-500"
+          use:reveal={{ delay: i * 80 }}
+          use:tilt3d={{ max: 8, scale: 1.02 }}
+        >
+          <div class="relative h-40 bg-gradient-to-br {project.gradient} overflow-hidden">
+            {#if project.image}
+              <img
+                src={project.image}
+                alt="{project.title} screenshot"
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+            {:else}
+              <div class="absolute inset-0 bg-grid-light opacity-20"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="{project.icon} text-white text-5xl drop-shadow-lg"></i>
+              </div>
+            {/if}
+            <div class="absolute top-3 left-3 badge-glass !text-[10px]">
+              {categoryLabel(project.category)}
+            </div>
+            {#if project.demoUrl}
+              <div class="absolute top-3 right-3 badge-glass !text-[10px]">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                {$t('common.live')}
+              </div>
+            {/if}
+          </div>
+
+          <div class="p-5">
+            <div class="flex items-center gap-2.5 mb-1">
+              {#if project.logo}
+                <div class="w-8 h-8 rounded-lg bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+                  <img src={project.logo} alt="{project.title} logo" class="w-6 h-6 object-contain" loading="lazy" />
+                </div>
+              {/if}
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">{project.title}</h3>
+            </div>
+            {#if project.subtitle}
+              <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">{project.subtitle}</p>
+            {/if}
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-2">
+              {project.description}
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              {#each expandedTech.has(project.id) ? project.technologies : project.technologies.slice(0, 3) as tech}
+                <span class="badge-tech !text-[10px] !px-2 !py-0.5">{tech}</span>
+              {/each}
+              {#if project.technologies.length > 3}
+                <button
+                  type="button"
+                  on:click|preventDefault|stopPropagation={() => toggleTech(project.id)}
+                  class="badge-tech !text-[10px] !px-2 !py-0.5 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition cursor-pointer"
+                  aria-label="Show all technologies"
+                >
+                  {#if expandedTech.has(project.id)}
+                    <i class="fa-solid fa-minus text-[9px]"></i> {$t('common.showLess')}
+                  {:else}
+                    +{project.technologies.length - 3}
+                  {/if}
+                </button>
+              {/if}
+            </div>
+
+            <div class="flex gap-2">
+              {#if project.demoUrl}
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white
+                         bg-gradient-to-r from-indigo-500 to-purple-500 hover:shadow-md transition"
+                >
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  {$t('projects.actions.demo')}
+                </a>
+              {/if}
+              {#if project.githubUrl}
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200
+                         bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 hover:shadow-md transition"
+                >
+                  <i class="fa-brands fa-github"></i>
+                  {$t('projects.actions.code')}
+                </a>
+              {/if}
+              {#if !project.demoUrl && !project.githubUrl}
+                <div
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-500 dark:text-slate-400
+                         bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700"
+                >
+                  <i class="fa-solid fa-lock"></i>
+                  {$t('projects.actions.private')}
+                </div>
+              {/if}
+            </div>
+          </div>
+        </div>
+      {/each}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-16">
+      <div class="relative overflow-hidden glass-strong rounded-3xl p-10 sm:p-14 text-center">
+        <div class="absolute -top-20 -right-20 w-80 h-80 bg-purple-300/50 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-300/50 rounded-full blur-3xl"></div>
+        <div class="relative">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+            {$t('projects.cta.title')}
+          </h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
+            {$t('projects.cta.subtitle')}
           </p>
-          <a 
-            href="/contact"
-            class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-8 py-4 rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-semibold"
-          >
-            <i class="fas fa-paper-plane mr-2"></i>
-            Get In Touch
+          <a href="/contact" class="btn-primary-gradient mt-6 shine">
+            <i class="fa-solid fa-paper-plane"></i>
+            {$t('projects.cta.button')}
           </a>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <style>
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 255, 0, 0.3);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    animation: particle-float 6s ease-in-out infinite;
-  }
-
-  @keyframes particle-float {
-    0%, 100% { 
-      transform: translateY(0) translateX(0); 
-      opacity: 0.5;
-    }
-    50% { 
-      transform: translateY(-20px) translateX(10px); 
-      opacity: 0.8;
-    }
-  }
-
-  .scanline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(0, 255, 0, 0.05) 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    animation: scanline 8s linear infinite;
-  }
-
-  @keyframes scanline {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100%); }
-  }
-
-  #matrix-rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>
-

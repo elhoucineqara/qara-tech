@@ -30,7 +30,7 @@
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
   <meta name="revisit-after" content="7 days" />
-  <meta name="theme-color" content="#00ff00" />
+  <meta name="theme-color" content="#8b5cf6" />
   
   <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
   <meta property="og:type" content={type} />

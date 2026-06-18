@@ -1,385 +1,201 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  
-  let isVisible = false;
-  
-  onMount(() => {
-    isVisible = true;
-    createParticles();
-    createScanline();
-    initMatrixRain();
-  });
+  import { fly, fade } from 'svelte/transition';
+  import { t } from '$lib/i18n/i18n';
+  import AnimatedBackground from '$lib/components/AnimatedBackground.svelte';
+  import { tilt3d, reveal } from '$lib/actions/motion';
 
-  const createParticles = () => {
-    const container = document.querySelector('.absolute.inset-0');
-    if (!container) return;
+  let mounted = false;
+  onMount(() => (mounted = true));
 
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.top = `${Math.random() * 100}%`;
-      particle.style.animationDelay = `${Math.random() * 5}s`;
-      container.appendChild(particle);
+  interface Education {
+    key: string;
+    period: string;
+    inProgress: boolean;
+    tags: string[];
+    icon: string;
+    gradient: string;
+  }
+
+  const education: Education[] = [
+    {
+      key: 'master',
+      period: '2024 — 2025',
+      inProgress: true,
+      tags: ['Educational Tech', 'Pedagogical Innovation', 'Digitalization', 'E-Learning'],
+      icon: 'fa-solid fa-graduation-cap',
+      gradient: 'from-indigo-500 via-purple-500 to-pink-500'
+    },
+    {
+      key: 'bachelor',
+      period: '2023 — 2024',
+      inProgress: false,
+      tags: ['Software Architecture', 'Web Technologies', 'Project Management', 'Modern Dev'],
+      icon: 'fa-solid fa-university',
+      gradient: 'from-blue-500 via-cyan-500 to-teal-500'
+    },
+    {
+      key: 'tech',
+      period: '2022 — 2023',
+      inProgress: false,
+      tags: ['Full Stack', 'Frontend', 'Backend', 'Databases'],
+      icon: 'fa-solid fa-code',
+      gradient: 'from-emerald-500 via-teal-500 to-green-500'
+    },
+    {
+      key: 'physics',
+      period: '2019 — 2020',
+      inProgress: false,
+      tags: ['Mathematics', 'Physics', 'Electronics', 'Scientific Method'],
+      icon: 'fa-solid fa-atom',
+      gradient: 'from-sky-500 via-blue-500 to-indigo-500'
+    },
+    {
+      key: 'bac',
+      period: '2015 — 2016',
+      inProgress: false,
+      tags: ['Physical Sciences', 'Mathematics', 'Chemistry', 'Physics'],
+      icon: 'fa-solid fa-school',
+      gradient: 'from-amber-500 via-orange-500 to-rose-500'
     }
-  };
+  ];
 
-  const createScanline = () => {
-    const container = document.querySelector('.absolute.inset-0');
-    if (!container) return;
-
-    const scanline = document.createElement('div');
-    scanline.className = 'scanline';
-    container.appendChild(scanline);
-  };
-
-  const initMatrixRain = () => {
-    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
-    const matrixArray = matrix.split("");
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
-
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.floor(Math.random() * (canvas.height / fontSize));
-    }
-
-    const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0F0';
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    };
-
-    setInterval(draw, 33);
-  };
+  const certifications = [
+    { key: 'laravel', icon: 'fa-brands fa-laravel', color: 'text-red-500' },
+    { key: 'react', icon: 'fa-brands fa-react', color: 'text-cyan-500' },
+    { key: 'node', icon: 'fa-brands fa-node-js', color: 'text-green-600' },
+    { key: 'db', icon: 'fa-solid fa-database', color: 'text-purple-600 dark:text-purple-400' },
+    { key: 'cloud', icon: 'fa-brands fa-aws', color: 'text-orange-500' },
+    { key: 'agile', icon: 'fa-solid fa-tasks', color: 'text-amber-500' }
+  ];
 </script>
 
-<div class="min-h-screen w-full relative">
-  <div class="absolute inset-0">
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-    <canvas id="matrix-rain" class="absolute inset-0 opacity-10"></canvas>
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.05)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-  </div>
+<svelte:head>
+  <title>Education & Certifications — El Houcine QARA</title>
+  <meta name="description" content="Academic background and certifications: Master's, Bachelor's, technical diplomas and tech certifications." />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</svelte:head>
 
-  <div class="relative z-10 px-4 sm:px-8 pt-32 pb-16">
-    <div class="container mx-auto">
-      <div class="mb-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-cyan-400">Education & Certifications</h1>
-        <p class="text-lg text-gray-200 max-w-3xl mx-auto">Academic excellence and continuous learning</p>
+<!-- Hero -->
+<section class="relative pt-32 pb-12 sm:pt-40 overflow-hidden">
+  <AnimatedBackground variant="cube" showStars={true} />
+
+  <div class="container relative z-10 text-center">
+    {#if mounted}
+      <div in:fly={{ y: 20, duration: 500 }} class="badge-glass mb-5">
+        <i class="fa-solid fa-graduation-cap text-indigo-500"></i>
+        {$t('education.badge')}
       </div>
+      <h1
+        in:fly={{ y: 30, duration: 700, delay: 100 }}
+        class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
+      >
+        {$t('education.titlePart1')} <span class="text-gradient">{$t('education.titleHighlight')}</span>
+      </h1>
+      <p
+        in:fade={{ duration: 700, delay: 200 }}
+        class="mt-5 text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
+      >
+        {$t('education.subtitle')}
+      </p>
+    {/if}
+  </div>
+</section>
 
-      <div class="max-w-5xl mx-auto space-y-8">
-        <!-- Education 1: Master's -->
-        <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center mb-2">
-                <span class="text-3xl font-bold text-cyan-400 mr-4">2024-2025</span>
-                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm font-semibold">In Progress</span>
-              </div>
-              <h3 class="text-2xl font-bold text-purple-400 mb-2">Master's in Digital Transformation of Educational Processes</h3>
-              <h4 class="text-xl text-gray-300 mb-3">2nd Year - ENSET Mohammedia, Morocco</h4>
-              <p class="text-gray-200 leading-relaxed mb-4">
-                Advanced specialized training in digital transformation of education, 
-                covering modern educational technologies, digitalization of learning processes, 
-                and digital pedagogical innovation.
-              </p>
-            </div>
-            <div class="hidden md:block ml-4">
-              <i class="fas fa-graduation-cap text-6xl text-cyan-400/30"></i>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">Educational Technologies</span>
-            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">Pedagogical Innovation</span>
-            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">Digitalization</span>
-            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">E-Learning</span>
-          </div>
-        </div>
-
-        <!-- Education 2: Professional Bachelor's -->
-        <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center mb-2">
-                <span class="text-3xl font-bold text-purple-400 mr-4">2023-2024</span>
-                <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm font-semibold">Completed</span>
-              </div>
-              <h3 class="text-2xl font-bold text-cyan-400 mb-2">Professional Bachelor's in Computer Systems Engineering & Web Technologies</h3>
-              <h4 class="text-xl text-gray-300 mb-3">EST Sidi Bennour Chouaib Doukkali, El Jadida, Morocco</h4>
-              <p class="text-gray-200 leading-relaxed mb-4">
-                Comprehensive software engineering program covering advanced programming concepts, 
-                software architecture, project management, and modern development methodologies.
-              </p>
-            </div>
-            <div class="hidden md:block ml-4">
-              <i class="fas fa-university text-6xl text-purple-400/30"></i>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Software Architecture</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Web Technologies</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Project Management</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Modern Development</span>
-          </div>
-        </div>
-
-        <!-- Education 3: Specialized Technician -->
-        <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-green-500/20 hover:border-green-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-green-500/10">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center mb-2">
-                <span class="text-3xl font-bold text-green-400 mr-4">2022-2023</span>
-                <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm font-semibold">Completed</span>
-              </div>
-              <h3 class="text-2xl font-bold text-cyan-400 mb-2">Specialized Technician Diploma in Digital Development, Web Full Stack</h3>
-              <h4 class="text-xl text-gray-300 mb-3">ISTA TAOURIRT, Morocco</h4>
-              <p class="text-gray-200 leading-relaxed mb-4">
-                Intensive program focused on full-stack web development, covering both 
-                frontend and backend technologies with hands-on project experience.
-              </p>
-            </div>
-            <div class="hidden md:block ml-4">
-              <i class="fas fa-code text-6xl text-green-400/30"></i>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Full Stack Development</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Frontend Technologies</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Backend Development</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Database Management</span>
-          </div>
-        </div>
-
-        <!-- Education 4: Bachelor's -->
-        <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center mb-2">
-                <span class="text-3xl font-bold text-blue-400 mr-4">2019-2020</span>
-                <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm font-semibold">Completed</span>
-              </div>
-              <h3 class="text-2xl font-bold text-cyan-400 mb-2">Fundamental Bachelor's in Physical Sciences</h3>
-              <h4 class="text-xl text-gray-300 mb-3">Faculty of Sciences Aïn Chock Hassan II, Casablanca</h4>
-              <p class="text-gray-200 leading-relaxed mb-4">
-                Strong foundation in mathematics, physics, and scientific methodology 
-                that supports analytical problem-solving in software development.
-              </p>
-            </div>
-            <div class="hidden md:block ml-4">
-              <i class="fas fa-atom text-6xl text-blue-400/30"></i>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Mathematics</span>
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Physics</span>
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Electronics</span>
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Scientific Method</span>
-          </div>
-        </div>
-
-        <!-- Education 5: Baccalaureate -->
-        <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center mb-2">
-                <span class="text-3xl font-bold text-indigo-400 mr-4">2015-2016</span>
-                <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm font-semibold">Completed</span>
-              </div>
-              <h3 class="text-2xl font-bold text-cyan-400 mb-2">Baccalaureate in Physical Sciences</h3>
-              <h4 class="text-xl text-gray-300 mb-3">Ibn Khaldoun High School, Bouznika, Morocco</h4>
-              <p class="text-gray-200 leading-relaxed mb-4">
-                High school diploma with specialization in Physical Sciences, providing 
-                a solid foundation in mathematics, physics, chemistry, and scientific reasoning.
-              </p>
-            </div>
-            <div class="hidden md:block ml-4">
-              <i class="fas fa-school text-6xl text-indigo-400/30"></i>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-sm">Physical Sciences</span>
-            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-sm">Mathematics</span>
-            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-sm">Chemistry</span>
-            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-sm">Physics</span>
-          </div>
-        </div>
-
-        <!-- Certifications Section -->
-        <div class="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-cyan-500/30">
-          <div class="text-center mb-8">
-            <i class="fas fa-certificate text-5xl text-yellow-400 mb-4"></i>
-            <h3 class="text-3xl font-bold text-cyan-400 mb-3">Certifications & Skills</h3>
-            <p class="text-gray-200 text-lg leading-relaxed max-w-3xl mx-auto mb-8">
-              Continuously expanding expertise through professional certifications and hands-on experience
-            </p>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Laravel -->
-            <div class="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-red-500/20 hover:border-red-500/40 transition-all duration-300 hover:scale-105">
-              <div class="flex items-center mb-4">
-                <i class="fab fa-laravel text-4xl text-red-500 mr-4"></i>
-                <div>
-                  <h4 class="text-lg font-bold text-gray-200">Laravel Expert</h4>
-                  <p class="text-sm text-gray-400">Framework Mastery</p>
+<!-- Education cards -->
+<section class="relative pb-16">
+  <div class="container">
+    <div class="max-w-5xl mx-auto space-y-6">
+      {#each education as ed, i}
+        <div
+          class="group relative glass-card overflow-hidden reveal lift hover:shadow-2xl transition-all duration-500"
+          use:reveal={{ delay: i * 100 }}
+          use:tilt3d={{ max: 4, scale: 1.01 }}
+        >
+            <div class="grid sm:grid-cols-12">
+              <!-- Side gradient bar with icon -->
+              <div class="sm:col-span-3 lg:col-span-2 bg-gradient-to-br {ed.gradient} p-6 flex sm:flex-col items-center justify-center gap-4 sm:gap-2 text-white">
+                <i class="{ed.icon} text-4xl drop-shadow"></i>
+                <div class="sm:text-center">
+                  <div class="text-xs uppercase tracking-wider opacity-80">{$t('education.period')}</div>
+                  <div class="font-bold">{ed.period}</div>
                 </div>
               </div>
-              <p class="text-gray-300 text-sm">Advanced backend development with Laravel, RESTful APIs, and microservices architecture</p>
-            </div>
 
-            <!-- React -->
-            <div class="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105">
-              <div class="flex items-center mb-4">
-                <i class="fab fa-react text-4xl text-blue-400 mr-4"></i>
-                <div>
-                  <h4 class="text-lg font-bold text-gray-200">React Developer</h4>
-                  <p class="text-sm text-gray-400">Frontend Excellence</p>
+              <!-- Content -->
+              <div class="sm:col-span-9 lg:col-span-10 p-6">
+                <div class="flex items-start justify-between gap-2 mb-2">
+                  <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">{$t(`education.items.${ed.key}.degree`)}</h3>
+                  <span
+                    class="badge-glass !text-[10px] uppercase tracking-wider flex-shrink-0
+                           {ed.inProgress ? '!bg-amber-50/80 dark:bg-amber-500/15 !text-amber-700 dark:text-amber-300' : '!bg-emerald-50 dark:bg-emerald-500/10/80 !text-emerald-700 dark:text-emerald-300'}"
+                  >
+                    {ed.inProgress ? $t('common.inProgress') : $t('common.completed')}
+                  </span>
+                </div>
+                <p class="text-purple-600 dark:text-purple-400 font-semibold text-sm mb-3">{$t(`education.items.${ed.key}.school`)}</p>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm mb-4">{$t(`education.items.${ed.key}.description`)}</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {#each ed.tags as tag}
+                    <span class="badge-tech">{tag}</span>
+                  {/each}
                 </div>
               </div>
-              <p class="text-gray-300 text-sm">Expert in React, Redux, Hooks, and modern frontend development patterns</p>
             </div>
+        </div>
+      {/each}
+    </div>
+  </div>
+</section>
 
-            <!-- Node.js -->
-            <div class="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-green-500/20 hover:border-green-500/40 transition-all duration-300 hover:scale-105">
-              <div class="flex items-center mb-4">
-                <i class="fab fa-node-js text-4xl text-green-500 mr-4"></i>
-                <div>
-                  <h4 class="text-lg font-bold text-gray-200">Node.js Expert</h4>
-                  <p class="text-sm text-gray-400">Server-Side Pro</p>
-                </div>
-              </div>
-              <p class="text-gray-300 text-sm">Scalable backend solutions with Node.js, Express, and real-time communications</p>
+<!-- Certifications & Skills -->
+<section class="relative py-12">
+  <div class="container">
+    <div class="text-center mb-12">
+      <span class="badge-glass mb-4">
+        <i class="fa-solid fa-certificate text-yellow-500"></i>
+        {$t('education.certsBadge')}
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        {$t('education.certsTitle')} <span class="text-gradient">{$t('education.certsTitleHighlight')}</span>
+      </h2>
+      <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        {$t('education.certsSubtitle')}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {#each certifications as c, i}
+        <div
+          class="glass-card p-5 reveal-scale lift transition-all"
+          use:reveal={{ delay: i * 80 }}
+          use:tilt3d={{ max: 8, scale: 1.03 }}
+        >
+          <div class="flex items-center gap-4 mb-3">
+            <div class="w-14 h-14 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700 flex items-center justify-center">
+              <i class="{c.icon} {c.color} text-3xl"></i>
             </div>
-
-            <!-- Database -->
-            <div class="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:scale-105">
-              <div class="flex items-center mb-4">
-                <i class="fas fa-database text-4xl text-purple-400 mr-4"></i>
-                <div>
-                  <h4 class="text-lg font-bold text-gray-200">Database Design</h4>
-                  <p class="text-sm text-gray-400">Data Architect</p>
-                </div>
-              </div>
-              <p class="text-gray-300 text-sm">MySQL, MongoDB, PostgreSQL, Redis - optimized database design and query performance</p>
-            </div>
-
-            <!-- Cloud -->
-            <div class="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 hover:scale-105">
-              <div class="flex items-center mb-4">
-                <i class="fab fa-aws text-4xl text-orange-400 mr-4"></i>
-                <div>
-                  <h4 class="text-lg font-bold text-gray-200">Cloud Computing</h4>
-                  <p class="text-sm text-gray-400">AWS & Azure</p>
-                </div>
-              </div>
-              <p class="text-gray-300 text-sm">Cloud infrastructure deployment, scalability, and DevOps practices</p>
-            </div>
-
-            <!-- Agile -->
-            <div class="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20 hover:border-yellow-500/40 transition-all duration-300 hover:scale-105">
-              <div class="flex items-center mb-4">
-                <i class="fas fa-tasks text-4xl text-yellow-400 mr-4"></i>
-                <div>
-                  <h4 class="text-lg font-bold text-gray-200">Agile & Scrum</h4>
-                  <p class="text-sm text-gray-400">Project Management</p>
-                </div>
-              </div>
-              <p class="text-gray-300 text-sm">Experienced in Agile methodologies, Scrum, JIRA, and collaborative development</p>
+            <div>
+              <h3 class="font-bold text-slate-900 dark:text-white">{$t(`education.certs.${c.key}.title`)}</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">{$t(`education.certs.${c.key}.sub`)}</p>
             </div>
           </div>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{$t(`education.certs.${c.key}.desc`)}</p>
         </div>
+      {/each}
+    </div>
 
-        <!-- Additional Info -->
-        <div class="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-cyan-500/30 mt-8">
-          <div class="text-center">
-            <i class="fas fa-trophy text-5xl text-yellow-400 mb-4"></i>
-            <h3 class="text-2xl font-bold text-cyan-400 mb-3">Continuous Learning</h3>
-            <p class="text-gray-200 text-lg leading-relaxed max-w-3xl mx-auto">
-              Committed to lifelong learning and staying current with the latest technologies and industry trends. 
-              Actively pursuing new certifications and participating in professional development programs.
-            </p>
-          </div>
-        </div>
+    <!-- Continuous learning callout -->
+    <div class="mt-12 relative overflow-hidden glass-strong rounded-3xl p-10 text-center">
+      <div class="absolute -top-20 -right-20 w-80 h-80 bg-amber-300/40 dark:bg-amber-600/25 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-300/40 dark:bg-purple-600/25 rounded-full blur-3xl"></div>
+      <div class="relative">
+        <i class="fa-solid fa-trophy text-5xl text-amber-500 mb-4"></i>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">{$t('education.continuous.title')}</h3>
+        <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          {$t('education.continuous.subtitle')}
+        </p>
       </div>
     </div>
   </div>
-</div>
-
-<style>
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 255, 0, 0.3);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    animation: particle-float 6s ease-in-out infinite;
-  }
-
-  @keyframes particle-float {
-    0%, 100% { 
-      transform: translateY(0) translateX(0); 
-      opacity: 0.5;
-    }
-    50% { 
-      transform: translateY(-20px) translateX(10px); 
-      opacity: 0.8;
-    }
-  }
-
-  .scanline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(0, 255, 0, 0.05) 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    animation: scanline 8s linear infinite;
-  }
-
-  @keyframes scanline {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100%); }
-  }
-
-  #matrix-rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-</style>
-
+</section>
