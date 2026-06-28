@@ -18,9 +18,6 @@ Thumbs.db
 !.env.example
 !.env.test
 
-# Contact messages (local storage)
-/data
-
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
