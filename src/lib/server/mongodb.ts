@@ -32,7 +32,10 @@ function createClient(): Promise<MongoClient> {
 
 function getClientPromise(): Promise<MongoClient> {
 	if (!globalForMongo._mongoClientPromise) {
-		globalForMongo._mongoClientPromise = createClient();
+		globalForMongo._mongoClientPromise = createClient().catch((error) => {
+			globalForMongo._mongoClientPromise = undefined;
+			throw error;
+		});
 	}
 	return globalForMongo._mongoClientPromise;
 }
