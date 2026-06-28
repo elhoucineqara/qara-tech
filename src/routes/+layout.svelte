@@ -70,7 +70,7 @@
   ];
 
   const featuredLinks = [
-    { href: 'https://harx25pageslinks.netlify.app/', label: 'HARX · Contact Center' },
+    { href: 'http://harx.ai/', label: 'HARX · Contact Center' },
     { href: 'https://learn.qaranetwork.com/', label: 'Dar Al-Ilm · LMS' }
   ];
 

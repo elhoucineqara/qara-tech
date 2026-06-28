@@ -24,7 +24,7 @@
       key: 'harx',
       gradient: 'from-indigo-500 via-purple-500 to-pink-500',
       icon: 'fa-solid fa-headset',
-      url: 'https://harx25pageslinks.netlify.app/',
+      url: 'http://harx.ai/',
       image: '/images/HARX.png',
       logo: '/images/harx-mascotte.webp',
       achievementKeys: ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7'],

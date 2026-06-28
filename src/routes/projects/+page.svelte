@@ -35,7 +35,7 @@
       description: $t('projects.items.harx.description'),
       technologies: ['Laravel', 'React', 'Svelte', 'Node.js', 'WebRTC', 'MySQL', 'MongoDB', 'Redis', 'Docker', 'OpenAI'],
       category: 'Enterprise',
-      demoUrl: 'https://harx25pageslinks.netlify.app/',
+      demoUrl: 'http://harx.ai/',
       featured: true,
       gradient: 'from-indigo-500 via-purple-500 to-pink-500',
       icon: 'fa-solid fa-headset',

@@ -17,7 +17,7 @@
       title: $t('projects.items.harx.title'),
       subtitle: $t('projects.items.harx.subtitle'),
       description: $t('projects.items.harx.description'),
-      url: 'https://harx25pageslinks.netlify.app/',
+      url: 'http://harx.ai/',
       tech: ['Laravel', 'React', 'WebRTC', 'AI'],
       gradient: 'from-indigo-500 via-purple-500 to-pink-500',
       image: '/images/HARX.png',
@@ -158,7 +158,7 @@
 
           <!-- Floating card 2: project (clickable) -->
           <a
-            href="https://harx25pageslinks.netlify.app/"
+            href="http://harx.ai/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Visit HARX live site"
