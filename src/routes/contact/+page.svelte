@@ -46,22 +46,23 @@
         body: JSON.stringify(formData)
       });
 
+      const result = await response.json().catch(() => ({}));
+
       if (response.ok) {
         submitStatus = 'success';
+        errorMessage = '';
         formData = { firstName: '', lastName: '', email: '', phone: '', message: '' };
         setTimeout(() => (submitStatus = 'idle'), 5000);
-      } else {
-        throw new Error('Failed to send message');
+        return;
       }
+
+      submitStatus = 'error';
+      errorMessage = result.error || get(t)('contact.form.sendError');
+      setTimeout(() => (submitStatus = 'idle'), 5000);
     } catch {
-      const subject = encodeURIComponent(`Contact from ${formData.firstName} ${formData.lastName}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`
-      );
-      window.location.href = `mailto:elhoucineqara114@gmail.com?subject=${subject}&body=${body}`;
-      submitStatus = 'success';
-      errorMessage = get(t)('contact.form.opening');
-      setTimeout(() => (submitStatus = 'idle'), 3000);
+      submitStatus = 'error';
+      errorMessage = get(t)('contact.form.sendError');
+      setTimeout(() => (submitStatus = 'idle'), 5000);
     } finally {
       isSubmitting = false;
     }

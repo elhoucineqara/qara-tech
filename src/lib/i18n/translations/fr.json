@@ -409,7 +409,7 @@
       "required": "Veuillez remplir tous les champs obligatoires",
       "invalidEmail": "Veuillez entrer une adresse email valide",
       "successTitle": "Message envoyé avec succès ! Je vous réponds rapidement.",
-      "opening": "Ouverture de votre client email..."
+      "sendError": "Impossible d'envoyer le message. Veuillez réessayer plus tard."
     },
     "sidebar": {
       "direct": "Contactez-moi directement",

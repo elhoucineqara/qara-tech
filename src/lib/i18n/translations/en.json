@@ -409,7 +409,7 @@
       "required": "Please fill in all required fields",
       "invalidEmail": "Please enter a valid email address",
       "successTitle": "Message sent successfully! I'll get back to you soon.",
-      "opening": "Opening your email client..."
+      "sendError": "Unable to send your message. Please try again later."
     },
     "sidebar": {
       "direct": "Reach me directly",
