@@ -58,6 +58,7 @@
 
   $: techTheme = routeTheme[$page.url.pathname] ?? 'neural';
   $: activeFx = enableHeavyFx ? techTheme : 'none';
+  $: isAdminRoute = $page.url.pathname.startsWith('/admin');
 
   const currentYear = new Date().getFullYear();
 
@@ -103,6 +104,7 @@
 </script>
 
 <!-- Global animated tech background — fixed, visible on full page scroll -->
+{#if !isAdminRoute}
 <div
   class="fixed inset-0 -z-10 pointer-events-none overflow-hidden"
   aria-hidden="true"
@@ -130,14 +132,18 @@
     {/if}
   {/key}
 </div>
+{/if}
 
 <div class="min-h-screen flex flex-col relative">
+  {#if !isAdminRoute}
   <Header />
+  {/if}
 
   <main class="flex-1">
     <slot />
   </main>
 
+  {#if !isAdminRoute}
   <!-- ==================== FOOTER ==================== -->
   <footer class="relative mt-20">
     <!-- Top fade -->
@@ -274,4 +280,5 @@
   </footer>
 
   <ScrollToTop />
+  {/if}
 </div>
