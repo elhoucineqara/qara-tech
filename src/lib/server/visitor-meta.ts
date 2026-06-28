@@ -94,11 +94,11 @@ export function extractVisitMeta(event: RequestEvent): VisitMeta {
 }
 
 export function shouldTrackVisit(event: RequestEvent): boolean {
-	const { method, url } = event.request;
-	if (method !== 'GET') return false;
+	if (event.request.method !== 'GET') return false;
 
-	const path = url.pathname;
+	const path = event.url.pathname;
 	if (
+		!path ||
 		path.startsWith('/api/') ||
 		path.startsWith('/admin') ||
 		path.startsWith('/_app') ||
