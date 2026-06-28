@@ -1,4 +1,4 @@
-import { getDb } from '$lib/server/mongodb';
+import { COLLECTIONS, getCollection } from '$lib/server/db-collections';
 
 export interface ContactMessage {
 	id: string;
@@ -11,11 +11,8 @@ export interface ContactMessage {
 	read: boolean;
 }
 
-const COLLECTION = 'contact_messages';
-
 async function collection() {
-	const db = await getDb();
-	return db.collection<ContactMessage>(COLLECTION);
+	return getCollection<ContactMessage>(COLLECTIONS.CONTACT_MESSAGES);
 }
 
 export async function addContactMessage(

@@ -5,7 +5,10 @@ import type { LayoutServerLoad } from './$types';
 export const load: LayoutServerLoad = async ({ cookies, url }) => {
 	const authenticated = verifyAdminToken(cookies.get(ADMIN_COOKIE));
 
-	if (url.pathname.startsWith('/admin/messages') && !authenticated) {
+	if (
+		(url.pathname.startsWith('/admin/messages') || url.pathname.startsWith('/admin/visitors')) &&
+		!authenticated
+	) {
 		throw redirect(303, '/admin');
 	}
 

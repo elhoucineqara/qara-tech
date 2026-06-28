@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { goto } from '$app/navigation';
+  import { adminPageTitle, adminPageSubtitle, adminRefresh } from '$lib/stores/admin-ui';
   import type { ContactMessage } from '$lib/server/contact-messages';
 
   let messages: ContactMessage[] = [];
@@ -50,11 +51,6 @@
     }
   }
 
-  async function logout() {
-    await fetch('/api/admin/logout', { method: 'POST' });
-    await goto('/admin');
-  }
-
   function formatDate(iso: string) {
     return new Date(iso).toLocaleString('fr-FR', {
       day: '2-digit',
@@ -71,63 +67,28 @@
   }
 
   $: unreadCount = messages.filter((m) => !m.read).length;
+  $: adminPageSubtitle.set(
+    `${messages.length} message${messages.length !== 1 ? 's' : ''}${unreadCount ? ` · ${unreadCount} non lu${unreadCount !== 1 ? 's' : ''}` : ''}`
+  );
 
-  onMount(loadMessages);
+  onMount(() => {
+    adminPageTitle.set('Messages contact');
+    adminRefresh.set(loadMessages);
+    loadMessages();
+  });
+
+  onDestroy(() => {
+    adminRefresh.set(null);
+  });
 </script>
 
 <svelte:head>
   <title>Messages — Admin QARATECH</title>
   <meta name="robots" content="noindex, nofollow" />
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    rel="stylesheet"
-  />
 </svelte:head>
 
-<div class="min-h-screen">
-  <!-- Top bar -->
-  <header class="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div
-          class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center"
-        >
-          <i class="fa-solid fa-inbox text-white"></i>
-        </div>
-        <div>
-          <h1 class="text-lg font-bold text-white">Messages contact</h1>
-          <p class="text-xs text-slate-400">
-            {messages.length} message{messages.length !== 1 ? 's' : ''}
-            {#if unreadCount > 0}
-              · <span class="text-emerald-400">{unreadCount} non lu{unreadCount !== 1 ? 's' : ''}</span>
-            {/if}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <button
-          type="button"
-          on:click={loadMessages}
-          class="px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-slate-800 transition"
-          title="Actualiser"
-        >
-          <i class="fa-solid fa-rotate-right"></i>
-        </button>
-        <button
-          type="button"
-          on:click={logout}
-          class="px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-slate-800 transition"
-        >
-          <i class="fa-solid fa-right-from-bracket mr-1"></i>
-          Déconnexion
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-    {#if loading}
-      <div class="flex justify-center py-20">
+{#if loading}
+  <div class="flex justify-center py-20">
         <svg class="animate-spin h-8 w-8 text-purple-500" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -237,8 +198,6 @@
         </div>
       </div>
     {/if}
-  </main>
-</div>
 
 <style>
   .line-clamp-2 {
