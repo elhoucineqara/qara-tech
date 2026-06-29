@@ -4,6 +4,7 @@
   import { t, currentLang } from '$lib/i18n/i18n';
   import AnimatedBackground from '$lib/components/AnimatedBackground.svelte';
   import { renderMarkdown } from '$lib/utils/markdown';
+  import AdSense from '$lib/components/AdSense.svelte';
 
   interface BlogPost {
     slug: string;
@@ -124,6 +125,12 @@
         <div class="glass-card p-6 sm:p-10 md:p-12 shadow-xl border border-white/40 dark:border-slate-800/40">
           <div class="prose prose-slate dark:prose-invert max-w-none">
             {@html renderedHtml}
+          </div>
+
+          <!-- AdSense Advertisement -->
+          <div class="mt-8 pt-8 border-t border-slate-200/40 dark:border-slate-800/40">
+            <!-- Remplacer 'slot' par l'ID de votre bloc d'annonce AdSense (ex: slot="1234567890") -->
+            <AdSense client="ca-pub-7245366364935377" slot="1234567890" format="auto" responsive={true} />
           </div>
         </div>
       </article>
