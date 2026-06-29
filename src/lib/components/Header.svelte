@@ -38,6 +38,7 @@
     { href: '/experience', label: $t('nav.experience') },
     { href: '/projects', label: $t('nav.projects') },
     { href: '/services', label: $t('nav.services') },
+    { href: '/blog', label: $t('nav.blog') },
     { href: '/contact', label: $t('nav.contact') }
   ];
 

@@ -3,7 +3,8 @@ import { getDb } from '$lib/server/mongodb';
 
 export const COLLECTIONS = {
 	CONTACT_MESSAGES: 'contact_messages',
-	VISITS: 'visits'
+	VISITS: 'visits',
+	BLOG_POSTS: 'blog_posts'
 } as const;
 
 let initPromise: Promise<void> | null = null;
@@ -24,6 +25,11 @@ async function createIndexes(): Promise<void> {
 	await visits.createIndex({ path: 1 });
 	await visits.createIndex({ visitorId: 1 });
 	await visits.createIndex({ device: 1 });
+
+	const blogPosts = db.collection(COLLECTIONS.BLOG_POSTS);
+	await blogPosts.createIndex({ slug: 1 }, { unique: true });
+	await blogPosts.createIndex({ date: -1 });
+	await blogPosts.createIndex({ published: 1 });
 }
 
 export async function ensureDbCollections(): Promise<void> {

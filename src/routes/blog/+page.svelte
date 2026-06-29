@@ -7,63 +7,31 @@
   import { tilt3d, reveal } from '$lib/actions/motion';
 
   interface BlogPost {
-    id: number;
-    title: string;
-    excerpt: string;
+    slug: string;
+    title: { en: string; fr: string };
+    excerpt: { en: string; fr: string };
     author: string;
     date: string;
     tags: string[];
     readTime: number;
     gradient: string;
+    image: string;
   }
+
+  export let data: { posts: BlogPost[] };
 
   let posts: BlogPost[] = [];
   let loading = true;
   let mounted = false;
   let selectedTag = 'all';
 
-  const samplePosts: BlogPost[] = [
-    {
-      id: 1,
-      title: 'Getting Started with SvelteKit',
-      excerpt:
-        'Learn how to build modern web applications with SvelteKit, the full-stack framework for the web.',
-      author: 'El Houcine QARA',
-      date: '2024-01-15',
-      tags: ['SvelteKit', 'Web Development', 'Tutorial'],
-      readTime: 5,
-      gradient: 'from-orange-500 via-amber-500 to-yellow-500'
-    },
-    {
-      id: 2,
-      title: 'Mastering TypeScript for Better Code',
-      excerpt:
-        'Discover how TypeScript can improve your development experience and code quality.',
-      author: 'El Houcine QARA',
-      date: '2024-01-10',
-      tags: ['TypeScript', 'Programming', 'Best Practices'],
-      readTime: 8,
-      gradient: 'from-blue-500 via-indigo-500 to-purple-500'
-    },
-    {
-      id: 3,
-      title: 'Building Responsive Designs with TailwindCSS',
-      excerpt:
-        'Create beautiful, responsive user interfaces with TailwindCSS utility-first approach.',
-      author: 'El Houcine QARA',
-      date: '2024-01-05',
-      tags: ['CSS', 'TailwindCSS', 'Design'],
-      readTime: 6,
-      gradient: 'from-cyan-500 via-teal-500 to-emerald-500'
-    }
-  ];
-
   onMount(() => {
     mounted = true;
+    // Keep a slight delay for the loading transition effect
     setTimeout(() => {
-      posts = samplePosts;
+      posts = data.posts || [];
       loading = false;
-    }, 600);
+    }, 400);
   });
 
   $: filteredPosts =
@@ -154,16 +122,30 @@
     {:else}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {#each filteredPosts as post, index}
-          <article
-            class="group glass-card overflow-hidden reveal-scale lift hover:shadow-2xl transition-all duration-500"
+          <a
+            href="/blog/{post.slug}"
+            class="group glass-card overflow-hidden reveal-scale lift hover:shadow-2xl transition-all duration-500 block text-left"
             use:reveal={{ delay: index * 100 }}
             use:tilt3d={{ max: 8, scale: 1.02 }}
           >
-            <div class="relative h-44 bg-gradient-to-br {post.gradient} overflow-hidden">
-              <div class="absolute inset-0 bg-grid-light opacity-20"></div>
-              <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-white text-6xl font-black opacity-30">{post.title.charAt(0)}</span>
-              </div>
+            <div class="relative h-48 bg-slate-950 overflow-hidden">
+              {#if post.image}
+                <img
+                  src={post.image}
+                  alt={post.title[$currentLang] || post.title.en}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+              {:else}
+                <div class="absolute inset-0 bg-gradient-to-br {post.gradient} opacity-90"></div>
+                <div class="absolute inset-0 bg-grid-light opacity-20"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-white text-6xl font-black opacity-30">
+                    {(post.title[$currentLang] || post.title.en).charAt(0)}
+                  </span>
+                </div>
+              {/if}
             </div>
 
             <div class="p-6">
@@ -174,10 +156,12 @@
               </div>
 
               <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                {post.title}
+                {post.title[$currentLang] || post.title.en}
               </h2>
 
-              <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
+              <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                {post.excerpt[$currentLang] || post.excerpt.en}
+              </p>
 
               <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                 <div class="flex items-center gap-2">
@@ -191,14 +175,14 @@
                 </span>
               </div>
 
-              <button
-                class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors"
+              <div
+                class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:text-purple-800 dark:group-hover:text-purple-300 transition-colors"
               >
                 {$t('blog.readMore')}
                 <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-              </button>
+              </div>
             </div>
-          </article>
+          </a>
         {/each}
       </div>
     {/if}

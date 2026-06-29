@@ -439,7 +439,8 @@
     "minRead": "min",
     "readMore": "Lire la suite",
     "noPosts": "Aucun article trouvé",
-    "noPostsHint": "Essayez un autre tag ou revenez plus tard."
+    "noPostsHint": "Essayez un autre tag ou revenez plus tard.",
+    "backToBlog": "Retour aux articles"
   },
   "footer": {
     "tagline": "Création de plateformes web modernes — centres de contact, LMS et logiciels d'entreprise avec Laravel, React et SvelteKit.",
