@@ -141,12 +141,12 @@
   {/if}
 
   <main class="flex-1">
+    <slot />
     {#if !isAdminRoute}
-      <div class="container pt-24 pb-2 max-w-4xl mx-auto relative z-20">
-        <AdSense slot="" format="horizontal" responsive={true} />
+      <div class="container py-8 max-w-4xl mx-auto relative z-20 mt-auto">
+        <AdSense client="ca-pub-7245366364935377" slot="" format="horizontal" responsive={true} />
       </div>
     {/if}
-    <slot />
   </main>
 
   {#if !isAdminRoute}
