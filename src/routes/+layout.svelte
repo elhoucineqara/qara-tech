@@ -9,6 +9,7 @@
   import CodeStream from '$lib/components/CodeStream.svelte';
   import { theme } from '$lib/stores/theme';
   import { currentLang, t } from '$lib/i18n/i18n';
+  import AdSense from '$lib/components/AdSense.svelte';
 
   type TechTheme = 'matrix' | 'neural' | 'code' | 'none';
 
@@ -140,6 +141,11 @@
   {/if}
 
   <main class="flex-1">
+    {#if !isAdminRoute}
+      <div class="container pt-24 pb-2 max-w-4xl mx-auto relative z-20">
+        <AdSense slot="" format="horizontal" responsive={true} />
+      </div>
+    {/if}
     <slot />
   </main>
 
