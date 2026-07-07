@@ -18,7 +18,7 @@
       subtitle: $t('projects.items.harx.subtitle'),
       description: $t('projects.items.harx.description'),
       url: 'http://harx.ai/',
-      tech: ['Laravel', 'React', 'WebRTC', 'AI'],
+      tech: ['React', 'Node.js', 'WebRTC', 'AI'],
       gradient: 'from-indigo-500 via-purple-500 to-pink-500',
       image: '/images/HARX.png',
       logo: '/images/harx-mascotte.webp'
@@ -33,6 +33,17 @@
       gradient: 'from-blue-500 via-cyan-500 to-teal-500',
       image: '/images/dar-al-ilm.png',
       logo: '/images/logo_dar-alilm.svg'
+    },
+    {
+      key: 'bahijastore',
+      title: $t('projects.items.bahijastore.title'),
+      subtitle: 'E-Commerce Platform',
+      description: $t('projects.items.bahijastore.description'),
+      url: 'https://bahijastore.vercel.app/',
+      tech: ['Next.js', 'Node.js', 'TailwindCSS'],
+      gradient: 'from-pink-500 via-red-500 to-yellow-500',
+      image: '/images/bahijastore-screenshot.png',
+      logo: '/images/bahijastore-logo.png'
     }
   ];
 
@@ -181,8 +192,39 @@
               </div>
             </div>
             <div class="flex items-center justify-between text-xs">
-              <span class="badge-tech">Laravel</span>
               <span class="badge-tech">React</span>
+              <span class="badge-tech">Node.js</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">● Live</span>
+            </div>
+          </a>
+
+          <!-- Floating card 5: project (clickable) -->
+          <a
+            href="https://bahijastore.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit Bahija Store live site"
+            class="group absolute top-64 right-12 w-64 glass-card p-5 animate-float z-10
+                   hover:shadow-2xl hover:shadow-pink-500/20
+                   transition-all duration-300 cursor-pointer"
+            style="animation-delay: 2.5s"
+            use:tilt3d={{ max: 10, scale: 1.04 }}
+          >
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-11 h-11 rounded-xl bg-white dark:bg-slate-900 shadow border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden">
+                <img src="/images/bahijastore-logo.png" alt="Bahija Store" class="w-9 h-9 object-contain" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-slate-800 dark:text-slate-100 text-sm flex items-center gap-1.5">
+                  Bahija Store
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400 group-hover:text-pink-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"></i>
+                </div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">E-Commerce</div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="badge-tech">Next.js</span>
+              <span class="badge-tech">Node.js</span>
               <span class="text-emerald-600 dark:text-emerald-400 font-semibold">● Live</span>
             </div>
           </a>

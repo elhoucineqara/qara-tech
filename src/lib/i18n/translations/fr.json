@@ -172,6 +172,11 @@
         "title": "Application de chat temps réel",
         "description": "Application de messagerie scalable avec WebSockets et appels vidéo.",
         "impact": "Supporte 10 000+ utilisateurs simultanés avec <100ms de latence"
+      },
+      "bahijastore": {
+        "title": "Bahija Store",
+        "description": "Une application e-commerce moderne offrant une expérience d'achat fluide.",
+        "impact": "Fournit une interface d'achat en ligne rapide et réactive."
       }
     }
   },

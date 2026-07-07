@@ -33,7 +33,7 @@
       title: $t('projects.items.harx.title'),
       subtitle: $t('projects.items.harx.subtitle'),
       description: $t('projects.items.harx.description'),
-      technologies: ['Laravel', 'React', 'Svelte', 'Node.js', 'WebRTC', 'MySQL', 'MongoDB', 'Redis', 'Docker', 'OpenAI'],
+      technologies: ['React', 'Node.js', 'Svelte', 'WebRTC', 'MySQL', 'MongoDB', 'Redis', 'Docker', 'OpenAI'],
       category: 'Enterprise',
       demoUrl: 'http://harx.ai/',
       featured: true,
@@ -103,6 +103,20 @@
       gradient: 'from-sky-500 via-blue-500 to-indigo-500',
       icon: 'fa-solid fa-comments',
       impact: $t('projects.items.chat.impact')
+    },
+    {
+      id: 7,
+      key: 'bahijastore',
+      title: $t('projects.items.bahijastore.title'),
+      description: $t('projects.items.bahijastore.description'),
+      technologies: ['Next.js', 'Node.js', 'TailwindCSS', 'Vercel'],
+      category: 'E-Commerce',
+      demoUrl: 'https://bahijastore.vercel.app/',
+      gradient: 'from-pink-500 via-red-500 to-yellow-500',
+      icon: 'fa-solid fa-store',
+      image: '/images/bahijastore-screenshot.png',
+      logo: '/images/bahijastore-logo.png',
+      impact: $t('projects.items.bahijastore.impact')
     }
   ] as Project[];
 
