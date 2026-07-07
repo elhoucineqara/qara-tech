@@ -29,6 +29,7 @@
   let isMobile = false;
   let reduceMotion = false;
   let enableHeavyFx = false;
+  let showBottomAd = true;
 
   onMount(() => {
     theme.init();
@@ -142,10 +143,22 @@
 
   <main class="flex-1">
     <slot />
-    {#if !isAdminRoute}
-      <div class="container py-8 max-w-4xl mx-auto relative z-20 mt-auto">
-        <AdSense client="ca-pub-7245366364935377" slot="" format="horizontal" responsive={true} />
+    {#if !isAdminRoute && showBottomAd}
+      <div class="fixed bottom-0 left-0 right-0 z-[100] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.5)] transition-transform duration-300">
+        <button 
+          on:click={() => showBottomAd = false}
+          class="absolute -top-10 right-4 bg-white/95 dark:bg-slate-900/95 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-t-xl px-4 py-2 text-sm font-medium border border-b-0 border-slate-200 dark:border-slate-800 transition-colors shadow-lg flex items-center gap-2 backdrop-blur-xl"
+          aria-label="Close ad"
+        >
+          <span>Fermer</span>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="container py-2 max-w-4xl mx-auto flex justify-center items-center min-h-[90px] overflow-hidden">
+          <AdSense client="ca-pub-7245366364935377" slot="" format="horizontal" responsive={true} />
+        </div>
       </div>
+      <!-- Spacer to prevent footer from being covered by the ad initially -->
+      <div class="h-[100px] w-full shrink-0"></div>
     {/if}
   </main>
 
