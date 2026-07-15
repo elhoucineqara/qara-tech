@@ -12,5 +12,5 @@ jobs:
     steps:
       - name: Appeler l'API d'envoi d'emails
         run: |
-          curl -X GET "${{ secrets.PROD_URL }}/api/cron/send-emails" \
+          curl -X GET "https://qaratech.vercel.app/api/cron/send-emails" \
           -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
