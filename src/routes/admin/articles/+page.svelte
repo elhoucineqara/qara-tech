@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   import { adminPageTitle, adminPageSubtitle } from '$lib/stores/admin-ui';
 
   export let data: any;
@@ -68,6 +69,14 @@
       year: 'numeric'
     });
   }
+
+  let copySuccessId = '';
+  function copyLink(slug: string) {
+    const url = `${$page.url.origin}/blog/${slug}`;
+    navigator.clipboard.writeText(url);
+    copySuccessId = slug;
+    setTimeout(() => { copySuccessId = ''; }, 2000);
+  }
 </script>
 
 <div class="space-y-6">
@@ -110,7 +119,7 @@
                   </span>
                 {/if}
               </td>
-              <td class="px-6 py-4 text-right">
+              <td class="px-6 py-4 text-right flex justify-end gap-1">
                 <button
                   on:click={() => openShareModal(post)}
                   class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-purple-500/20 transition-all border border-transparent hover:border-purple-500/30 group relative"
@@ -119,9 +128,52 @@
                   <i class="fa-solid fa-envelope group-hover:scale-110 transition-transform"></i>
                 </button>
                 <a
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent((post.title.fr || post.title.en) + ' ' + $page.url.origin + '/blog/' + post.slug)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 rounded-xl text-slate-400 hover:text-green-400 hover:bg-green-500/10 transition-all"
+                  title="WhatsApp"
+                >
+                  <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent($page.url.origin + '/blog/' + post.slug)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 rounded-xl text-slate-400 hover:text-blue-400 hover:bg-blue-500/10 transition-all"
+                  title="Facebook"
+                >
+                  <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent($page.url.origin + '/blog/' + post.slug)}&text=${encodeURIComponent(post.title.fr || post.title.en)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 rounded-xl text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 transition-all"
+                  title="Twitter"
+                >
+                  <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a
+                  href="https://dev.to/new"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+                  title="Dev.to"
+                >
+                  <i class="fa-brands fa-dev"></i>
+                </a>
+                <button
+                  on:click={() => copyLink(post.slug)}
+                  class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 transition-all"
+                  title={copySuccessId === post.slug ? 'Copié !' : 'Copier le lien'}
+                >
+                  <i class="fa-solid {copySuccessId === post.slug ? 'fa-check text-emerald-400' : 'fa-link'}"></i>
+                </button>
+                <a
                   href={`/blog/${post.slug}`}
                   target="_blank"
-                  class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-transparent hover:border-slate-700 inline-block ml-1"
+                  class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-transparent hover:border-slate-700"
                   title="Voir l'article"
                 >
                   <i class="fa-solid fa-arrow-up-right-from-square"></i>
