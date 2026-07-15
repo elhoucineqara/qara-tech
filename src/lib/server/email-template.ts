@@ -53,7 +53,6 @@ export function generateArticleEmailHtml(title: string, excerpt: string, url: st
             <td style="padding: 30px 40px; background-color: #162032; border-top: 1px solid #334155; text-align: center;">
               <p style="margin: 0; color: #64748b; font-size: 13px;">
                 Cet email a été envoyé par <strong>QaraTech</strong>.
-                <br>Vous recevez cet email suite à un partage manuel ou automatisé.
               </p>
             </td>
           </tr>
