@@ -28,6 +28,7 @@
 		"@sveltejs/adapter-vercel": "^6.1.1",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/nodemailer": "^8.0.1",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.14",
@@ -46,6 +47,7 @@
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.4.0",
 		"mongodb": "^7.4.0",
+		"nodemailer": "^9.0.3",
 		"pptxgenjs": "^3.12.0",
 		"svelte-calendar": "^3.1.6"
 	}

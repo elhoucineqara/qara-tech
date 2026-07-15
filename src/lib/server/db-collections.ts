@@ -4,7 +4,8 @@ import { getDb } from '$lib/server/mongodb';
 export const COLLECTIONS = {
 	CONTACT_MESSAGES: 'contact_messages',
 	VISITS: 'visits',
-	BLOG_POSTS: 'blog_posts'
+	BLOG_POSTS: 'blog_posts',
+	SCHEDULED_EMAILS: 'scheduled_emails'
 } as const;
 
 let initPromise: Promise<void> | null = null;
@@ -30,6 +31,9 @@ async function createIndexes(): Promise<void> {
 	await blogPosts.createIndex({ slug: 1 }, { unique: true });
 	await blogPosts.createIndex({ date: -1 });
 	await blogPosts.createIndex({ published: 1 });
+
+	const scheduledEmails = db.collection(COLLECTIONS.SCHEDULED_EMAILS);
+	await scheduledEmails.createIndex({ status: 1, scheduledAt: 1 });
 }
 
 export async function ensureDbCollections(): Promise<void> {

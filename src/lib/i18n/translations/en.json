@@ -445,7 +445,10 @@
     "readMore": "Read More",
     "noPosts": "No posts found",
     "noPostsHint": "Try selecting a different tag or check back later.",
-    "backToBlog": "Back to Articles"
+    "backToBlog": "Back to Articles",
+    "shareArticle": "Share this article",
+    "copyLink": "Copy link",
+    "copied": "Copied!"
   },
   "footer": {
     "tagline": "Building modern web platforms — contact centers, LMS and enterprise software with Laravel, React and SvelteKit.",

@@ -11,7 +11,6 @@ interface DBBlogPost {
   date: string;
   tags: string[];
   readTime: number;
-  gradient: string;
   image?: string;
   published: boolean;
 }
@@ -36,7 +35,6 @@ export const load: PageServerLoad = async ({ params }) => {
       date: post.date,
       tags: post.tags,
       readTime: post.readTime,
-      gradient: post.gradient,
       image: post.image || ''
     };
 

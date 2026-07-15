@@ -14,7 +14,6 @@
     date: string;
     tags: string[];
     readTime: number;
-    gradient: string;
     image: string;
   }
 
@@ -129,23 +128,13 @@
             use:tilt3d={{ max: 8, scale: 1.02 }}
           >
             <div class="relative h-48 bg-slate-950 overflow-hidden">
-              {#if post.image}
-                <img
-                  src={post.image}
-                  alt={post.title[$currentLang] || post.title.en}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
-              {:else}
-                <div class="absolute inset-0 bg-gradient-to-br {post.gradient} opacity-90"></div>
-                <div class="absolute inset-0 bg-grid-light opacity-20"></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <span class="text-white text-6xl font-black opacity-30">
-                    {(post.title[$currentLang] || post.title.en).charAt(0)}
-                  </span>
-                </div>
-              {/if}
+              <img
+                src={post.image}
+                alt={post.title[$currentLang] || post.title.en}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
             </div>
 
             <div class="p-6">

@@ -15,6 +15,18 @@
       label: 'Visiteurs',
       icon: 'fa-chart-line',
       collection: 'visits'
+    },
+    {
+      href: '/admin/articles',
+      label: 'Articles',
+      icon: 'fa-file-lines',
+      collection: 'blog_posts'
+    },
+    {
+      href: '/admin/emails',
+      label: 'Historique des Emails',
+      icon: 'fa-envelope-open-text',
+      collection: 'scheduled_emails'
     }
   ];
 

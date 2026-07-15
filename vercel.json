@@ -1,6 +1,8 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".svelte-kit",
-  "framework": "sveltekit"
+  "crons": [
+    {
+      "path": "/api/cron/send-emails",
+      "schedule": "*/15 * * * *"
+    }
+  ]
 }
-
