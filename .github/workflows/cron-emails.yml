@@ -1,0 +1,16 @@
+name: Send Scheduled Emails
+
+on:
+  schedule:
+    # Exécuter toutes les 15 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch: # Permet de lancer l'action manuellement depuis l'interface GitHub
+
+jobs:
+  ping-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Appeler l'API d'envoi d'emails
+        run: |
+          curl -X GET "${{ secrets.PROD_URL }}/api/cron/send-emails" \
+          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
