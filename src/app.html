@@ -41,6 +41,16 @@
 		})();
 	</script>
 
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-PV8NJQJY2J"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-PV8NJQJY2J');
+	</script>
+
 	%sveltekit.head%
 	<script>
 		// Anti-FOUC: apply theme before first paint (dark by default)
